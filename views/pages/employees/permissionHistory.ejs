@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" data-layout="topnav" data-topbar-color="light" data-menu-color="light">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Apply Leave Page | Shiftwave</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
+    <meta content="Techzaa" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+    <!-- Daterangepicker css -->
+    <link rel="stylesheet" href="/assets/vendor/daterangepicker/daterangepicker.css">
+
+    <!-- Vector Map css -->
+    <link rel="stylesheet" href="/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css">
+
+    <!-- Theme Config Js -->
+    <script src="/assets/js/config.js"></script>
+
+    <!-- App css -->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Datatables css -->
+    <link href="/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Icons css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        div.scroll {
+            margin: 4px;
+            padding: 4px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .table-responsive1 {
+            overflow-x: auto;
+        }
+        
+        @media (max-width:600px){
+        div.dataTables_wrapper div.dataTables_length label{
+            width: 210px !important;
+            display: none;
+        }
+        .dataTables_filter{
+            display: none;
+        }
+        }
+        @media (max-width:780px){
+        div.dataTables_wrapper div.dataTables_length label{
+            width: 210px !important;
+            display: none;
+        }
+        .dataTables_filter{
+            display: none;
+        }
+        }
+        
+    </style>
+    <style>
+        .white-background {
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+   
+    <!-- Begin page -->
+ 
+    <div class="wrapper">
+
+        <%- include('../../includes/employee-header')%>
+
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                          
+                                            <a href="/employees/permission"><input type="button" value="Apply Permission" class="btn btn-primary btn-sm waves-effect waves-light"></a>
+                                        </ol>
+                                    </div>
+
+                                    <h4 class="page-title">Permission History</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+<div class="card">
+                        <div class="content" >
+
+                            <!-- Start Content-->
+
+
+                            <div class="row">
+                                <div class="col-12">
+
+
+                                    <div class="card-body">
+                                        <div class="table-responsive lead-table" style="padding: unset;">
+                                        <table id="basic-datatable"
+                                            class="table table-hover progress-table text-center dataTable no-footer dtr-inline collapsed table-centered table-nowrap mb-0"
+                                            role="grid" aria-describedby="dataTable_info" style="width: 100%;background-color: white;">
+                                            <thead class="bg-light text-capitalize">
+                                                <tr role="row" style="background-color: white;">
+                                                    <th>Permission_id</th>
+
+                                                    <th width="150">Reason For Permission</th>
+                                                    <th>Permission Date</th>
+                                                    <th>Start Time</th>
+                                                    <th>End Time</th>
+                                                    <th width="150">Applied</th>
+                                                    <!-- <th width="120">Admin's Remark</th> -->
+                                                    <th width="150" >
+                                                        <select class="form-select" id="validationCustomDropdown" style="padding: 0.2rem 2rem 0.25rem 0.5rem;" >
+
+                                                            <option value="">Status</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="approved">Approved</option>
+                                                            <option value="rejected">Declined</option>
+                                                            <!-- <option value="Emergency/Medical">Emergency/Medical</option> -->
+
+                                                        </select>
+                                                    </th>
+                                                    <th>View Details</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="load">
+                                                <% if(permission_history !="0" ) { %>
+                                                    <% i=0 %>
+                                                        <% permission_history.forEach(permission=> { %>
+                                                            <% i=i+1 %>
+                                                                <tr role="row" class="even">
+                                                                    <td>
+                                                                        <%= permission.permission_id %>
+                                                                    </td>
+                                                                    <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;max-width: 150px;">
+                                                                       
+                                                                        <%= permission.reason %>
+
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                        <%= permission.date.getDate() %>/<%=
+                                                                                (permission.date.getMonth() +
+                                                                                1).toString().padStart(2, '0' ) %>/<%=
+                                                                                    permission.date.getFullYear() %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <% const startTime = new Date(permission.start_time); %>
+                                                                        <% if (!isNaN(startTime)) { %>
+                                                                            <% const formattedStartTime = `${('0' + startTime.getHours()).slice(-2)}:${('0' + startTime.getMinutes()).slice(-2)}`; %>
+                                                                            <%= formattedStartTime %>
+                                                                        <% } else { %>
+                                                                            <%= permission.start_time %>
+                                                                        <% } %>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <%= permission.end_time %>
+                                                                          
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <%= permission.created_at.getDate() %>/<%=
+                                                                                (permission.created_at.getMonth() +
+                                                                                1).toString().padStart(2, '0' ) %>/<%=
+                                                                                    permission.created_at.getFullYear()
+                                                                                    %>
+                                                                    </td>
+                                                                    <!-- <td style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 150px;">
+                                                                        <%= permission.admin_remark_permission %>
+                                                                    </td> -->
+                                                                    <td>
+                                                                        <% if(permission.status=='approved' ) { %>
+                                                                            <span style="color: green">Approved</span>
+                                                                            <% } %>
+                                                                                <% if(permission.status=='rejected' ) {
+                                                                                    %>
+                                                                                    <span style="color: #aa0505">Declined</span>
+                                                                                    <% } %>
+                                                                                        <% if(permission.status=='pending'
+                                                                                            ) { %>
+                                                                                            <span>Pending</span>
+                                                                                            <% } %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="/employees/permission-details?permission_id=<%= permission.permission_id  %>"
+                                                                            class="btn btn-secondary btn-sm" style="background-color: #0bb197;border: 1px solid #0bb197;"  > View Details</a>
+                                                                        </td>
+
+                                                                </tr>
+
+                                                                <% }) %>
+                                                                    <% } %>
+                                            </tbody>
+
+                                        </table>
+                                        </div>
+
+
+                                    </div> <!-- end card body-->
+
+                                </div><!-- end col-->
+                            </div> <!-- end row-->
+
+
+
+
+
+
+
+
+
+                        </div> <!-- content -->
+
+                    </div>
+
+                    </div>
+
+
+                </div>
+                <!-- container -->
+
+                <!-- content -->
+
+                <!-- Footer Start -->
+                <%- include('../../includes/employee-footer')%>
+                    <!-- end Footer -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+    </div>
+
+    <!-- END wrapper -->
+
+    <!-- Theme Settings -->
+    <%- include('../../includes/employee-theme')%>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+        <script>
+            $(document).ready(function() {
+            $("#validationCustomDropdown").on('change', function (event) {
+                event.preventDefault();
+
+                let selectedValue = $(this).val();
+
+                if (selectedValue === 'pending' || selectedValue === 'approved' || selectedValue === 'rejected' || selectedValue =='' ) {
+                    let status = selectedValue;
+                    let permission_history = 2;
+       
+
+                    $.ajax({
+                        type: 'POST',
+                        dataType: "json",
+                        data: { status: status, permission_history: permission_history },
+                        url: '/employees/filter-permission',
+                        success: function (response) {
+                            if (response.status === 'sucess') {
+                           
+                          
+                                let table = $('#basic-datatable').DataTable();
+                                     table.clear().draw();
+                                
+
+                                if (response.data.length > 0) {
+
+
+                                    response.data.forEach(leave => {
+
+
+                                        
+                                        const isValidDate = dateString => {
+                                            const dateObject = new Date(dateString);
+                                            return !isNaN(dateObject.getTime());
+                                        };
+
+                                       
+                                        const isValidStartDate = isValidDate(leave.date);
+                                        
+
+                                        const startDate = isValidStartDate ? new Date(leave.date) : null;
+                             
+
+                                       
+                                        const formattedStartDate = isValidStartDate ? `${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}` : '';
+
+                                        let formattedCreatedAt = new Date(leave.created_at);
+
+                                        let statusText = '';
+                                        let statusClass = '';
+
+                                        if (leave.status === 'approved') {
+                                            statusText = '<p style="color:green;">Approved</p>';
+                                            statusClass = 'status-approved';
+                                            
+                                        } else if (leave.status === 'rejected') {
+                                            statusText = '<p style="color:#aa0505;">Declined</p>';
+                                            statusClass = 'status-rejected';
+                                            
+                                        } else if (leave.status === 'pending') {
+                                            statusText = '<p style="color:grey;">Pending</p>';
+                                            statusClass = 'status-pending';
+                                            
+                                        }
+                                        const dateString = formattedCreatedAt.toISOString().split('T')[0]; // Extract date part only
+                                        const timeString = formattedCreatedAt.toTimeString().split(' ')[0]; // Extract time part only
+
+                                        const [year, month, day] = dateString.split('-'); // Splitting the date parts
+
+                                        formattedCreatedAt = `${day}/${month}/${year} `;
+
+
+
+                                       
+
+                                                table.row.add([
+                                                leave.permission_id,
+                                                `<div style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 150px;">${leave.reason}</div>`,
+
+                                                formattedStartDate,
+                                                leave.start_time,
+                                                leave.end_time,
+                                                formattedCreatedAt,
+                                                 
+                                                // `<div style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 150px;">${leave.admin_remark_permission}</div>`,
+                                                statusText,
+                                                `<a href="/employees/leave-details?req_id=${leave.permission_id}" class="btn btn-secondary btn-sm" style="background-color: #0bb197;border: 1px solid #0bb197;" >View Details</a>`
+                                            ]).draw(false);
+                                    });
+                                   
+                                } else {
+
+                                    table.row.add([
+                                            '',
+                                            'No data available',
+                                            '',
+                                            '',
+                                            '',
+                                            '',
+                                            '',
+                                            '',''
+                                        ]).draw(false);
+
+                             
+                                }
+
+
+                               
+
+
+
+                            } else {
+                           
+                                $('#load').html('<tr><td colspan="9">Error retrieving data</td></tr>');
+                            }
+                        },
+
+                        error: function (xhr, status, error) {
+                            console.log("AJAX Error:", error);
+                            $('#load').html('<tr><td colspan="9">Error</td></tr>');
+                        }
+                    });
+
+                }
+            });
+        })
+
+
+        </script>
+
+
+
+        <!-- Vendor js -->
+        <script src="/assets/js/vendor.min.js"></script>
+
+        <!-- Datatables js -->
+        <script src="/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+      
+
+        <!-- Datatable Demo Aapp js -->
+        <script src="/assets/js/pages/datatable.init.js"></script>
+
+        <!-- App js -->
+        <script src="/assets/js/app.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" data-layout="topnav" data-topbar-color="dark" data-menu-color="light">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Permission Page | Shiftwave</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
+    <meta content="Techzaa" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+    <!-- Select2 css -->
+    <link href="/assets/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Daterangepicker css -->
+    <link href="/assets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+    <!-- Bootstrap Touchspin css -->
+    <link href="/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Bootstrap Datepicker css -->
+    <link href="/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Bootstrap Timepicker css -->
+    <link href="/assets/vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Flatpickr Timepicker css -->
+    <link href="/assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Theme Config Js -->
+    <script src="/assets/js/config.js"></script>
+
+    <!-- App css -->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <%- include('../../includes/employee-header')%>
+
+       
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                      
+                                        <a href="javascript:window.history.go(-1);"><input type="button" value="Back" class="btn btn-primary btn-sm waves-effect waves-light"></a>
+                                    </ol>
+                                </div>
+
+                                <h4 class="page-title">Apply Permission</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="alert alert-info text-bg-info border-0" id="sucess_message" role="alert"
+                        style="display: none;">
+                        <strong>Info - </strong> A simple info alert—check it out!
+                    </div>
+                    <div class="alert alert-danger" role="alert" id="failed-message" style="display: none;">
+                        <strong>Error - </strong> A simple danger alert—check it out!
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+
+                                <div class="card-body">
+                                    <form class="needs-validation" id="leaveForm" method="post" novalidate>
+                                        
+                                        <div class="mb-2 position-relative">
+                                            <label class="form-label">Date</label>
+                                            <input type="text" class="form-control datepicker" placeholder="Select Date" id="datepicker" name="date" required autocomplete="off">
+                                            <div class="invalid-feedback">
+                                                enter date
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-2">
+                                            <label class="form-label" for="validationCustom01">Start Time</label>
+                                            
+                                                <input id="24hours-timepicker" name="start_time" type="text" class="form-control"
+                                                    placeholder="enter time"  required>
+                                                    <div class="invalid-feedback">
+                                                        enter start time in between 09:00 AM to  17:00 PM
+                                                    </div>   
+                                            
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label" for="readonlyTimeField">End Time</label>
+                                            <input id="validationCustom02" name="end_time" type="text" step="3600" class="form-control" readonly required>
+                                            <div class="invalid-feedback">
+                                                enter end time in between 09:00 AM to  17:00 PM
+                                            </div>
+                                        </div>
+                                        
+
+                                      
+                                        
+                                        
+                                        <div class="mb-2">
+                                            <label class="form-label" for="validationCustom03">Reason for permission</label>
+
+
+                                            <textarea class="form-control" name="description" type="text" length="400"
+                                                id="validationCustom03" rows="5"  maxlength="500" required></textarea>
+                                            <div class="invalid-feedback">
+                                                enter description
+                                            </div>
+                                        </div>
+                                        
+
+
+                                        <button class="btn btn-primary" id="submitBtn" type="submit">Submit</button>
+                                    </form>
+
+                                </div> <!-- end card-body-->
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+                    </div>
+
+
+                </div>
+                <!-- container -->
+
+            </div>
+            <!-- content -->
+
+            <!-- Footer Start -->
+            <%- include('../../includes/employee-footer')%>
+            <!-- end Footer -->
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+
+    <!-- Theme Settings -->
+<%- include('../../includes/employee-theme')%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function () {
+		$('.datepicker').datepicker({
+		autoclose: true,
+		todayHighlight: true,
+		format:'dd/mm/yyyy',
+		startDate: new Date(),
+		beforeShowDay: function (date) {
+		var currentDate = new Date();           
+		currentDate.setHours(0, 0, 0, 0);
+		date.setHours(0, 0, 0, 0);
+		// Disable Sundays (assuming 0 is Sunday and 6 is Saturday)
+		if (date.getDay() === 0) { // Sunday
+			return { enabled: false };
+		}
+		// Disable specific dates
+		var disabledDates = [
+		"2023-12-16", 
+		"2024-01-13",
+		'2024-01-06', '2024-01-20',
+		'2024-02-03', '2024-02-17',
+		'2024-03-02', '2024-03-16',
+		'2024-04-06', '2024-04-20',
+		'2024-05-04', '2024-05-18',
+		'2024-06-01', '2024-06-15',
+		'2024-07-06', '2024-07-20',
+		'2024-08-03', '2024-08-17',
+		'2024-09-07', '2024-09-21',
+		'2024-10-05', '2024-10-19',
+		'2024-11-02', '2024-11-16',
+		'2024-12-07', '2024-12-21'
+
+		// Add as many dates as needed in the same format
+		];
+
+		var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
+		if (disabledDates.indexOf(formattedDate) !== -1) {
+			return { enabled: false };
+		}
+
+			return date < currentDate ? { enabled: false } : { enabled: true };
+		}
+    });
+    $('#leaveForm').submit(function (event) {
+        $('#sucess_message').text('');
+        $('#sucess_message').hide();
+        $('#failed-message').text('');
+        $('#failed-message').hide('');
+        var form = $(this)[0];
+        const date = $('#leaveForm input[name="date"]').val();
+        const start_time = $('#leaveForm input[name="start_time"]').val();
+        const end_time = $('#leaveForm input[name="end_time"]').val();               
+        const description = $('#leaveForm textarea[name="description"]').val();           
+        if (start_time == '' ) {                    
+            $('.invalid-feedback').show();
+            $('#24hours-timepicker').addClass('is-invalid');
+        }    
+        if(!form.checkValidity()) {
+            form.reportValidity(); // Show native HTML5 validation messages
+            event.preventDefault(); // Prevent form submission if invalid
+            event.stopPropagation();
+            return;
+        }else{
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                dataType: "json",
+                data: $('#leaveForm').serialize(),
+                url: '/employees/createpermission',
+                success: function (response) {
+                    if (response.status == 'suceesfully Created') {
+                        // Clear form fields                   
+                        $('#leaveForm')[0].reset(); 
+                        $('#sucess_message').text("Permission Applyed Sucessfully.");
+                        $('#sucess_message').show();
+                        $('#leaveForm').removeClass('was-validated');
+                        $('.invalid-feedback').hide();
+                        $('.form-control').removeClass('is-invalid');
+                        $('html, body').animate({ scrollTop: 0 }, 'slow');                           
+                    } else {
+                    // Show error message
+                        $('#failed-message').text(response.status);
+                        $('#failed-message').show();
+                        $('html, body').animate({ scrollTop: 0 }, 'slow');
+                        $('#leaveForm')[0].reset(); 
+                    }
+                }
+            }); 
+        }                
+        })
+    })
+</script>
+
+   <!-- Vendor js -->
+   <script src="/assets/js/vendor.min.js"></script>
+
+   <!--  Select2 Plugin Js -->
+   <script src="/assets/vendor/select2/js/select2.min.js"></script>
+
+   <!-- Daterangepicker Plugin js -->
+   <script src="/assets/vendor/daterangepicker/moment.min.js"></script>
+   <script src="/assets/vendor/daterangepicker/daterangepicker.js"></script>
+
+   <!-- Bootstrap Datepicker Plugin js -->
+   <script src="/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+   <!-- Bootstrap Timepicker Plugin js -->
+   <script src="/assets/vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+
+   <!-- Input Mask Plugin js -->
+   <script src="/assets/vendor/jquery-mask-plugin/jquery.mask.min.js"></script>
+
+   <!-- Bootstrap Touchspin Plugin js -->
+   <script src="/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+
+   <!-- Bootstrap Maxlength Plugin js -->
+   <script src="/assets/vendor/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+
+   <!-- Typehead Plugin js -->
+   <script src="/assets/vendor/handlebars/handlebars.min.js"></script>
+   <script src="/assets/vendor/typeahead.js/typeahead.bundle.min.js"></script>
+
+   <!-- Flatpickr Timepicker Plugin js -->
+   <script src="/assets/vendor/flatpickr/flatpickr.min.js"></script>
+
+   <!-- Typehead Demo js -->
+   <script src="/assets/js/pages/typehead.init.js"></script>
+
+   <!-- Timepicker Demo js -->
+   <script src="/assets/js/pages/timepicker.init.js"></script>
+
+   <!-- App js -->
+   <script src="/assets/js/app.min.js"></script>
+
+</body>
+
+</html>

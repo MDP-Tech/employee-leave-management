@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Log In | Shiftwave </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
+    <meta content="Techzaa" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+
+    <!-- App css -->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+
+
+</head>
+
+<body class="authentication-bg position-relative">
+    <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5 position-relative">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xxl-8 col-lg-7">
+                    <div class="card overflow-hidden">
+                        <div class="row g-0">
+                            <div class="col-lg-6 d-none d-lg-block p-2">
+                                <img src="/assets/images/auth-img.jpg" alt="" class="img-fluid rounded h-100">
+                            </div>
+                            <div class="col-lg-6" >
+                                <div class="d-flex flex-column h-100">
+                                    
+                                    <div class="p-4 my-auto">
+                                        <h4 class="fs-20" >Log In</h4>
+                                        <p class="text-muted mb-3" >Login with employee credentials.
+                                        </p>
+                                        <!-- invalid credentials message -->
+
+                                        <div class="text-danger" id="invalid"></div>
+                                        <br>
+                                        <!-- form -->
+                                        <form  id="login-form" >
+                                            
+                                            <div class="mb-3">
+                                                <label for="emailaddress" class="form-label">Email address</label>
+                                                <input class="form-control" type="email" id="emailaddress" required=""
+                                                    placeholder="Enter your email" maxlength="30">
+                                                    <div class="text-danger"></div>
+                                            </div>
+                                      
+
+                                            <div class="mb-3">
+                                                <a  href="" id="forgotpassword" class="text-muted float-end"><small>Forgot
+                                                    your
+                                                    password?</small></a>
+                                                <label for="password" class="form-label">Password</label>
+                                                <div class="input-group input-group-merge">
+                                                    <input type="password" id="password" class="form-control" placeholder="Enter your password" maxlength="30">
+                                                    <div class="input-group-text" data-password="false">
+                                                        <span class="password-eye"></span> <!-- Use any suitable eye icon here -->
+                                                    </div>
+                                                </div>
+                                                <div class="text-danger" id="passwordError"></div> <!-- Error message for password field -->
+                                            </div>
+
+                                         
+                                            <!-- <button class="btn btn-soft-primary w-100" type="submit" id="button">
+                                                <i class="ri-login-circle-fill me-1"></i> <span class="fw-bold">Log In</span>
+                                            </button> -->
+                                            <button style="width:100%" class="btn btn-primary waves-effect waves-light" type="submit" id="button"><span id="login-text">Log In</span></button>
+
+                                        </form>
+
+                                           <!-- reset password form -->
+                                           <form id="resetPasswordFields" style="display: none;">
+                                            <div class="text-bg-info" id="reset_sucessmessage"></div>
+                                        <div class="text-danger" id="reset_failedmessage"></div>
+                                        <br>
+                                        
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" id="reset_email" class="form-control" placeholder="Enter your email" maxlength="50">
+                                            <div class="text-danger" id="email_alert"></div>
+                                        </div>
+                                        
+                                            <div class="mb-3">
+                                                <label for="newpassword" class="form-label">New Password</label>
+                                                <div class="input-group">
+                                                    <input type="password" id="newpassword" class="form-control" placeholder="Enter your new password" maxlength="30">
+                                                    <div class="input-group-text" data-password="false">
+                                                        <span class="password-eye"></span> <!-- Use any suitable eye icon here -->
+                                                    </div>
+                                                </div>
+                                                <div class="text-danger" id="password_alert"></div> 
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="confirmpassword" class="form-label">Confirm Password</label>
+                                                <div class="input-group">
+                                                <input type="password" id="confirmpassword" class="form-control" placeholder="Confirm your new password" maxlength="30">
+                                                <div class="input-group-text" data-password="false">
+                                                    <span class="password-eye"></span> <!-- Use any suitable eye icon here -->
+                                                </div>
+                                                <div class="text-danger" id="confirmpassword_alert"></div> 
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-secondary" id="Save">Save</button>
+                                            <button class="btn btn-primary waves-effect waves-light" id="login_page">Back to Login</button>
+                                        </form>
+                                        <!-- end form-->
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+
+   
+    <!-- Vendor js -->
+    <!-- s -->
+
+    <!-- App js -->
+    <!-- <script src="/js/app.min.js"></script> -->
+
+    <!-- jquery -->
+    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+   $(document).ready(function () {
+
+
+    $("#forgotpassword").on('click',function (event) {
+        event.preventDefault();
+       
+        $("#login-form").hide();
+        $("#resetPasswordFields").show();
+        
+    })
+
+   
+// Save Password
+$("#Save").on('click',function (event) {
+    event.preventDefault();
+
+    $("#password_alert").text("");
+    $("#confirmpassword_alert").text("");
+    $("#email_alert").text("");
+
+    
+   alert($("#newpassword").val());
+   alert($("#confirmpassword").val());
+
+   var isValid = true;
+   
+   var password = $("#newpassword").val();
+    var confirm_password = $("#confirmpassword").val();
+    var email = $("#reset_email").val();
+    
+
+
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (email.trim() === '') {
+    
+    $("#email_alert").text("Please enter your email");
+    var isValid = false;
+    
+}
+if (isValid) {
+    
+
+if (!emailRegex.test(email)) {
+    $("#email_alert").text("Invalid email format");
+    var isValid = false;
+} 
+}
+
+    if (password == '') {
+        $("#password_alert").text("Please Enter Your Password").show();
+        isValid = false;
+
+    }
+    if(confirm_password == ''){
+        $("#confirmpassword_alert").text("Please Enter Confirm Password ").show();
+        isValid = false;
+
+    }
+    if (isValid) {
+        
+    
+    if (password !== confirm_password) {
+            $("#reset_failedmessage").text("Passwords do not match").show();
+            isValid = false;
+ 
+            
+        }
+    }
+
+   
+
+       
+            
+        if(isValid){
+
+               
+                         $.ajax({
+                             type: 'POST',
+                             dataType: "json",
+                             data: { password:password,re_password:confirm_password,email:email },
+                             url: '/employees/updatepassword',
+                             success: function (response) {
+                                 if (response.status == 'Sucessfully Updated') {
+                                    
+                                    $('#reset_sucessmessage').text(response.status)
+                                    $('#reset_sucessmessage').show().fadeOut(7000);
+                                     $("#newpassword").val('');
+                                     $("#confirmpassword").val('');
+                                     $("#reset_failedmessage").text('');
+                                     $("#reset_email").val('');
+                                     
+                                        
+                                    
+                                 } else {
+                                     
+                                    $('#reset_failedmessage').text(response.status).fadeOut(7000);
+                                     
+                                 }
+                             },
+                             error: function (xhr, status, error) {
+                                 console.log("AJAX Error:", error);
+                             }
+                         });
+                        }
+})
+
+
+// back to login page
+$("#login_page").on('click',function (event) {
+    event.preventDefault();
+    $("#login-form").show();
+        $("#resetPasswordFields").hide();
+})
+
+    // eye icon to visible password
+$(".password-eye").on("click", function () {
+        var password = $("#password");
+        var passwordFieldType = password.attr("type");
+
+        if (passwordFieldType === "password") {
+            password.attr("type", "text");
+        } else {
+            password.attr("type", "password");
+        }
+    });
+
+    $("#button").on('click', function (event) {
+        event.preventDefault();
+
+        var email = $("#emailaddress").val();
+        var password = $("#password").val();
+        var isValid = true;
+
+        $(".text-danger").text(""); // Clear previous error messages
+
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (email.trim() === '') {
+            $("#emailaddress").siblings(".text-danger").text("Please enter your email");
+            var isValid = false;
+            
+        }
+        if (isValid) {
+            
+        
+        if (!emailRegex.test(email)) {
+            $("#emailaddress").siblings(".text-danger").text("Invalid email format");
+            var isValid = false;
+        } 
+    }
+         if (password.trim() === '') {
+            $("#passwordError").text("Please enter your password");
+            var isValid = false;
+        }
+         if(isValid) {
+            $('#button').html(`<div class="spinner-border spinner-border-sm" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>`)  
+                    $.ajax({
+                        type: 'POST',
+                        dataType: "json",
+                        data: { user_name: email, user_password: password },
+                        url: '/employees/login',
+                        success: function (response) {
+                            if (response.status == 'Invalid credentials') {
+                               
+                                 $('#button').html(`Log In`)  
+                                $("#invalid").text("Invalid Credentials").show()
+                            } else {
+                                console.log(response.role);
+                             
+                                if (response.role == 'employee' ) {
+
+                                    window.location.href = '/employees/dashboard'
+                                    
+                                }else {
+                               
+                                window.location.href = "/admin/dashboard";
+                                }
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.log("AJAX Error:", error);
+                        }
+                    });
+                }
+
+                
+               
+            
+            
+            });
+        });
+        </script>  
+    
+
+
+    
+
+    <script src="assets/js/vendor.min.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/app.min.js"></script>
+  
+
+</body>
+
+</html>
+

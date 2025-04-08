@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" data-layout="topnav" data-topbar-color="light" data-menu-color="dark">
+<head>
+    <meta charset="utf-8" />
+    <title>Permission History | Shiftwave</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
+    <meta content="Techzaa" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+    <!-- Daterangepicker css -->
+    <link rel="stylesheet" href="/assets/vendor/daterangepicker/daterangepicker.css" />
+    <!-- Vector Map css -->
+    <link rel="stylesheet" href="/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" />
+    <!-- Theme Config Js -->
+    <script src="/assets/js/config.js"></script>
+    <!-- App css -->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <!-- Datatables css -->
+    <link href="/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <!-- Icons css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <style> 
+        .dataTables_length {
+            margin-bottom: 17px;
+        }
+
+        @media (max-width:600px) {
+            div.dataTables_wrapper div.dataTables_length label {
+                width: 205px !important;
+            }
+        }
+
+        @media (max-width:780px) {
+            div.dataTables_wrapper div.dataTables_length label {
+                width: 205px !important;
+            }
+        }
+
+        .white-background {
+            background-color: white;
+        }
+
+        @media (min-width: 576px) {
+            .modal-dialog {
+
+                max-width: none;
+                margin-right: 80px;
+                margin-left: 80px;
+                padding: 20px;
+            }
+        }
+
+        .success_message_style {
+            background-color: #0dcaf0 !important;
+            color: white;
+            padding: 15px 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Begin page -->
+<div class="wrapper">
+        <%- include('../includes/admin-header')%>
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+<div class="content-page">
+    <div class="content">
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">Employee List</h4>
+
+                    </div>
+                    <div class="success_message_style" id="sucessmessage"><stron></stron></div>
+                </div>
+            </div>
+            <!-- end page title -->
+            <div class="row" id="loading">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive lead-table" style="padding: unset">
+
+                                <table id="basic-datatable"
+                                    class="table table-hover progress-table text-center dataTable no-footer dtr-inline collapsed table-centered table-nowrap mb-0"
+                                    role="grid" aria-describedby="dataTable_info"
+                                    style="width: 100%; background-color: white">
+                                    <thead class="bg-light text-capitalize">
+                                        <tr role="row" style="background-color: white">                                     
+                                            <th>Sl.No</th>
+                                            <th width="120">First Name</th>
+                                            <th width="120">Last Name</th>
+                                           <th style="display: none;">Employee ID</th>
+                                            <th>Mobile Number</th>
+                                            <th>Email - ID</th>
+                                            <!-- <th>Role</th> -->
+                                            <th>Designation</th>
+                                            <!-- <th>Location</th> -->
+                                            <th style="display: none;">Balanced Leaves</th>
+                                            <!-- <th>View Details</th> -->
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                            <th style="display: none;">Role</th>
+                                            <th style="display: none;">Location</th>
+                                            <th style="display: none;">Lastname</th>
+                                            <th style="display: none;">Experience</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="load">
+                                        <% i=0 %>
+                                            <% employee_data.forEach(data=> { %> <% i=i+1 %>
+                                                    <tr role="row" class="even">
+                                                        <!-- <td>
+                                                            <input type="checkbox"
+                                                                class="form-check-input row-checkbox"
+                                                                data-employee-id="<%= data.employee_id %>" />
+                                                            <label class="form-check-label"
+                                                                for="checkbox<%= i %>"></label>
+                                                        </td> -->
+                                                        <td id="checkbox">
+                                                            <%= i %>
+                                                        </td>
+                                                        <td class="employee-name"
+                                                            data-employee-name="<%= data.first_name %>">
+                                                            <%= data.first_name %>
+                                                        </td>
+                                                        <td class="employee-name"
+                                                            data-employee-name="<%= data.last_name %>">
+                                                            <%= data.last_name %>
+                                                        </td>
+
+                                                        <td id="id" value="<%= data.employee_id %>" style="display: none;">
+                                                            <%= data.employee_id %>
+                                                        </td>
+                                                        <td id="MobileNumnber">
+                                                            <%= data.phone_number %>
+                                                        </td>
+
+                                                        <td id="email">
+                                                            <%= data.email %>
+                                                        </td>
+
+                                                        <td id="designation">
+                                                            <%= data.designation %>
+                                                        </td>
+                                                        <td id="balanced" style="display: none;">
+                                                            <%= data.balanced_leaves %>
+                                                        </td>
+                                                        <!-- <td>
+                                                            <button
+                                                                class="btn btn-primary btn-sm waves-effect btn-edit"
+                                                                style="background-color: #0bb197;border: 1px solid #0bb197;">
+                                                                 <i class="ri-pencil-fill"></i> -->
+                                                                <!-- View Details -->
+                                                            <!-- </button>
+                                                        </td>  -->
+                                                         <td>
+                                                            <a
+                                                                class="btn btn-primary btn-sm waves-effect " href="/admin/employee-details?emp_id=<%= data.employee_id %>"
+                                                                style="background-color: #0bb197;border: 1px solid #0bb197;">
+                                                             
+                                                                View Details <%= data.request_id %>
+                                                         </a>
+                                                        </td> 
+                                                     
+                                                        <td>
+                                                            <button id="delete_button"
+                                                                class="btn btn-danger btn-sm  waves-effect">
+
+                                                                <i class="ri-delete-bin-line"></i>
+                                                            </button>
+                                                        </td>
+                                                        <td class="hidden-role" style="display: none;">
+                                                            <%= data.role %>
+                                                        </td>
+                                                        <td class="hidden-location" style="display: none;">
+                                                            <%= data.location %>
+                                                        </td>
+                                                        <td class="hidden-lastname" style="display: none;">
+                                                            <%= data.last_name %>
+                                                        </td>
+                                                        <td class="hidden-experience"
+                                                            style="display: none;">
+                                                            <%= data.experience %>
+                                                        </td>
+
+
+                                                        <!-- Add New Event MODAL -->
+
+                                                        <% }) %>
+                                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end card body-->
+                    </div>
+                    <!-- end card -->
+                </div>
+                <!-- end col-->
+            </div>
+            <!-- end row-->
+        </div>
+        <!-- container -->
+    </div>
+    <!-- content -->
+
+    <!-- Modal for Edit -->
+    <!-- Footer Start -->
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title text-center" id="editModalLabel">
+Edit Employee Details
+</h5>
+<button type="button" class="close" data-dismiss="modal" id="close"
+style="background-color: white; border:none;">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <form id="editForm" class="row needs-validation p-1" novalidate>
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <label for="editEmployeeFirstName">Employee_id</label>
+                    <input type="text" class="form-control mt-1" id="employeeid"
+                    name="Employee_id" placeholder="Enter first name" required />
+                    <div class="text-danger" id="idError"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <label for="editEmployeeFirstName">First
+                    Name</label>
+                    <input type="text" class="form-control mt-1" id="editEmployeeFirstName"
+                    name="Employee_fullname" placeholder="Enter first name" required />
+                    <div class="text-danger" id="nameError"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <label for="editEmployeeFirstName">Last
+                    Name</label>
+                    <input type="text" class="form-control mt-1" id="lastName"
+                    name="Employee_lastname" placeholder="Enter first name" required />
+                    <div class="text-danger" id="lastnameError"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <label for="phoneNumber" class="mb-1">Mobile
+                    Number</label>
+                    <input type="text" class="form-control" maxlength="10" id="phoneNumber"
+                    name="phoneNumber" placeholder="Enter mobile number" required />
+                    <div class="text-danger" id="numberError"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <label for="editEmployeeEmail" class="mb-1">Email</label>
+                    <input type="text" class="form-control" id="editEmployeeEmail" name="email"
+                    placeholder="Enter email" required />
+                    <div class="text-danger" id="emailError"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <label for="editEmployeeRole" class="mb-1">Role</label>
+                        <select name="role" id="editEmployeeRole" class="form-select" required>
+                        <option value="">Select Role</option>
+                        <option value="employee">Employee </option>
+                        <option value="hr">HR </option>
+                    </select>
+                    <div class="text-danger" id="roleError"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <label for="editEmployeeDesignation" class="mb-1">Designation</label>                                          
+                    <input type="text" list="job-role" id="editEmployeeDesignation"
+                    placeholder="enter here" name="designation" class="form-control"
+                    required />
+                    <datalist id="editEmployeeDesignation">
+                    <% designations.forEach(data=> { %>
+                    <option value="<%= data.designation %>">
+                    <%= data.designation %>
+                    </option>
+                    <% }) %>
+                    </datalist>
+                    <div class="text-danger" id="designationError"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <label for="editEmployeeLocation" class="mb-1">Location</label>
+                    <input type="text" class="form-control" id="editEmployeeLocation"
+                    name="location" placeholder="Enter location" required />
+                    <div class="text-danger" id="locationError"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <label for="editEmployeeBalanced" class="mb-1">Balanced
+                    Leaves</label>
+                    <input type="text" class="form-control" id="editEmployeeBalanced"
+                    name="balanced" placeholder="Enter balanced leaves" required />
+                    <div class="text-danger" id="balancedError"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <label for="editEmployeeBalanced" class="mb-1">Experience
+                    </label>
+                    <input type="text" class="form-control" id="edit_experience"
+                    name="experience" placeholder="Enter Experience" required />
+                    <div class="text-danger" id="experienceError"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div style="display: flex;justify-content: center;margin: 10px auto;">
+    <button type="button" class="btn btn-primary mb-3" id="update_button">Update</button>
+</div>
+</div>
+</div>
+</div>
+<% ids_array=[]; 
+    email_array=[]; 
+    result.forEach(data=> {%>
+        
+        <% ids_array.push(data.employee_id);
+          
+        email_array.push(data.email); 
+        
+        }); %>
+    <%- include('../includes/employee-footer')%>
+    </div>
+    <%- include('../includes/admin-theme-settings')%>
+
+        <!-- end Footer -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+
+
+                var ids_array = JSON.parse('<%- JSON.stringify(ids_array) %>');
+                var email_array = JSON.parse('<%- JSON.stringify(email_array) %>')
+
+                $('#phoneNumber, #edit_experience,#editEmployeeBalanced').on('input', function () {
+                    $(this).val($(this).val().replace(/[^0-9.]/g, ''));
+                });
+
+                // edit modal
+                // $(document).on("click", ".btn-edit", function () {  
+                    $(document).on("click", ".btn-edit", function () {                 
+                             
+                    const row = $(this).closest("tr");
+                    // Extract data from the clicked row
+                    const employeeId = row.find(".form-check-input.row-checkbox").data("employee-id");
+                    const fullname = row.find(".employee-name").data("employee-name").trim();
+                    const phoneNumber = row.find("#MobileNumnber").text().trim();             
+                    const email = row.find("#email").text().trim();
+                    const designation = row.find("#designation").text().trim();
+                    const experience = row.find(".hidden-experience").text().trim();
+                    const balanced = row.find("#balanced").text().trim();
+                    const id = row.find("#id").text().trim();
+                    const role = row.find(".hidden-role").text().trim();
+                    const location = row.find(".hidden-location").text().trim();
+                    const lastname = row.find(".hidden-lastname").text().trim();
+                    // Populate modal fields with existing data
+                    $("#phoneNumber").val(phoneNumber);
+                    $("#editEmployeeEmail").val(email);
+                    $("#editEmployeeRole").val(role);
+                    $("#editEmployeeDesignation").val(designation);
+                    $("#editEmployeeLocation").val(location);
+                    $("#editEmployeeBalanced").val(balanced);
+                    $("#lastName").val(lastname);
+                    $("#employeeid").val(id);
+                    $("#editEmployeeFirstName").val(fullname);
+                    $("#edit_experience").val(experience);
+                    // Show the modal
+                    jQuery("#editModal").modal("show");
+                 
+                });
+       
+
+                $("#close").on('click', function (event) {
+                    event.preventDefault();
+                    $("#editModal").modal("hide");
+                });
+
+                // delete function
+                $(document).on("click", "#delete_button", function () {
+                // $("#delete_button").on("click", function () {
+                    const row = $(this).closest("tr");
+                    const employeeId = row.find("#id").text().trim();
+                    // Use a confirm dialog to confirm the delete action
+                    if (confirm("Are you sure you want to delete this employee?")) {
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            data: { id: employeeId },
+                            url: "/delete-employees",
+                            success: function (response) {
+                                if (response.status === "success") {
+                                    $("#basic-datatable").load(window.location.href + " #basic-datatable");
+
+                                } else {
+                                    console.log("Not Update Successfully");
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                console.log("AJAX Error:", error);
+                                // Handle error appropriately (e.g., show a message to the user)
+                            },
+                        });
+                    }
+                });
+
+                $(document).on("click", "#update_button", function (event) {
+                    event.preventDefault();
+                    $('#idError, #nameError, #lastnameError, #numberError, #emailError, #roleError, #designationError, #locationError, #balancedError, #experienceError').text("");
+                    var form = document.getElementById("editForm");
+                    let value = true;
+                    // Access form fields using their name
+                    var employeeId = form.elements["Employee_id"].value;
+                    var firstName = form.elements["Employee_fullname"].value;
+                    var lastName = form.elements["Employee_lastname"].value;
+                    var mobileNumber = form.elements["phoneNumber"].value;                  
+                    var email = form.elements["email"].value;
+                    var role = form.elements["role"].value;
+                    var designation = form.elements["designation"].value;
+                    var location = form.elements["location"].value;
+                    var balancedLeaves = form.elements["balanced"].value;
+                    var experience = form.elements["experience"].value
+                    
+                    if (employeeId.trim() === '') {
+                        $('#idError').text("Please enter Employee ID");
+                        value = false;
+                    }
+                    // if (value) {
+                    //     for (var i = 0; i < ids_array.length; i++) {
+                    //          if (ids_array[i] == employee_id) {
+                    //              $('#idError').text("Id Is Already Present In Database").show();
+                    //               value = false
+                    //         }
+                    //              }
+                    // }
+                    // Validation for First Name
+
+                    if (firstName.trim() === '') {
+                        $('#nameError').text("Please enter First Name");
+                        value = false;
+                    }
+                    // Validation for Last Name            
+                    if (lastName.trim() === '') {
+                        $('#lastnameError').text("Please enter Last Name");
+                        value = false;
+                    }
+                    if (mobileNumber.trim() === '') {
+                        $('#numberError').text("Please enter Mobile Number");
+                        value = false;
+                    }
+                    if (value) {
+                       
+                        if ( mobileNumber.trim().length < 10) {
+                            $("#numberError").text("Phone Number having must 10 Numbers")
+                            value = false
+                        }
+                    }
+                    // Validation for Email         
+                    if (email.trim() === '') {
+                        $('#emailError').text("Please enter a valid Email");
+                        value = false;
+                    }
+
+                    if (value) {
+                        if (!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).test(email.trim())) {
+                            // If the email format is not valid, show an error message
+                            $('#emailError').text('Invalid email format');
+                            value=false;
+                        }
+                    }
+    
+                    // if (value) {
+
+                    //     alert("sucess123")
+                        
+                    //     for (var i = 0; i < ids_array.length; i++) {
+
+                    //             // if (ids_array[i] == employee_id) {
+                    //             //      $('#idError').text("Id Is Already Present In Database").show();
+                    //             //       value = false
+                    //             //      }
+                    //              if (email_array[i] == email) {
+                    //                 $('#emailError').text("Email Is Already Present In Database").show();
+                    //                      value = false
+                    //             }
+
+                    //             }
+                    // }
+                    // Validation for Role            
+                    if (role.trim() == '') {
+
+                        $('#roleError').text("Please enter Role");
+                        value = false;
+                    }
+                    // Validation for Designation            
+                    if (designation.trim() === '') {
+                        $('#designationError').text("Please enter Designation");
+                        value = false;
+                    }
+
+                    // Validation for Location
+
+                    if (location.trim() === '') {
+                        $('#locationError').text("Please enter Location");
+                        value = false;
+                    }
+
+                    // Validation for Balanced Leaves
+
+                    if (balancedLeaves.trim() === '') {
+                        $('#balancedError').text("Please enter Balanced Leaves");
+                        value = false;
+                    }
+                    if (experience.trim() === '') {
+                        $('#experienceError').text("Please enter Experience");
+                        value = false;
+                    }
+
+                    if (value) {
+
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            data: $("#editForm").serialize(),
+                            url: "/edit-employee",
+                            success: function (response) {                              
+                                if (response.status === "Successfully Updated") {
+                                    // Clear the existing content of the row within specific cells
+                                    $("#editModal").modal("hide");
+                                    $("#basic-datatable").load(window.location.href + " #basic-datatable");                                  
+                                    $("#sucessmessage").text("Updated Sucessfully.")
+                                    $('#sucessmessage').show().fadeOut(3000);
+                                    $("html, body").animate({ scrollTop: 0 }, "slow"); 
+                                                                     
+                                } else {
+                                    console.log("Not Update Successfully");
+                                }
+                            },
+                            error: function (error) {
+                                console.error("Error during the AJAX request", error);
+                            }
+                        });
+                    }
+                });
+
+                $(".btn-secondary").on("click", function () {
+                    // Close the modal
+                    $("#editModal").modal("hide");
+                });
+
+                // select all checkboxes
+                $("#selectallbox").on("click", function () {
+                    const isChecked = $(this).prop("checked");
+                    $(".form-check-input.row-checkbox").prop("checked", isChecked);
+                });
+            });
+        </script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- Vendor js -->
+        <script src="/assets/js/vendor.min.js"></script>
+        <!-- Datatables js -->
+        <script src="/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+        <!-- Datatable Demo Aapp js -->
+        <script src="/assets/js/pages/datatable.init.js"></script>
+        <!-- App js -->
+        <script src="/assets/js/app.min.js"></script>
+
+
+        <!-- END wrapper -->
+</body>
+
+</html>

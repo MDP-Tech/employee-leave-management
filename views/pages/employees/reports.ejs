@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<html lang="en" data-layout="topnav" data-topbar-color="light" data-menu-color="light">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Reports | Shiftwave</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
+    <meta content="Techzaa" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+     <!-- Select2 css -->
+     <link href="/assets/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+
+     <!-- Daterangepicker css -->
+     <link href="/assets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+ 
+     <!-- Bootstrap Touchspin css -->
+     <link href="/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet"
+         type="text/css" />
+ 
+     <!-- Bootstrap Datepicker css -->
+     <link href="/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet"
+         type="text/css" />
+ 
+     <!-- Bootstrap Timepicker css -->
+     <link href="/assets/vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet"
+         type="text/css" />
+ 
+     <!-- Flatpickr Timepicker css -->
+     <link href="/assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Daterangepicker css -->
+    <link rel="stylesheet" href="/assets/vendor/daterangepicker/daterangepicker.css">
+
+    <!-- Vector Map css -->
+    <link rel="stylesheet" href="/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css">
+
+    <!-- Theme Config Js -->
+    <script src="/assets/js/config.js"></script>
+
+    <!-- App css -->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Datatables css -->
+    <link href="/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Icons css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+     div.scroll {
+            margin: 4px;
+            padding: 4px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .lead-table1 {
+    overflow-y: hidden;
+}
+
+.table-responsive1 {
+    overflow-x: auto;
+}
+.white-background {
+            background-color: white;
+        }
+
+       
+        .btns-flexes{
+            display: flex;
+            flex-direction: row;
+           justify-content: space-between;
+            margin-top: 30px;
+            
+        }
+
+        
+       
+        @media (min-width: 1200px) {
+           
+        .clear-btn1{
+         margin-right: 20px;
+            margin-left: 30px;
+           
+        }
+        .btn-mini-apply{
+            width: 80px;
+        }
+        .btns-flexes{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 35px;
+            
+        }
+}
+
+.dataTables_length{
+    display: none;
+}
+.dataTables_filter{
+    display: none;
+}
+
+.bg-table1{
+  
+  border: rgb(230, 230, 230) 0.1px solid;
+}
+
+.daterangepicker {
+            z-index: 9999;
+            /* Increase the z-index to ensure it appears above other elements */
+            /* Or you can try adjusting the positioning */
+            /* position: relative; */
+        }
+
+    </style>
+     <style>
+        /* ... (existing styles) ... */
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #basic-datatable,
+            #basic-datatable * {
+                visibility: visible;
+            }
+            #basic-datatable {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+   
+    <!-- Begin page -->
+ 
+    <div class="wrapper">
+
+        <%- include('../../includes/employee-header')%>
+
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                   
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                          
+                                            <a ><input type="button" value="Download Report" class="btn btn-primary btn-sm waves-effect waves-light" id="Download"></a>
+                                        </ol>
+                                        
+                                    </div>
+                                       
+                                    
+
+                                    <h4 class="page-title">Reports</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+<div class="card">
+                        <div class="content" >
+
+                            <!-- Start Content-->
+
+
+                            <div class="row">
+                                <div class="col-12">
+
+
+                                    <div class="card-body">
+                                        <div class="mb-3 position-relative">
+                                            
+                                            <div class="row">
+                                                <form class="row needs-validation p-1" id="leaveForm" novalidate>
+                                                   
+                                                    
+                                                    
+                                           
+                                                    <div class="col-md-2 mb-1" id="datepicker1">
+                                                        <label for="validationCustom01" class="form-label">Start Date</label>
+                                                        <input type="text" class="form-control" placeholder="Select Date"
+                                                    id="datepicker_start" name="start_date" required readonly autocomplete="off" >
+                                                <div class="text-danger" id="start_date" style="display: none;">
+                                                    Enter start date
+                                                </div>
+                                                    </div>
+
+
+
+
+                                                    <div class="col-md-2 mb-1" id="datepicker2">
+                                                        <label for="validationCustom02" class="form-label">End Date</label>
+                                                       
+                                                        <input type="text" class="form-control" placeholder="Select Date"
+                                                        id="datepicker_end" name="end_date" required readonly autocomplete="off">
+                                                    <div class="text-danger" id="end_date" style="display: none;">
+                                                        Enter end date
+                                                    </div>
+                                                    </div>
+                                                   
+                                              
+                                                    <div class="col-md-2 mb-1">
+                                                        <label class="form-label " for="validationCustomDropdown">Status
+                                                            </label>
+                                                            <select class="form-select" id="validationCustomDropdown" >
+
+                                                                <option value="">Status</option>
+                                                                <option value="Pending">Pending</option>
+                                                                <option value="Approved">Approved</option>
+                                                                <option value="rejected">Declined</option>
+                                                                <!-- <option value="Emergency/Medical">Emergency/Medical</option> -->
+    
+                                                            </select>
+                                                        <div class="invalid-feedback">Please select a leave_type.</div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        </div>
+                                                    
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-1 btns-flexes">
+                                                    <div class="clear-btn1">
+                                                        <button class="btn btn-danger btn-sm waves-effect waves-light" id="clear" type="clear">Clear</button>
+                                                    </div>
+                                                   
+                                                    <div class="apply-btn1">
+                                                        <button class="btn btn-primary btn-sm waves-effect waves-light btn-mini-apply" id="submit" type="submit">Apply</button>
+                                                    </div>
+                                                    </div>
+                                                
+                                                </form>
+                                                
+                                            </div>
+                                           
+                                            
+                                            
+                                        </div>
+                                        
+                                        <div class="table-responsive lead-table" id="table_print" style="padding: unset;">
+                                        <table id="basic-datatable"
+                                            class="table bg-table1 text-center dataTable no-footer dtr-inline collapsed table-centered table-nowrap mb-0"
+                                            role="grid" aria-describedby="dataTable_info" style="width: 100%;background-color: white;">
+                                            <thead class="text-capitalize">
+                                                <tr role="row" style="background-color: white;">
+                                                    <th>S.NO</th>
+
+                                                    <th width="150">Leave Type</th>
+                                                  
+                                                    <th>From</th>
+                                                    <th>To</th>
+                                                    <th width="150">Days</th>
+                                                    <th>Status</th>
+                                                    
+                                                    
+                                                    
+                                                    
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="load">                                                  
+                                              <tr role="row" class="even">                                                       
+                                                  <td colspan="6"> Data visible after filter  </td>                                                           
+                                                </tr>
+                                             </tbody>
+
+                                        </table>
+                                        </div>
+
+
+                                    </div> <!-- end card body-->
+
+                                </div><!-- end col-->
+                            </div> <!-- end row-->
+
+
+
+
+
+
+
+
+
+                        </div> <!-- content -->
+
+                    </div>
+
+                    </div>
+
+
+                </div>
+                <!-- container -->
+
+                <!-- content -->
+
+                <!-- Footer Start -->
+                <%- include('../../includes/employee-footer')%>
+                    <!-- end Footer -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+    </div>
+
+    <!-- END wrapper -->
+
+    <!-- Theme Settings -->
+    <%- include('../../includes/employee-theme')%>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- Vendor js -->
+        <script src="/assets/js/vendor.min.js"></script>
+
+        <!-- Datatables js -->
+        <script src="/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+      
+            <!-- Bootstrap Datepicker Plugin js -->
+            <script src="/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+        <!-- Datatable Demo Aapp js -->
+        <script src="/assets/js/pages/datatable.init.js"></script>
+
+    
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+
+                // To enable the date picker calendar, click on the field.
+                $('#datepicker_start , #datepicker_end').on('click', function () {
+                   
+                    $(this).datepicker('show');
+                });
+
+                // download report
+                const downloadReportBtn = document.getElementById('downloadReportBtn');
+
+              
+              $('#Download').on('click', function (event) {
+                
+                event.preventDefault();
+
+                       
+                window.print();
+          
+                });
+
+                $('#clear').on('click',function (event) {
+                
+                    var startDate = $('#datepicker_start').val('');
+                    var endDate= $('#datepicker_end').val('');
+
+                    let table = $('#basic-datatable').DataTable();
+                        table.clear().draw();
+                       
+                        $("#validationCustomDropdown").val("").trigger("change");
+                 
+                    event.preventDefault();
+
+                })
+                let nationalHolidays = [
+                    // new Date('2024-01-15'), new Date('2024-03-09'),
+                    // new Date('2024-04-09'), new Date('2024-08-15'),
+                    // new Date('2024-09-07'), new Date('2024-10-12'),
+                    // new Date('2024-10-31'), new Date('2024-12-25')
+                    ];
+                let saturdayHolidays = [
+                    // new Date('2024-01-06'), new Date('2024-01-20'),
+                    // new Date('2024-02-03'), new Date('2024-02-17'),
+                    // new Date('2024-03-02'), new Date('2024-03-16'),
+                    // new Date('2024-04-06'), new Date('2024-04-20'),
+                    // new Date('2024-05-04'), new Date('2024-05-18'),
+                    // new Date('2024-06-01'), new Date('2024-06-15'),
+                    // new Date('2024-07-06'), new Date('2024-07-20'),
+                    // new Date('2024-08-03'), new Date('2024-08-17'),
+                    // new Date('2024-09-07'), new Date('2024-09-21'),
+                    // new Date('2024-10-05'), new Date('2024-10-19'),
+                    // new Date('2024-11-02'), new Date('2024-11-16'),
+                    // new Date('2024-12-07'), new Date('2024-12-21')
+
+                ];
+
+                let disabledDates = [...nationalHolidays,...saturdayHolidays];
+                disabledDates =  disabledDates.map(elem => elem.toLocaleDateString());
+                
+                $('#datepicker_start').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    orientation: 'bottom',
+                    format: 'dd/mm/yyyy',
+                    beforeShowDay: function (date) {
+                    var currentDate = new Date();
+                    currentDate.setHours(0, 0, 0, 0);
+                    date.setHours(0, 0, 0, 0);
+
+                    // Disable national holidays and Saturdays
+                    
+
+                    // Format the date to match the disabledDates format
+                    // var formattedDate = date.toLocaleDateString();
+
+                    // if (disabledDates.includes(formattedDate) || date.getDay() === 0) { // Sunday
+                    //     return { enabled: false };
+                    // }
+
+                    // return { enabled: true };
+                }
+            
+                    
+                   
+                })
+                // set end date
+                $("#datepicker_start").on("changeDate", function (e) {
+                    var selectedDate = e.format(0, "dd/mm/yyyy");
+                    $("#datepicker_end").datepicker("setStartDate", selectedDate);
+                    $("#datepicker_end").datepicker("setDate", selectedDate);
+                    });
+
+                
+                $('#datepicker_end').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                orientation: 'bottom',
+                format: 'dd/mm/yyyy', 
+                beforeShowDay: function (date) {
+                    var currentDate = new Date();
+                    currentDate.setHours(0, 0, 0, 0);
+                    date.setHours(0, 0, 0, 0);
+
+                    // Disable national holidays and Saturdays
+                    
+
+                    // Format the date to match the disabledDates format
+                    // var formattedDate = date.toLocaleDateString();
+
+                    // if (disabledDates.includes(formattedDate) || date.getDay() === 0) { // Sunday
+                    //     return { enabled: false };
+                    // }
+
+                    // return { enabled: true };
+                }
+            
+            });
+
+                // no of days calculation
+              
+
+                $('#submit').on('click', function (event) {
+  
+                var form = $(this).closest('form')[0];
+                var startDate = $('#datepicker_start').val();
+                var endDate= $('#datepicker_end').val();
+                var status=$('#validationCustomDropdown').val();
+                $('#start_date').text('');
+                $('#end_date').text('');
+                 isValid =true;
+
+                   
+                if (startDate == '') {
+                    
+                    $('#start_date').text('Enter Start Date').show();
+                    
+                     isValid =false;
+                }
+                if (endDate == '') {
+                   
+                    $('#end_date').text('Enter end Date').show();
+
+                     isValid =false;
+                }
+                
+                event.preventDefault();
+                if (isValid) {
+                 
+
+                     if (!form.checkValidity()) {
+
+            form.reportValidity(); // Show native HTML5 validation messages
+            // Prevent form submission if invalid
+            event.stopPropagation();
+            return;
+            } else{
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    data: {startDate:startDate,endDate:endDate,status:status},
+
+                    url: '/employees/reports-filter',
+                    success: function (response) {
+                       
+                        
+                        if (response.status === 'success') {
+                           
+                            response.data.length
+                           let table = $('#basic-datatable').DataTable();
+                                table.clear().draw();
+                           
+
+                           if (response.data.length > 0) {
+
+                            let sno=1
+                            
+                           
+                               response.data.forEach(leave => {
+                                const startDate = new Date(leave.start_date);
+                            const endDate = new Date(leave.end_date);
+                            const formattedStartDate = `${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`;
+                            const formattedEndDate = `${endDate.getDate()}/${endDate.getMonth() + 1}/${endDate.getFullYear()}`;
+                             if (leave.status == 'pending') {
+                                status= 'Pending'
+                            }
+                            if (leave.status == 'approved') {
+                                status= 'Approved'
+                            }
+                            
+                            if (leave.status == 'rejected') {
+                               
+                                status = 'Declined'
+                                
+                            }
+                                           table.row.add([
+                                           sno,
+                                           leave.leave_type,
+                                           formattedStartDate,
+                                           formattedEndDate,
+                                           leave.no_of_days,
+                                           status
+
+                                          
+                                       ]).draw(false);
+                                       sno++;
+                               });
+                              
+                           } else {
+
+                            
+                            dataTable.row.add([
+                                    {
+                                        'colspan': 6, // Number of columns to span
+                                        'text': 'No data available',
+                                        'className': 'text-center' // Optional: Center the content
+                                    }
+                                ]).draw(false);
+
+                        
+                           }
+
+
+                          
+
+
+
+                       } else {
+                      
+                           $('#load').html('<tr><td colspan="9">Error retrieving data</td></tr>');
+                       }
+                    }
+                });
+
+
+         
+            }
+
+                    
+                }
+                
+                
+   
+});
+
+               
+               
+              
+            })
+
+
+          
+        </script>
+
+
+              <!--  Select2 Plugin Js -->
+              <script src="/assets/vendor/select2/js/select2.min.js"></script>      
+              <!-- App js -->
+              <script src="/assets/js/app.min.js"></script>
+
+</body>
+
+</html>

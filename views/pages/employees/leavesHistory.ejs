@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" data-layout="topnav" data-topbar-color="light" data-menu-color="light">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Leave History List | shiftwave </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
+    <meta content="Techzaa" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+    <!-- Datatables css -->
+    <link href="/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Theme Config Js -->
+    <script src="/assets/js/config.js"></script>
+
+    <!-- App css -->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+
+        <%- include('../includes/admin-header') %>
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <!-- <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Shiftwave</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                        <li class="breadcrumb-item active">Data Tables</li>
+                                    </ol>
+                                </div> -->
+                                    <h4 class="page-title">Leaves History</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+
+                                    <div class="card-body">
+                                        <table id="basic-datatable"
+                                            class="table table-striped dt-responsive nowrap w-100">
+                                            <thead>
+                                                <tr>
+                                                    <td>Request_id</td>
+
+                                                    <td width="120">Full Name</td>
+                                                    <td>Employee ID</td>
+                                                    <td>From</td>
+
+                                                    <td>Applied On</td>
+                                                    <th width="150">
+                                                        <select class="form-select" id="validationCustomDropdown">
+
+                                                            <option value="">Status</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="approved">Approved</option>
+                                                            <option value="rejected">Not Approved</option>
+                                                            <!-- <option value="Emergency/Medical">Emergency/Medical</option> -->
+
+                                                        </select>
+                                                    </th>
+                                                    <td>View Details</td>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody id="laod" >
+
+                                                <% i=0 %>
+                                                    <% if(result !="0" ){%>
+                                                        <% result.forEach(leave=>{ %>
+                                                            <% i=i+1 %>
+
+
+                                                                <tr>
+                                                                    <td> <b>
+                                                                            <%= leave.request_id %>
+                                                                        </b></td>
+
+                                                                    <td><a target="_blank">
+                                                                            <%= leave.fullname %>
+                                                                        </a></td>
+                                                                    <td>
+                                                                        <%= leave.employee_id %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%= leave.start_date.getDate() %>/<%=
+                                                                                (leave.start_date.getMonth() +
+                                                                                1).toString().padStart(2, '0' )
+                                                                                %>/<%=
+                                                                                    leave.start_date.getFullYear()
+                                                                                    %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <% const date=new Date(leave.created_at); const
+                                                                            formattedDate=`${date.getFullYear()}-${(date.getMonth()
+                                                                            + 1).toString().padStart(2, '0'
+                                                                            )}-${date.getDate().toString().padStart(2, '0'
+                                                                            )}
+                                                                           `; %>
+                                                                            <%= formattedDate %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <% let status=leave.status %>
+
+                                                                            <% if(status=='approved' ){%>
+
+                                                                                <span style="color: green">Approved <i
+                                                                                        class="fa fa-thumbs-o-up"></i></span>
+                                                                                <% } %>
+                                                                                    <% if(status=='rejected' ){%>
+
+                                                                                        <span>Rejected
+                                                                                            <i
+                                                                                                class="fa fa-thumbs-o-down"></i></span>
+                                                                                        <% } %>
+                                                                                            <% if(status=='pending' ){%>
+                                                                                                <span>Pending
+                                                                                                    <i
+                                                                                                        class="fa fa-spinner"></i></span>
+                                                                                                <% } %>
+
+
+                                                                    </td>
+
+
+                                                                    <td>
+                                                                        <a href="/admin/employeeLeave-details?emp_id=<%= leave.employee_id %>&req_id=<%= leave.request_id %>"
+                                                                            class="btn btn-secondary btn-sm"> View
+                                                                            Details</a>
+                                                                    </td>
+                                                                </tr>
+                                                                <% })%>
+                                                                    <% }else{ %>
+                                                                        <tr>
+                                                                            <td>"No pending leaves"
+                                                                        </tr>
+                                                                        </tr>
+
+                                                                        <% } %>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div><!-- end col-->
+                        </div> <!-- end row-->
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                <%- include('../includes/employee-footer')%>
+                    <!-- end Footer -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+
+    <!-- Theme Settings -->
+    <%- include('../includes/admin-theme-settings')%>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+
+                $("#validationCustomDropdown").on('change', function (event) {
+                    event.preventDefault();
+
+                    let selectedValue = $(this).val();
+
+                    if (selectedValue === 'pending' || selectedValue === 'approved' || selectedValue === 'rejected' || selectedValue === '') {
+                        let status = selectedValue;
+                        let leavehistory = 1;
+
+                        $.ajax({
+                            type: 'POST',
+                            dataType: "json",
+                            data: { status: status, leavehistory: leavehistory },
+                            url: '/admin/filter-leaves',
+                            success: function (response) {
+                            if (response.status === 'sucess') {
+
+                                let table = $('#basic-datatable').DataTable();
+                                     table.clear().draw();
+                    
+                                                        if (response.data.length > 0) {
+
+
+                                                            response.data.forEach(leave => {
+                                                        
+                                                            
+                                                                let formattedDate = '';
+                                                                const isValidDate = dateString => {
+                                                        const dateObject = new Date(dateString);
+                                                        return !isNaN(dateObject.getTime());
+                                                    };
+
+                            // Parse start_date and end_date strings into Date objects if they are in the 'YYYY-MM-DD' format
+                            const isValidStartDate = isValidDate(leave.start_date);
+                            const isValidEndDate = isValidDate(leave.end_date);
+
+                            const startDate = isValidStartDate ? new Date(leave.start_date) : null;
+                            const endDate = isValidEndDate ? new Date(leave.end_date) : null;
+
+                            // Format start_date and end_date to desired format (DD/MM/YYYY)
+                            const formattedStartDate = isValidStartDate ? `${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}` : '';
+                            const formattedEndDate = isValidEndDate ? `${endDate.getDate()}/${endDate.getMonth() + 1}/${endDate.getFullYear()}` : '';
+                            
+                            let formattedCreatedAt = new Date(leave.created_at);
+
+                            let statusText = '';
+                                        let statusClass = '';
+
+                                        if (leave.status === 'approved') {
+                                            statusText = 'Approved';
+                                            statusClass = 'status-approved';
+                                        } else if (leave.status === 'rejected') {
+                                            statusText = 'Not Approved';
+                                            statusClass = 'status-rejected';
+                                        } else if (leave.status === 'pending') {
+                                            statusText = 'Pending';
+                                            statusClass = 'status-pending';
+                                        }
+                        const dateString = formattedCreatedAt.toISOString().split('T')[0]; // Extract date part only
+                        const timeString = formattedCreatedAt.toTimeString().split(' ')[0]; // Extract time part only
+
+                        const [year, month, day] = dateString.split('-'); // Splitting the date parts
+
+                        formattedCreatedAt = `${day}/${month}/${year} `;
+
+
+                
+                     
+                    
+                    table.row.add([
+                    leave.request_id,
+                    leave.employee_id,
+                    leave.Description,
+                    formattedCreatedAt,
+                  
+                    statusText,
+                    `<a href="/admin/employeeLeave-details?emp_id=${leave.employee_id}&req_id=${leave.request_id}" class="btn btn-secondary btn-sm">
+                View Details
+            </a>`
+
+                ]).draw(false);
+            });
+        } else {
+         
+            table.row.add([
+                                            
+                                            'No data available',
+                                            '',
+                                            '',
+                                            '',
+                                            '',
+                                            ''
+                                            
+                                            
+                                        ]).draw(false);
+        }
+
+       
+    
+
+} else {
+        $('#laod').empty();
+        $('#laod').html('<tr><td colspan="9">Error retrieving data</td></tr>');
+    }
+},
+
+                            error: function (xhr, status, error) {
+                                console.log("AJAX Error:", error);
+                                $('#laod').html('<tr><td colspan="9">Error</td></tr>');
+                            }
+                        });
+
+                    }
+                });
+            });
+
+
+        </script>
+
+        <!-- Vendor js -->
+        <script src="/assets/js/vendor.min.js"></script>
+
+        <!-- Datatables js -->
+        <script src="/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+
+
+        <!-- Datatable Demo Aapp js -->
+        <script src="/assets/js/pages/datatable.init.js"></script>
+
+        <!-- App js -->
+        <script src="/assets/js/app.min.js"></script>
+
+</body>
+
+</html>

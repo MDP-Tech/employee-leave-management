@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" data-layout="topnav" data-topbar-color="light" data-menu-color="light">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Permission Page | Shiftwave</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
+    <meta content="Techzaa" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+    <!-- Daterangepicker css -->
+    <link rel="stylesheet" href="/assets/vendor/daterangepicker/daterangepicker.css">
+
+    <!-- Vector Map css -->
+    <link rel="stylesheet" href="/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css">
+
+    <!-- Theme Config Js -->
+    <script src="/assets/js/config.js"></script>
+
+    <!-- App css -->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        .head-fp{
+        margin:5px auto;
+        font-weight: 900;
+        
+    }
+    .address-hr.biography.updateFields {
+border-bottom: 1px solid #efefef;
+padding: 8px 0;}
+.sp{
+    margin: 0px;
+}
+.tp{
+    margin: 0px;
+}
+.sub-btn-style{
+    height: 35px;
+    width: 80px;
+}
+
+</style>
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <%- include('../../includes/employee-header')%>
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                      
+                                        <a href="javascript:window.history.go(-1);"><input type="button" value="Back" class="btn btn-primary btn-sm waves-effect waves-light"></a>
+                                    </ol>
+                                </div>
+
+                                <h4 class="page-title">Permission Details</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row" id="table_data">
+                        <% permissionDetails.forEach(Permission => { %>
+
+                        <!-- Striped table start -->
+
+                        <div>
+                            <div class="alert alert-danger alert-dismissible fade show" style="display: none;"
+                                id="failed_message"><strong>Info: </strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="false">&times;</span>
+                                </button>
+
+                            </div>
+                            <div class="alert alert-success alert-dismissible fade show" id="sucess_message"
+                                style="display: none;"><strong>Info: </strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="address-hr biography updateFields">
+                                                <p class="head-fp">Permission_id :
+                                                </p>
+                                                <p class="sp" id="updateShow-119"> <%= Permission.permission_id  %></p>
+                                                <p class="tp" style="display:none"></p>
+                                            </div>
+                                         </div>
+                                        <div class="col-md-3">
+                                            <div class="address-hr biography updateFields">
+                                                <p class="head-fp">Employee Name:
+                                                </p><p class="sp" id="updateShow-119"><%= Permission.name %></p>
+                                                <p class="tp" style="display:none"></p>
+                                           </div>                               
+                                        </div>
+                                       
+                                        <div class="col-md-3">
+                                            <div class="address-hr biography updateFields">
+                                                <p class="head-fp">Employee Email:
+                                                </p>
+                                                <p class="sp" id="updateShow-119"><%= Permission.email %></p>
+                                                <p class="tp" style="display:none"></p>
+                                            </div>
+                                         </div>
+                                         <div class="col-md-3">
+                                            <div class="address-hr biography updateFields">
+                                                <p class="head-fp">Employee id:
+                                                </p>
+                                                <p class="sp" id="updateShow-119"> <%= Permission.employee_id %></p>
+                                                <p class="tp" style="display:none"></p>
+                                            </div>
+                                         </div>
+                                         <div class="col-md-3">
+                                            <div class="address-hr biography updateFields">
+                                                <p class="head-fp">Permission Date:
+                                                </p>
+                                                <p class="fp" id="updateShow-119">   <%= Permission.date.getDate() %>/<%=
+                                                    (Permission.date.getMonth() +
+                                                    1).toString().padStart(2, '0' ) %>/<%= Permission.date.getFullYear() %></p>
+                                                <p class="tp" style="display:none"></p>
+                                            </div>
+                                         </div>
+                                         <div class="col-md-3">
+                                            <div class="address-hr biography updateFields">
+                                                <p class="head-fp">Permission From:
+                                                </p>
+                                                <p class="fp" id="updateShow-119"><%= Permission.start_time %></p>
+                                                <p class="tp" style="display:none"></p>
+                                            </div>
+                                         </div>
+                                         <div class="col-md-3">
+                                            <div class="address-hr biography updateFields">
+                                                <p class="head-fp">Permission Upto:
+                                                </p>
+                                                <p class="fp" id="updateShow-119"> <%= Permission.end_time %></p>
+                                                <p class="tp" style="display:none"></p>
+                                            </div>
+                                         </div>
+                                         <div class="col-md-3">
+                                            <div class="address-hr biography updateFields">
+                                                <p class="head-fp">Permission Applied:
+                                                </p>
+                                                <p class="fp" id="updateShow-119"><%= Permission.formatted_created_at %></p>
+                                                <p class="tp" style="display:none"></p>
+                                            </div>
+                                         </div>
+                                         <div class="col-md-3">
+
+                                            <div class="address-hr biography updateFields">
+
+                                                <p class="head-fp">Status:
+                                                </p>
+                                                <% let status=Permission.status %>
+
+                                                <% if(status=='approved' ){%>
+
+                                                    <span style="color: green"><p class="fp"><b>Approved </b></p><i
+                                                            class="fa fa-thumbs-o-up"></i></span>
+                                                    <% } %>
+                                                        <% if(status=='rejected' ){%>
+
+                                                            <span style="color:#aa0505 "><p class="fp"><b>Declined</b></p> <i
+                                                                    class="fa fa-thumbs-o-down"></i></span>
+                                                            <% } %>
+                                                                <% if(status=='pending' ){%>
+                                                                    <span
+                                                                        style="color: #f29339"><p class="fp"><b>Pending</b></p>
+                                                                        <i
+                                                                            class="fa fa-spinner"></i></span>
+                                                                    <% } %>
+
+                                                <p class="tp" style="display:none"></p>
+                                            </div>
+                                         </div>
+                                         
+                                         <div class="col-md-3">
+                                            <div class="address-hr biography updateFields">
+                                                <p class="head-fp">Admin Remark:
+                                                </p>
+                                                <p class="fp" id="updateShow-119"><% if(Permission.admin_remark_permission==null ) {%> "Waiting for
+                                                    Action" <%} else {%>
+                                                        <%= Permission.admin_remark_permission %>
+                                                            <%}%></p>
+                                                <p class="tp" style="display:none"></p>
+                                            </div>
+                                         </div>
+                                         <div class="col-md-3">
+                                            <div class="address-hr biography updateFields">
+                                                <p class="head-fp">Admin Action On:
+                                                </p>
+                                                <p class="fp" id="updateShow-119">  <% if(Permission.admin_remark_date_permission==null ) {%> "NA" <%} else {%>
+                                                    <%= Permission.admin_remark_date_permission %>
+                                                        <%}%></p>
+                                                <p class="tp" style="display:none"></p>
+                                            </div>
+                                         </div>
+                                         <div class="col-md-12 mt-1">
+                                            <div>
+                                                <p class="head-fp">Permission Conditions:
+                                                </p>
+                                                <p class="fp" id="updateShow-119" style="text-align: justify;"> <%= Permission.reason %></p>
+                                                <p class="tp" style="display:none"></p>
+                                            </div>
+                                         </div>
+                                         
+                                        
+                                         
+                                        
+                                    </div>
+                            </div>
+
+
+                                    
+                        </div>
+                        </div>
+
+
+
+                        <% } )%>
+
+
+
+
+
+
+
+                </div> <!-- container -->
+
+            </div> <!-- content -->
+
+            <!-- Footer Start -->
+            <%- include('../../includes/employee-footer')%>
+                <!-- end Footer -->
+
+        </div>
+
+
+
+
+      
+
+        
+
+    </div>
+    <!-- END wrapper -->
+
+    <!-- Theme Settings -->
+    <%- include('../../includes/employee-theme')%>
+
+    <!-- ... (previous HTML code) ... -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#submitBtn').on('click', function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            const fileInput = $('#validationCustom04')[0];
+
+
+            
+            const formData = new FormData();
+
+            if (fileInput.files.length > 0) {
+                $('#failed-message').hide();
+
+
+                for (let i = 0; i < fileInput.files.length; i++) {
+                        formData.append('uploaded_document', fileInput.files[i]);
+                    }
+                formData.append('leaveDetails','leaveDetails');
+                formData.append('req_id', $('#req_id').text())
+
+                for (const pair of formData.entries()) {
+                    console.log(pair[0] + ': ' + pair[1]);
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    url: '/leave/uploadFile',
+                    success: function (response) {
+                       console.log(response)
+                   
+                        if (response.status == 'Successfully created') {
+                           
+                        
+                           
+                           
+
+                        if (response.documentURL && response.documentURL.length > 0) {
+                            let htmlContent = "<td><b>Document URL</b></td><td colspan='3'><ul>";
+                            response.documentURL.forEach(url => {
+                                htmlContent += `<li>${url}</li>`;
+                            });
+                            htmlContent += "</ul></td>";  
+
+                            $('#file').html(htmlContent);
+                        }
+
+                            $('#leaveForm')[0].reset();
+                            $('#failed-message').text('');
+                            $('#failed-message').removeClass('alert-info');
+                            $('#failed-message').hide();
+                            $('#sucess_message').text("Leave Applied Successfully");
+                            $('#sucess_message').show();
+                            $('#leaveForm').removeClass('was-validated');
+                            $('.invalid-feedback').hide();
+                            $('.form-control').removeClass('is-invalid');
+                            $('html, body').animate({ scrollTop: 0 }, 'slow');
+                            $('#half-day').hide();
+                            $('#noofdays').hide();
+                        } else {
+                            alert("free")
+                            $('#failed-message').text(response.status);
+                            $('#failed-message').show();
+                        }
+                    }
+                });
+            } else {
+                // Display a message if no file is selected
+                $('#failed-message').addClass('invalid-feedback')
+                $('#failed-message').show();
+            }
+        });
+    });
+</script>
+
+<!-- ... (remaining HTML code) ... -->
+
+  
+
+
+   
+
+    <!-- Vendor js -->
+    <script src="/assets/js/vendor.min.js"></script>
+
+    <!-- Daterangepicker js -->
+    <script src="/assets/vendor/daterangepicker/moment.min.js"></script>
+    <script src="/assets/vendor/daterangepicker/daterangepicker.js"></script>
+
+    <!-- Apex Charts js -->
+
+    <!-- Vector Map js -->
+    <script src="/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="/assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
+
+
+
+
+
+    <!-- App js -->
+    <script src="/assets/js/app.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+<!-- ========== Topbar Start ========== -->
+<div class="navbar-custom">
+    <div class="topbar container-fluid">
+        <div class="d-flex align-items-center gap-1">
+
+            <!-- Topbar Brand Logo -->
+            <div class="logo-topbar">
+                <!-- Logo light -->
+                <a href="" class="logo-light">
+                    <span class="logo-lg">
+                        <img src="/assets/images/logo.png" alt="logo" style="width: 100%; height: 35px;" >
+                    </span>
+                    <span class="logo-sm">
+                        <img src="/assets/images/logo-sm.png" alt="small logo">
+                    </span>
+                </a>
+
+                <!-- Logo Dark -->
+                <a href="" class="logo-dark">
+                    <span class="logo-lg">
+                        <img src="/assets/images/logo.png" alt="dark logo" style="height: 50px;" >
+                    </span>
+                    <span class="logo-sm">
+                        <img src="/assets/images/logo-sm.png" alt="small logo">
+                    </span>
+                </a>
+            </div>
+
+         
+
+            <!-- Horizontal Menu Toggle Button -->
+            <button class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+                <div class="lines">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+
+            
+            
+        </div>
+
+        <ul class="topbar-menu d-flex align-items-center gap-3">
+           
+
+
+
+            <li class="d-none d-sm-inline-block" >
+                <a class="nav-link" data-bs-toggle="offcanvas" href="#theme-settings-offcanvas" style="display: none;">
+                    <i class="ri-settings-3-line fs-22"></i>
+                </a>
+            </li>
+
+            <li class="d-none d-sm-inline-block">
+                <div class="nav-link" id="light-dark-mode">
+                    <i class="ri-moon-line fs-22"></i>
+                </div>
+            </li>
+            
+            
+
+            <li class="dropdown">
+                <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#"
+                    role="button" aria-haspopup="false" aria-expanded="false">
+                    <span class="account-user-avatar">
+                        <img src="/assets/images/users/avatar-1.jpg" alt="user-image" width="32"
+                            class="rounded-circle">
+                    </span>
+                    <span class="d-lg-block d-none">
+                        <h5 class="my-0 fw-normal"><%= admin_name  %> <i
+                                class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i></h5>
+                    </span>
+                 
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
+                   
+                    <a href="/employees/settings" class="dropdown-item">
+                        <i class="ri-settings-4-line fs-18 align-middle me-1"></i>
+                        <span>Settings</span>
+                    </a>
+                    <!-- item-->
+                    <a href="/Logout" class="dropdown-item">
+                        <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- ========== Topbar End ========== -->
+
+ <!-- ========== Horizontal Menu Start ========== -->
+ <div class="topnav">
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg">
+            <div class="collapse navbar-collapse" id="topnav-menu-content">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none" href="/admin/dashboard"  id="topnav-dashboards"
+                            role="button" aria-haspopup="true" aria-expanded="false">
+                            <i></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-apps" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i></i>Leaves <div class="arrow-down"></div>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="topnav-apps">
+                            
+                            
+                            
+                            <a href="/admin/leaves-history" class="dropdown-item">Leave History</a>
+
+                            
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-apps" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i ></i>Permissions <div class="arrow-down"></div>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="topnav-apps">
+                            
+                            
+                           
+                            <a href="/employees/?history=total" class="dropdown-item" >Permission History</a>
+                            
+                            
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none" href="/admin/admin-calender" 
+                            role="button" aria-haspopup="true" aria-expanded="false">
+                            <i></i>Calendar
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none" href="/reports" 
+                            role="button" aria-haspopup="true" aria-expanded="false">
+                            <i></i>Reports
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- ========== Horizontal Menu End ========== -->

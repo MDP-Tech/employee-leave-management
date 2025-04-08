@@ -1,0 +1,187 @@
+<!-- ========== Topbar Start ========== -->
+
+<div class="navbar-custom">
+    <div class="topbar container-fluid">
+        <div class="d-flex align-items-center gap-1">
+
+            <!-- Topbar Brand Logo -->
+            <div class="logo-topbar" >
+                <!-- Logo light -->
+                <a href="/employees/dashboard" class="logo-light">
+                    <span class="logo-lg">
+                       <img src="/assets/images/logo.png" alt="dark logologo" style="height: 50px;" >
+                    </span>
+                    <span class="logo-sm">
+                        <img src="/assets/images/logo-sm.png" alt="small logo" >
+                    </span>
+                </a>
+
+                <!-- Logo Dark -->
+                <a href="/employees/dashboard" class="logo-dark">
+                    <span class="logo-lg">
+                        <img src="/assets/images/logo.png" alt="dark logo" style="height: 50px;"  >
+                    </span>
+                    <span class="logo-sm">
+                        <img src="/assets/images/logo-sm.png" alt="small logo" >
+                    </span>
+                </a>
+            </div>
+
+            <!-- Sidebar Menu Toggle Button -->
+            <button class="button-toggle-menu">
+                <i class="ri-menu-line"></i>
+            </button>
+
+            <!-- Horizontal Menu Toggle Button -->
+            <button class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+                <div class="lines">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+
+            
+            
+        </div>
+
+        <ul class="topbar-menu d-flex align-items-center gap-3">
+            <!--<li class="dropdown d-lg-none">
+                <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
+                    aria-haspopup="false" aria-expanded="false">
+                    <i class="ri-search-line fs-22"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-animated dropdown-lg p-0">
+                    <form class="p-3">
+                        <input type="search" class="form-control" placeholder="Search ..."
+                            aria-label="Recipient's username">
+                    </form>
+                </div>
+            </li>-->
+
+
+
+            <!--<li class="d-none d-sm-inline-block">
+                <a class="nav-link" data-bs-toggle="offcanvas" href="#theme-settings-offcanvas">
+                    <i class="ri-settings-3-line fs-22 text-white"></i>
+                </a>
+            </li>-->
+
+            <li class="d-none d-sm-inline-block">
+                <div class="nav-link" id="light-dark-mode">
+                    <i class="ri-moon-line fs-22"></i>
+                </div>
+            </li>
+            
+            
+
+            <li class="dropdown">
+                <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#"
+                    role="button" aria-haspopup="false" aria-expanded="false">
+                    <span class="account-user-avatar">
+                        <img src="/assets/images/users/avatar-1.jpg" alt="user-image" width="32"
+                            class="rounded-circle">
+                    </span>
+                    <span class="d-lg-block d-none">
+                        <h5 class="my-0 fw-normal"><%= employee %> <i
+                                class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i></h5>
+                    </span>
+                 
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
+                   
+                    <a href="/employees/settings" class="dropdown-item">
+                        <i class="ri-settings-4-line fs-18 align-middle me-1"></i>
+                        <span>Settings</span>
+                    </a>
+                    <!-- item-->
+                    <a href="/Logout" class="dropdown-item">
+                        <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- ========== Topbar End ========== -->
+
+ <!-- ========== Horizontal Menu Start ========== -->
+ <div class="topnav" style="background-color: #252b3b;">
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg">
+         
+                <div class="collapse navbar-collapse" id="topnav-menu-content" >
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown mt-styel-mob">
+                        <a class="nav-link dropdown-toggle arrow-none" href="/employees/dashboard"  id="topnav-dashboards"
+                            role="button" aria-haspopup="true" aria-expanded="false">
+                            <i></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown" style="margin-top:-2px">
+                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-apps" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i></i>Leaves <span class="arrow-down"></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="topnav-apps">
+                            
+                            
+                            <a href="/employees/leave" class="dropdown-item">Apply Leave</a>
+                            <a href="/employees/leave-history" class="dropdown-item">Leave History</a>
+
+                            
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown" style="margin-top:-2px">
+                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-apps" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i ></i>Permissions <div class="arrow-down" style="margin-top: 2px;"></div>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="topnav-apps">
+                            
+                            
+                            <a href="/employees/permission" class="dropdown-item">Apply Permission</a>
+                            <a href="/employees/permission-history" class="dropdown-item">Permission History</a>
+                            
+                            
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none" href="/calender" 
+                            role="button" aria-haspopup="true" aria-expanded="false">
+                            <i></i>Calendar
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown mb-styel-mob">
+                        <a class="nav-link dropdown-toggle arrow-none" href="/reports" 
+                            role="button" aria-haspopup="true" aria-expanded="false">
+                            <i></i>Reports
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </div>
+        </nav>
+    </div>
+</div>
+
+<style>
+     body{
+     touch-action: pan-x pan-y;
+    }
+
+    @media (max-width:600px){
+    .mb-styel-mob{
+        margin-bottom: 15px;
+    }
+    .mt-styel-mob{
+        margin-top: 10px;
+    }
+    }
+    :root {
+    --tz-dropdown-font-size: 16px !important;
+    }
+</style>
+
+<!-- ========== Horizontal Menu End ========== -->

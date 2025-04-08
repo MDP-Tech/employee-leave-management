@@ -1,0 +1,898 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-layout="topnav" data-topbar-color="light" data-menu-color="light">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Apply Leave Page | Shiftwave</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta content="Shiftwave Leave page" name="author" />
+  <!-- App favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+
+  <!-- Select2 css -->
+  <link href="/assets/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Daterangepicker css -->
+  <link href="/assets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+  <!-- Bootstrap Touchspin css -->
+  <link href="/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Bootstrap Datepicker css -->
+  <link href="/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Bootstrap Timepicker css -->
+  <link href="/assets/vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Flatpickr Timepicker css -->
+  <link href="/assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Theme Config Js -->
+  <script src="/assets/js/config.js"></script>
+
+  <!-- App css -->
+  <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+  <!-- Icons css -->
+  <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Vendor js -->
+  <script src="/assets/js/vendor.min.js"></script>
+
+  <!--  Select2 Plugin Js -->
+  <script src="/assets/vendor/select2/js/select2.min.js"></script>
+
+  <!-- Daterangepicker Plugin js -->
+  <script src="/assets/vendor/daterangepicker/moment.min.js"></script>
+  <script src="/assets/vendor/daterangepicker/daterangepicker.js"></script>
+
+  <!-- Bootstrap Datepicker Plugin js -->
+  <script src="/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+  <!-- Bootstrap Timepicker Plugin js -->
+  <script src="/assets/vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+
+  <!-- Input Mask Plugin js -->
+  <script src="/assets/vendor/jquery-mask-plugin/jquery.mask.min.js"></script>
+
+  <!-- Bootstrap Touchspin Plugin js -->
+  <script src="/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+
+  <!-- Bootstrap Maxlength Plugin js -->
+  <script src="/assets/vendor/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+
+  <!-- Typehead Plugin js -->
+  <script src="/assets/vendor/handlebars/handlebars.min.js"></script>
+
+  <!-- Flatpickr Timepicker Plugin js -->
+  <script src="/assets/vendor/flatpickr/flatpickr.min.js"></script>
+
+  <!-- Typehead Demo js -->
+  <script src="/assets/js/pages/typehead.init.js"></script>
+
+  <!-- Timepicker Demo js -->
+  <script src="/assets/js/pages/timepicker.init.js"></script>
+
+  <!-- App js -->
+  <script src="/assets/js/app.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+  <style>
+    .daterangepicker {
+      z-index: 9999;
+    }
+
+    body {
+      touch-action: pan-x pan-y;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Begin page -->
+
+  <!-- ============================================================== -->
+  <!-- Start Page Content here -->
+  <!-- ============================================================== -->
+  <div class="wrapper">
+    <%- include('../includes/employee-header')%>
+
+      <!-- ============================================================== -->
+      <!-- Start Page Content here -->
+      <!-- ============================================================== -->
+
+      <div class="content-page">
+        <div class="content">
+          <!-- Start Content-->
+          <div class="container-fluid">
+            <!-- start page title -->
+            <div class="row">
+              <div class="col-12">
+                <div class="page-title-box">
+                  <h4 class="page-title">Apply Leave</h4>
+                </div>
+              </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="alert alert-info text-bg-info border-0" id="sucess_message" role="alert" style="display: none">
+              <strong>Info - </strong> A simple info alert—check it out!
+            </div>
+            <div class="alert alert-danger" role="alert" id="failed-message" style="display: none"></div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+                    <form class="needs-validation" id="leaveForm" method="post" novalidate>
+                      <div class="mb-2">
+                        <label class="form-label" for="validationCustomDropdown">Leave Type</label>
+                        <select class="form-select" id="validationCustomDropdown" name="leave_type" required>
+                          <option value="">Select Type</option>
+                          <option value="Half-Day">Half-Day</option>
+                          <option value="1-3 Day">1-3 Days</option>
+                          <option value="3+ Day">3+ Days</option>
+                          <option value="Emergency/Medical">
+                            Emergency/Medical
+                          </option>
+                          <!-- <option value="Emergency/Medical">Emergency/Medical</option> -->
+                        </select>
+                        <div class="invalid-feedback">
+                          Please select a leave_type.
+                        </div>
+                      </div>
+
+                      <div class="mb-2" id="half-day" style="display: none" id="after_noon">
+                        <div class="row">
+                          <div class="col-4 col-md-2 mb-1">
+                            <div class="form-checkcol-md-12 ">
+                              <input class="form-check-input" type="radio" value="Morning" id="morning"
+                                name="session" />
+                              <label class="form-check-label" for="morning">
+                                Morning
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-4 col-md-2 mb-1">
+                            <div class="form-check col-md-12">
+                              <input class="form-check-input" type="radio" value="Afternoon" id="afternoon"
+                                name="session" />
+                              <label class="form-check-label" for="afternoon">
+                                Afternoon
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="mb-2 position-relative" id="datepicker1">
+                            <label class="form-label">Start Date</label>
+                            <input type="text" class="form-control" placeholder="Select Date" id="datepicker_start"
+                              name="start_date" required autocomplete="off" readonly />
+                            <div class="invalid-feedback" id="start_date" style="display: none"></div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="mb-2 position-relative" id="datepicker2">
+                            <label class="form-label">End Date</label>
+                            <input type="text" class="form-control" placeholder="Select Date" id="datepicker_end"
+                              name="end_date" required autocomplete="off" readonly />
+                            <div class="invalid-feedback" id="end_date" style="display: none"></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="mb-2" style="display: none" id="noofdays">
+                        <label class="form-label" for="calculatedDays">
+                          Total Days --<span>(Total days shown exclude Sundays, weekends, and
+                            holidays)</span></label>
+
+                        <select class="form-select" id="calculatedDays" name="calculatedDays" required></select>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label" for="validationCustom03">Reason For Leave</label>
+
+                        <textarea class="form-control" name="description" type="text" length="400"
+                          id="validationCustom03" rows="5" maxlength="500" required></textarea>
+                        <div class="invalid-feedback">enter description</div>
+                      </div>
+
+                      <div class="mb-2" id="uploaded_document" style="display: none">
+                        <label class="form-label" for="validationCustom04">Upload Documents</label>
+                        <input type="file" class="form-control" id="validationCustom04" name="uploaded_document[]"
+                          accept=".pdf, .jpg, .jpeg, .png" multiple="multiple" required />
+                        
+                        <div class="invalid-feedback">
+                          Please upload one or more documents (PDF, JPG, JPEG,
+                          PNG).
+                        </div>
+                        <div class="text-danger" id="fileError"></div>
+                      </div>
+
+                      <button class="btn btn-primary" id="submitBtn" type="submit">
+                        Submit
+                      </button>
+                    </form>
+                  </div>
+                  <!-- end card-body-->
+                </div>
+                <!-- end card-->
+              </div>
+              <!-- end col-->
+            </div>
+          </div>
+          <!-- container -->
+        </div>
+        <!-- content -->
+
+        <!-- Footer Start -->
+        <%- include('../includes/employee-footer')%>
+          <!-- end Footer -->
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- End Page content -->
+      <!-- ============================================================== -->
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- End Page content -->
+  <!-- ============================================================== -->
+
+  <!--END wrapper -->
+
+  <!-- Theme Settings -->
+  <%- include('../includes/employee-theme')%>
+    <script>
+      $(document).ready(function () {
+
+
+        // To enable the date picker calendar, click on the field.
+                $('#datepicker_start , #datepicker_end').on('click', function () {
+                   
+                    $(this).datepicker('show');
+                });
+        let nationalHolidays = [
+          new Date("2024-01-15"),
+          new Date("2024-03-09"),
+          new Date("2024-04-09"),
+          new Date("2024-08-15"),
+          new Date("2024-09-07"),
+          new Date("2024-10-12"),
+          new Date("2024-10-31"),
+          new Date("2024-12-25"),
+        ];
+        let saturdayHolidays = [
+          new Date("2024-01-06"),
+          new Date("2024-01-20"),
+          new Date("2024-02-03"),
+          new Date("2024-02-17"),
+          new Date("2024-03-02"),
+          new Date("2024-03-16"),
+          new Date("2024-04-06"),
+          new Date("2024-04-20"),
+          new Date("2024-05-04"),
+          new Date("2024-05-18"),
+          new Date("2024-06-01"),
+          new Date("2024-06-15"),
+          new Date("2024-07-06"),
+          new Date("2024-07-20"),
+          new Date("2024-08-03"),
+          new Date("2024-08-17"),
+          new Date("2024-09-07"),
+          new Date("2024-09-21"),
+          new Date("2024-10-05"),
+          new Date("2024-10-19"),
+          new Date("2024-11-02"),
+          new Date("2024-11-16"),
+          new Date("2024-12-07"),
+          new Date("2024-12-21"),
+        ];
+
+        let disabledDates = [...nationalHolidays, ...saturdayHolidays];
+        disabledDates = disabledDates.map((elem) => elem.toLocaleDateString());
+
+        // end date picker
+
+        // end date picker
+
+        $("#datepicker_start").datepicker({
+          autoclose: true,
+          todayHighlight: true,
+          orientation: "bottom",
+          format: "dd/mm/yyyy",
+          disableMobile: false,
+          startDate: new Date(),
+          beforeShowDay: function (date) {
+            var currentDate = new Date();
+            currentDate.setHours(0, 0, 0, 0);
+            date.setHours(0, 0, 0, 0);
+
+            // Disable Sundays (assuming 0 is Sunday and 6 is Saturday)
+            if (date.getDay() === 0) {
+              // Sunday
+              return { enabled: false };
+            }
+
+            var formattedDate =
+              (date.getMonth() + 1).toString() +
+              "/" +
+              date.getDate().toString() +
+              "/" +
+              date.getFullYear();
+
+            if (disabledDates.indexOf(formattedDate) !== -1) {
+              return { enabled: false };
+            }
+
+            // Disable dates before the current date
+            return date < currentDate ? { enabled: false } : { enabled: true };
+          },
+          showOn: "button", // Show the calendar only when the button is clicked
+          buttonImageOnly: true,
+        });
+
+        // Add an event listener to handle the change in startDate for #datepicker_end
+        $("#datepicker_start").on("changeDate", function (e) {
+          var selectedDate = e.format(0, "dd/mm/yyyy");
+          $("#datepicker_end").datepicker("setStartDate", selectedDate);
+          $("#datepicker_end").datepicker("setDate", selectedDate);
+        });
+
+        $("#datepicker_end").datepicker({
+          autoclose: true,
+          todayHighlight: true,
+          orientation: "bottom",
+          disableMobile: true,
+          format: "dd/mm/yyyy",
+          startDate: new Date(),
+          beforeShowDay: function (date) {
+            var currentDate = new Date();
+            currentDate.setHours(0, 0, 0, 0);
+            date.setHours(0, 0, 0, 0);
+
+            // Disable Sundays (assuming 0 is Sunday and 6 is Saturday)
+            if (date.getDay() === 0) {
+              // Sunday
+              return { enabled: false };
+            }
+
+            var formattedDate =
+              (date.getMonth() + 1).toString() +
+              "/" +
+              date.getDate().toString() +
+              "/" +
+              date.getFullYear();
+
+            if (disabledDates.indexOf(formattedDate) !== -1) {
+              return { enabled: false };
+            }
+
+            return date < currentDate ? { enabled: false } : { enabled: true };
+          },
+        });
+
+
+        
+
+        // no of days calculation
+        function populateDropdown(totalDays) {
+          const dropdown = $("#calculatedDays");
+          dropdown.empty();
+          dropdown.append(`<option value="${totalDays}">${totalDays}</option>`);
+          dropdown.append(`<option value="${totalDays - 0.5}+Morning">${totalDays - 0.5}->Half-day Afternoon</option>`);
+          dropdown.append(`<option value="${totalDays - 0.5}+Afternoon">${totalDays - 0.5}->Half-day Morning</option>`);
+        }
+
+        // Change event listener for date inputs
+        $(
+          '#leaveForm input[name="start_date"], #leaveForm input[name="end_date"]'
+        ).change(function () {
+          const startDate = $('#leaveForm input[name="start_date"]').val();
+          const endDate = $('#leaveForm input[name="end_date"]').val();
+          if (startDate) {
+            $("#start_date").hide();
+          }
+          if (endDate) {
+            $("#end_date").hide();
+          }
+          let parts = startDate.split("/"); // Split the date string
+          let convertedDate = `${parts[1]}/${parts[0]}/${parts[2]}`;
+          let parts1 = endDate.split("/");
+          let convertedDate1 = `${parts1[1]}/${parts1[0]}/${parts1[2]}`;
+          const totalDays = countWeekdays(
+            new Date(convertedDate),
+            new Date(convertedDate1),
+            nationalHolidays,
+            saturdayHolidays
+          );
+          populateDropdown(totalDays);
+        });
+
+        // form Submission
+        $('#leaveForm select[name="leave_type"]').change(function () {
+          if ($(this).val() === "Half-Day") {
+            $("#half-day").show();
+            $("#morning").prop("required", true);
+            $("#afternoon").prop("required", true);
+            const date = $('#leaveForm input[name="start_date"]').val();
+            let parts = date.split("/");
+            let date_day = `${parts[1]}/${parts[0]}/${parts[2]}`;
+            let dayOfWeek = new Date(date_day).getDay();
+            if (dayOfWeek === 6) {
+              $("#afternoon").closest(".col-md-6").hide();
+            } else {
+              $("#afternoon").closest(".col-md-6").show();
+            }
+          } else {
+            $("#morning, #afternoon").prop("required", false);
+            $("#half-day").hide();
+          }
+
+          if ($(this).val() === "1-3 Day" || $(this).val() === "3+ Day") {
+            $("#noofdays").show();
+          } else {
+            $("#noofdays").hide();
+          }
+
+          if ($(this).val() === "Emergency/Medical") {
+            $("#uploaded_document").show();
+            $("#noofdays").show();
+
+          } else {
+            $("#uploaded_document").hide();
+          }
+        });
+
+        $("#leaveForm").submit(function (event) {
+          var startDate_test = $("#datepicker_start").datepicker("getDate");
+          var endDate_test = $("#datepicker_end").datepicker("getDate");
+          $("#fileError").text("");
+
+          // Check if both start date and end date are selected
+          if (startDate_test == null || endDate_test == null) {
+            if (startDate_test == null) {
+              $("#start_date").text("Please select start date.");
+              $("#start_date").show();
+            }
+
+            if (endDate_test == null) {
+              $("#end_date").text("Please select end date.");
+              $("#end_date").show();
+            }
+            return;
+          }
+          // valiadiotn
+          var form = $(this)[0];
+          const formData = new FormData();
+          // For text-based inputs
+
+          let converteddate = $('#leaveForm input[name="start_date"]').val();
+          let parts3 = converteddate.split("/"); // Split the date string
+          let startDate = `${parts3[1]}/${parts3[0]}/${parts3[2]}`;
+          const endDate1 = $('#leaveForm input[name="end_date"]').val();
+          let parts4 = endDate1.split("/");
+          let endDate = `${parts4[1]}/${parts4[0]}/${parts4[2]}`;
+          const leaveType = $('#leaveForm select[name="leave_type"]').val();
+          const description = $(
+            '#leaveForm textarea[name="description"]'
+          ).val();
+          const days = $("#calculatedDays").val();
+          const fileInput = $("#validationCustom04")[0];
+          if (fileInput.files.length > 0) {
+            for (let i = 0; i < fileInput.files.length; i++) {
+              formData.append("image[]", fileInput.files[i]);
+            }
+
+            for (const pair of formData.entries()) {
+              console.log(pair[0] + ": " + pair[1]);
+            }
+          } else {
+            // Remove the 'required' attribute from the file input
+            $("#validationCustom04").removeAttr("required");
+
+            // Remove the validation message
+            $("#uploaded_document .invalid-feedback").remove();
+          }
+          if ($("#morning").is(":checked").toString() === "true") {
+            const halfDayMorning = $("#morning")
+              .siblings("label")
+              .text()
+              .trim();
+            formData.append("Morning", halfDayMorning);
+          }
+          if ($("#afternoon").is(":checked").toString() === "true") {
+            const halfDayAfternoon = $("#afternoon")
+              .siblings("label")
+              .text()
+              .trim();
+            formData.append("Evening", halfDayAfternoon);
+          }
+
+          const daysCount = countWeekdays(
+            new Date(startDate),
+            new Date(endDate),
+            nationalHolidays,
+            saturdayHolidays
+          );
+          $("#failed-message").html("");
+
+          if (!form.checkValidity()) {
+            form.reportValidity(); // Show native HTML5 validation messages
+            event.preventDefault(); // Prevent form submission if invalid
+            event.stopPropagation();
+            return;
+          } else if (leaveType == "Half-Day") {
+
+            let date = new Date();
+            let date_time = new Date();
+
+            // Set time to 00:00:00.000 for both dates
+            date.setHours(0, 0, 0, 0);
+            new Date(startDate).setHours(0, 0, 0, 0);
+            new Date(endDate).setHours(0, 0, 0, 0);
+
+            if (date.getTime() === new Date(startDate).getTime() && date.getTime() === new Date(endDate).getTime()) {
+
+              var morningSelected = $("#morning").prop("checked");
+              var afternoonSelected = $("#afternoon").prop("checked");
+
+
+              let morningStartTime = new Date(date_time);
+              morningStartTime.setHours(0, 0, 0, 0); // Set to 1 am
+
+              let morningEndTime = new Date(date_time);
+              morningEndTime.setHours(23, 45, 0, 0); // Set to 11:45 pm
+
+              if (date_time.getTime() >= morningStartTime.getTime() && morningSelected == true && date_time.getTime() < morningEndTime.getTime()) {
+                $("#failed-message")
+                  .text(`Leave request not allowed because must apply for half-day leave at least 1/2 - 1 working day
+prior to the day of leave.`)
+                  .show()
+                  .fadeOut(10000);
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                event.preventDefault();
+                event.preventDefault();
+                return
+              }
+
+
+              morningStartTime.setHours(12, 45, 0, 0); // Set to 1 am
+
+              if (date_time.getTime() >= morningStartTime.getTime() && afternoonSelected == true) {
+                $("#failed-message")
+                  .text(`Leave request not allowed because must apply for half-day leave at least 1/2 - 1 working day prior to the day of leave.`)
+                  .show()
+                  .fadeOut(10000);
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                event.preventDefault();
+                event.preventDefault();
+                return
+              }
+            }
+
+
+
+
+            if (startDate == endDate) {
+              if (daysCount == 1) {
+                const noticePeriod = countWeekdays(
+                  new Date(),
+                  new Date(startDate),
+                  nationalHolidays,
+                  saturdayHolidays
+                );
+                const today = new Date().toLocaleDateString();
+                const requestedDate = new Date(startDate).toLocaleDateString();
+
+                if (today <= requestedDate || noticePeriod >= 1) {
+                  leave(event);
+                } else {
+                  $("#failed-message")
+                    .text(
+                      "Application notice for half-day leave must be 1/2 - 1 working day."
+                    )
+                    .show()
+                    .fadeOut(10000);
+                  $("#sucess_message").text("");
+                  $("#sucess_message").removeClass("alert-info");
+                  $("#sucess_message").hide();
+                  $("html, body").animate({ scrollTop: 0 }, "slow");
+
+                  event.preventDefault();
+                }
+              }
+            } else {
+              $("#failed-message")
+                .text("For Half Day leave start date and end date must be same.")
+                .show()
+                .fadeOut(10000);
+              $("#sucess_message").text("");
+              $("#sucess_message").removeClass("alert-info");
+              $("#sucess_message").hide();
+              $("html, body").animate({ scrollTop: 0 }, "slow");
+              event.preventDefault();
+            }
+          } else if (leaveType == "1-3 Day") {
+            $("#afternoon").prop("checked", false);
+            $("#morning").prop("checked", false);
+
+            if (new Date(startDate) <= new Date(endDate)) {
+              if (daysCount >= 1 && daysCount <= 3) {
+                const noticePeriod = countWeekdays(
+                  new Date(),
+                  new Date(startDate),
+                  nationalHolidays,
+                  saturdayHolidays
+                );
+
+                if (noticePeriod >= 3) {
+                  leave(event);
+                } else {
+                  $("#failed-message")
+                    .text(
+                      "1-3 Day Leave: 1-3 days leave must be applied at least 3 working days prior to the date of leave. If urgent, apply emergency leave."
+                    )
+                    .show()
+                    .fadeOut(10000);
+                  $("#sucess_message").text("");
+                  $("#sucess_message").removeClass("alert-info");
+                  $("#sucess_message").hide();
+                  $("html, body").animate({ scrollTop: 0 }, "slow");
+                  event.preventDefault();
+                }
+              } else {
+                $("#failed-message")
+                  .text(
+                    `
+If you're taking off for only half a day (0.5 days), choose the "half-day leave" option. If your leave duration falls within the range of 1 to 3 days, you should choose the "1-3 Days" leave type. If your leave duration is more than 3 days, choose the "3+ Days" leave option.
+`
+                  )
+                  .show()
+                  .fadeOut(10000);
+
+                $("#sucess_message").text("");
+                $("#sucess_message").removeClass("alert-info");
+                $("#sucess_message").hide();
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+
+                event.preventDefault();
+              }
+            } else {
+              $("#failed-message")
+                .text(
+                  ` Start date cannot be greater than the end date. Start date and end date can be the same.`
+                )
+                .show()
+                .fadeOut(10000);
+              $("html, body").animate({ scrollTop: 0 }, "slow");
+              event.preventDefault();
+            }
+          } else if (leaveType == "3+ Day") {
+            if (new Date(startDate) <= new Date(endDate)) {
+              $("#afternoon").prop("checked", false);
+              $("#morning").prop("checked", false);
+              if (daysCount > 3) {
+                const noticePeriod = countWeekdays(
+                  new Date(),
+                  new Date(startDate),
+                  nationalHolidays,
+                  saturdayHolidays
+                );
+                if (noticePeriod >= 15) {
+                  leave(event);
+                } else {
+                  $("#failed-message")
+                    .text(
+                      "To take a leave of 3 days or more, make sure to submit your request at least 15 working days in advance. In case of an urgent situation, use the emergency leave option."
+                    )
+                    .show()
+                    .fadeOut(10000);
+                  $("#sucess_message").text("");
+                  $("#sucess_message").removeClass("alert-info");
+                  $("#sucess_message").hide();
+                  $("html, body").animate({ scrollTop: 0 }, "slow");
+                  event.preventDefault();
+                }
+              } else {
+                let Total_No_Days = daysCount;
+                let addhalf = Total_No_Days + 0.5;
+                $("#failed-message")
+                  .text(
+                    `
+If you're taking off for only half a day (0.5 days), choose the "half-day leave" option. If your leave duration falls within the range of 1 to 3 days, you should choose the "1-3 Days" leave type. If your leave duration is more than 3 days, choose the "3+ Days" leave option.
+`
+                  )
+                  .show()
+                  .fadeOut(10000);
+                $("#sucess_message").text("");
+                $("#sucess_message").removeClass("alert-info");
+                $("#sucess_message").hide();
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                event.preventDefault();
+              }
+            } else {
+              $("#failed-message")
+                .text(
+                  `The starting date must be earlier than end date or start date equal to the end date.`
+                )
+                .show()
+                .fadeOut(10000);
+              $("html, body").animate({ scrollTop: 0 }, "slow");
+              event.preventDefault();
+            }
+          } else {
+            if (new Date(startDate) <= new Date(endDate)) {
+              if (fileInput.files.length > 0) {
+      
+                if ( fileInput.files.length <= 5) {
+
+                  $("#afternoon").prop("checked", false);
+                $("#morning").prop("checked", false);
+                event.preventDefault();
+                
+                $('#submitBtn').html(`<div class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>`) 
+                $.ajax({
+                  type: "POST",
+                  dataType: "json",
+                  processData: false, // Important to prevent jQuery from processing data
+                  contentType: false, // Important to prevent jQuery from setting content type
+                  data: formData,
+                  url: "https://www.shiftwave.com/node-upload.php",
+                  success: function (response) {
+                    let filelength = response.length;
+                    let filenames = response;
+
+                    $.ajax({
+                      type: "post",
+                      dataType: "json",
+                      data:
+                        $("#leaveForm").serialize() +
+                        "&filelength=" +
+                        response.length +
+                        "" +
+                        "&leaveDetails=formDetails" +
+                        "&filenames=" +
+                        response +
+                        "",
+                      url: "/leave/uploadFile",
+                      success: function (response) {
+                        if (response.status == "Successfully Created." || response.status =="Successfully created" ) {
+
+                           
+
+                          $("#leaveForm")[0].reset(); // Reset the form after successful submission
+                          $("#failed-message").text("");
+                          $("#failed-message").removeClass("alert-info");
+                          $("#failed-message").hide();
+                          $("#sucess_message").text("Leave Applied Successfully.");
+                          $("#sucess_message").show().fadeOut(3000);
+
+                          $("#leaveForm").removeClass("was-validated");
+                          $(".invalid-feedback").hide();
+                          $(".form-control").removeClass("is-invalid");
+                          $("html, body").animate({ scrollTop: 0 }, "slow");
+                          $("#half-day").hide();
+                          $("#noofdays").hide();
+                          $('#submitBtn').html(`Submit`);
+                        } else {
+                          $("#failed-message").text(response.status);
+                          $("#failed-message").show().fadeOut(10000);
+			  $("html, body").animate({ scrollTop: 0 }, "slow");
+                          $('#submitBtn').html(`Submit`);
+                          
+                        }
+                      },
+                    });
+                  },
+                });
+                  
+                }else{
+                  $("#fileError").text("Maximum of 5 files can be uploaded");
+                  event.preventDefault();
+                  return
+
+                }
+                
+              } else {
+                leave(event);
+              }
+            } else {
+              $("#failed-message")
+                .text(
+                  `The starting date must be earlier than end date or start date equal to the end date.`
+                )
+                .show()
+                .fadeOut(10000);
+            }
+          }
+        });
+      });
+
+      function leave(event, formData) {
+        event.preventDefault();
+        $('#submitBtn').html(`<div class="spinner-border spinner-border-sm" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>`) 
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          data: $("#leaveForm").serialize(),
+
+          url: "/leave/createLeave",
+          success: function (response) {
+            console.log(response.status);
+            if (response.status == "suceesfully Created") {
+              $('#submitBtn').html(`Submit`);
+              $("#leaveForm")[0].reset(); // Reset the form after successful submission
+              $("#failed-message").text("");
+              $("#failed-message").removeClass("alert-info");
+              $("#failed-message").hide();
+              $("#sucess_message").text("Leave Applied Successfully.");
+              $("#sucess_message").show().fadeOut(3000);
+
+              $("#leaveForm").removeClass("was-validated");
+              $(".invalid-feedback").hide();
+              $(".form-control").removeClass("is-invalid");
+              $("html, body").animate({ scrollTop: 0 }, "slow");
+              $("#half-day").hide();
+              $("#noofdays").hide();
+            } else {
+
+              $("#failed-message").text(response.status);
+              $("#failed-message").show().fadeOut(10000);
+              $("html, body").animate({ scrollTop: 0 }, "slow");
+              $('#submitBtn').html(`Submit`);
+
+            }
+          },
+        });
+      }
+
+      function countWeekdays(
+        startDate,
+        endDate,
+        nationalHolidays,
+        saturdayHolidays
+      ) {
+        let start = new Date(startDate);
+        let end = new Date(endDate);
+        let weekdays = 0;
+
+        function isHoliday(date, holidayList) {
+          return holidayList.some((holiday) => {
+            return date.toDateString() === holiday.toDateString();
+          });
+        }
+
+        for (
+          let currentDate = start;
+          currentDate <= end;
+          currentDate.setDate(currentDate.getDate() + 1)
+        ) {
+          if (
+            currentDate.getDay() !== 0 &&
+            !isHoliday(currentDate, saturdayHolidays) &&
+            !isHoliday(currentDate, nationalHolidays)
+          ) {
+            weekdays++;
+          }
+        }
+
+        return weekdays;
+      }
+    </script>
+
+    <script src="/assets/vendor/typeahead.js/typeahead.bundle.min.js"></script>
+</body>
+
+</html>

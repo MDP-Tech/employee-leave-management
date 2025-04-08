@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" data-layout="topnav" data-topbar-color="light" data-menu-color="dark">
+
+<head>
+    <meta charset="utf-8" />
+    <title>calendar| Shiftwave </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
+    <meta content="Techzaa" name="author" />
+
+
+    
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+   
+        <!-- Plugin css -->
+        <link rel="stylesheet" href="/assets/vendor/fullcalendar/main.min.css" type="text/css">
+
+    <!-- Bootstrap Css -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+
+    <!-- Theme Config Js -->
+    <script src="/assets/js/config.js"></script>
+
+    <!-- App css -->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        .plane-fs-icon{
+            font-size: 22px;
+    
+        }
+        .small-icon-btns{
+            height: 10px;
+            width: 10px;
+            background-color: #800080;
+            margin-top: 10px;
+            margin-right: 4px;
+            display: flex;
+        }
+        .small-icon-btns1{
+            display: flex;
+            height: 10px;
+            width: 10px;
+            background-color:#00A3E1;
+            margin-top: 10px;
+            margin-right: 4px;
+        }
+        .permissiion-icons-new{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-left: 50px;
+        }
+        .permissiion-icons-new1{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-left: 100px;
+        }
+        .icon-side-fs{
+            font-size: 12px;
+            font-weight: normal;
+           
+        }
+    
+        .calendar-align{
+            margin: 15px 0px;
+        }
+    
+        @media only screen and (max-width: 600px) {
+            .icon-side-fs{
+            font-size: 12px;
+            font-weight: normal;
+            display: none;
+            
+        }
+        .plane-fs-icon{
+            font-size: 22px;
+    
+        }
+        .permissiion-icons-new{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-left: 0px;
+          
+        }
+        .permissiion-icons-new1{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-left: 0px;
+          
+        }
+        .small-icon-btns{
+            height: 10px;
+            width: 10px;
+            background-color: #800080;
+            margin-top: 10px;
+            margin-right: 4px;
+        }
+        .small-icon-btns1{
+            height: 10px;
+            width: 10px;
+            background-color:#00A3E1;
+            margin-top: 10px;
+            margin-right: 4px;
+        }
+        }
+    
+       
+    
+        @media only screen and (min-width: 600px) {    
+            .icon-side-fs{
+            font-size: 12px;
+            font-weight: normal;
+                
+        }
+        .plane-fs-icon{
+            font-size: 22px;
+    
+        }
+        }
+        @media only screen and (min-width: 768px) {
+            .icon-side-fs{
+            font-size: 16px;
+            font-weight: normal;
+                 
+        }
+        .plane-fs-icon{
+            font-size: 25px;
+            display: none;
+    
+        }
+    
+        
+        .calendar-align{
+            margin: 0px 0px 0px 0px;
+        }
+    
+        }
+    
+        @media only screen and (min-width: 992px) {
+            .icon-side-fs{
+            font-size: 12px;
+            font-weight: normal;      
+        }
+        .plane-fs-icon{
+            font-size: 30px;
+            display: none;
+    
+    
+        }
+        .calendar-align{
+            margin: 0px 0px 0px 160px;
+        }
+        }
+    
+        @media only screen and (min-width: 1200px) {
+            .icon-side-fs{
+            font-size: 12px;
+            font-weight: normal;       
+        }
+        .plane-fs-icon{
+            font-size: 30px;
+            display: none;
+    
+        }
+        }
+    
+        @media (max-width:640px){
+        .fc .fc-daygrid-body-natural .fc-daygrid-day-events {
+        margin-bottom: 0 !important;
+        }}
+ 
+      </style>
+</head>
+
+<body>
+    <!-- Begin page -->
+    
+    <div class="wrapper">
+
+       
+        
+       <%- include('../includes/admin-header')%>
+       
+
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row mb-1">
+                            <div class="col-1" style="margin: 15px 0px 5px 0px;">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 calendar-align">CALENDAR</h4>  
+                                    <div class="permissiion-icons-new">
+                                        
+                                        <h5 class="small-icon-btns"><b style="margin-left: 13px;margin-top: -2px;">Permission</b></h5>
+                                    </div>
+                                    <div class="permissiion-icons-new1">
+                                       
+                                        <h5 class="small-icon-btns1"><span style="margin-top: -2px;margin-left: 13px;">Leave</span></h5>
+                                    </div>                                                                                                 
+                                </div>
+                                
+                             
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <div class="row mb-5">
+                            <!-- end col-->
+                            <div class="col-xl-9" style="margin: 0px auto;">
+                               <div class="card mb-0" >
+                                   <div class="card-body" >
+                                                                     
+                                       <div id="calendar" class="overflow-auto"></div>
+  
+                                   </div>
+                               </div>
+                           </div> <!-- end col -->
+                       </div> <!-- end row-->
+                       <div style='clear:both'></div>
+        
+                        <!-- Add New Event MODAL -->
+                        <div class="modal fade" id="event-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="event-modal-title">Event Details</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="event-modal-body">
+                                    <!-- Event details will be displayed here -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                                
+                                </div>
+                                <!-- end modal-content-->
+                            </div>
+                            <!-- end modal dialog-->
+                        </div>
+                        <!-- end modal-->
+                    </div>
+                </div> <!-- container-fluid -->
+            </div>
+                <!-- End Page-content -->
+                <%- include('../includes/employee-footer')%>
+          
+    </div>
+
+
+    <!-- Theme Settings -->
+    <%- include('../includes/admin-theme-settings')%>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+
+       
+        $.ajax({
+            type: 'get',
+            dataType: "json",
+            
+
+            url: '/admin/getDetailsByAdmin',
+            success: function (response) {
+                
+              
+                if (response.status == 'sucess') {
+
+                 console.log(response.data);
+                  var eventDataArray = [];
+
+                  response.data.forEach(leave => {
+                        var eventData = {
+                            title: 'Leave', 
+                            start: `${leave.start_date}`,
+                            end: `${leave.end_date}`,
+                            status:`${leave.status}`,
+                            color: '#00A3E1',
+                        
+                            extendedProps: {
+                            name: leave.name,
+                            id:leave.employee_id,
+                            designation:leave.designation,
+                            Leave:'Leave'
+                            
+                        },
+                        };
+
+                        eventDataArray.push(eventData);
+                    });
+
+
+                 response.data1.forEach(Permission => {
+
+                      
+                      var eventData = {
+                                title: `Permission`,
+                                start: `${Permission.date}`,
+                                status:`${Permission.status}`,
+                                color:'#800080',
+                                extendedProps: {
+                                    name: Permission.name,
+                                    id:Permission.employee_id,
+                                    designation:Permission.designation,
+                                    Leave:'Permission'
+                                }
+                                
+                              
+                            };
+
+                            eventDataArray.push(eventData);
+
+                      });
+                 
+
+                  var calendarEl = document.getElementById('calendar');
+        
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            // Basic View Configurations
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                right: 'title',
+               
+            }, 
+    
+            editable: true,
+            contentHeight: 'auto',
+            aspectRatio: 2,
+            dayHeaderFormat: { weekday: 'short' }, // Format the day headers to display abbreviated names (e.g., Mon, Tue)
+            events:eventDataArray,
+          
+            eventDisplay: '<span style="font-size:100px;">&#128742;</span>',
+            eventTimeFormat: { // Hide time display on the event bars
+                 
+                
+                 omitZeroMinute: false
+                   
+             }, eventContent: function(arg) {
+                 
+                 var icon = arg.event.extendedProps.Leave === 'Leave' ?
+                             '<span><i class="ri-plane-fill" style="margin-right:3px;font-size:16px;"></i><b style="font-weight:normal;" class="icon-side-fs">'+arg.event.extendedProps.name+'</b></span>' :
+                             '<span><i class="ri-time-fill" style="margin-right:3px"></i><b style="font-weight:normal;" class="icon-side-fs">'+arg.event.extendedProps.name+'</b></span>';
+
+                     return {
+                 html: icon ,
+             };
+ },
+              eventClick: function(info) {
+               
+                var eventTitle = info.event.title;
+            
+                var name = info.event.extendedProps.name; 
+                var id=info.event.extendedProps.id;
+                var designation=info.event.extendedProps.designation;
+                var status = info.event.extendedProps.status;
+                alert(status);
+                var modalTitle = $('#event-modal-title');
+                var modalBody = $('#event-modal-body');
+             
+// <p><strong>Start:</strong> ${eventStart}</p>
+                    // <p><strong>End:</strong> ${eventEnd}</p>
+                modalTitle.text(eventTitle);
+                modalBody.html(`
+                  
+                   
+                 
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Employee_id:</strong> ${id}</p>
+                    <p><strong>Designation:</strong> ${designation}</p>
+                    <p><strong>Status:</strong>${status}</p>
+                  
+                `);
+
+                $('#event-modal').modal('show');
+            }
+        });
+        calendar.render();
+        $('#calendar').show();
+        $('#calendar').addClass('overflow-auto');
+
+
+                }
+                else {
+                   
+
+                   alert(response.status);
+                 
+                    $('html, body').animate({ scrollTop: 0 }, 'slow');
+
+
+
+                }
+
+            }
+        });
+
+
+          
+      });
+    </script>
+   
+    <script src="/assets/js/vendor.min.js"></script>
+
+    <!-- Daterangepicker js -->
+    <script src="/assets/vendor/daterangepicker/moment.min.js"></script>
+    <script src="/assets/vendor/daterangepicker/daterangepicker.js"></script>
+    
+
+
+
+    <!-- Dashboard App js -->
+    <script src="/assets/js/pages/dashboard.js"></script>
+
+
+    <!-- App js -->
+    <script src="/assets/js/app.min.js"></script>
+   <!-- Calendar init -->
+   <script src="/assets/js/pages/calendar.init.js"></script>
+
+   <script src="/assets/js/app.js"></script>
+
+
+        <!-- plugin js -->
+       
+        <script src="/assets/vendor/moment/min/moment.min.js"></script>
+        <script src="/assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+      
+        <script src="/assets/vendor/fullcalendar/locales-all.min.js"></script>
+        <script src="/assets/vendor/fullcalendar/main.min.js"></script>
+        
+</body>
+</html> 

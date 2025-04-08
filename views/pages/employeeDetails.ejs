@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="en" data-layout="topnav" data-topbar-color="light" data-menu-color="light">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Details Page | Shiftwave</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
+    <meta content="Techzaa" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+    <!-- Daterangepicker css -->
+    <link rel="stylesheet" href="/assets/vendor/daterangepicker/daterangepicker.css">
+
+    <!-- Vector Map css -->
+    <link rel="stylesheet" href="/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css">
+
+    <!-- Theme Config Js -->
+    <script src="/assets/js/config.js"></script>
+
+    <!-- App css -->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Bootstrap Datepicker css -->
+    <link href="/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Datatables css -->
+    <link href="/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Icons css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        .head-fp {
+            margin: 5px auto;
+            font-weight: 900;
+
+        }
+
+        .address-hr.biography.updateFields {
+            border-bottom: 1px solid #efefef;
+            padding: 8px 0;
+        }
+
+        .sp {
+            margin: 0px;
+        }
+
+        .tp {
+            margin: 0px;
+        }
+
+        .centered {
+            text-align: center;
+        }
+
+        .apply-btn1 {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            margin-top: 30px;
+        }
+
+        .edit-button-style {
+            margin-left: 100px;
+        }
+
+        @media (max-width:767px) {
+            .apply-btn1 {
+                display: flex;
+                align-items: center;
+                justify-content: start !important;
+                margin-top: 10px;
+            }
+
+            .dataTables_length {
+                display: none;
+            }
+
+            .dataTables_filter label {
+                display: none;
+            }
+
+            .edit-button-style {
+                margin-left: 120px;
+            }
+
+            .edit-button-style-1 {
+                margin-left: 40px;
+            }
+
+            .empoyee_det {
+                text-align: end !important;
+            }
+        }
+
+        .empoyee_det {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+
+        <%- include('../includes/admin-header')%>
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+
+                                            <a href="javascript:window.history.go(-1);"><input type="button"
+                                                    value="Back"
+                                                    class="btn btn-primary btn-sm waves-effect waves-light"></a>
+                                        </ol>
+                                    </div>
+
+                                    <h4 class="page-title">Details</h4>
+                                    <div class="success_message_style alert alert-success" id="sucessmessage"
+                                        style="display: none;">
+                                        <stron></stron>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <div class="row" id="table_data">
+
+                            <!-- Striped table start -->
+                            <div>
+                                <div class="alert alert-danger alert-dismissible fade show" style="display: none;"
+                                    id="failed_message"><strong>Info: </strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="false">&times;</span>
+                                    </button>
+
+                                </div>
+                                <div class="alert alert-success alert-dismissible fade show" style="display: none;"
+                                    id="sucess_message"><strong>Updated Successfully</strong>
+
+                                </div>
+
+                                <% result.forEach(employee=>{ %>
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="col-md-10">
+                                                    <h4 class="page-title text-dark">Employee Details</h4>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button id="edit"
+                                                        class="edit-button-style btn btn-primary btn-sm waves-effect waves-light">Edit</button>
+                                                    <button id="cancel_button"
+                                                        class="edit-button-style-1 btn btn-danger btn-sm waves-effect waves-light"
+                                                        style="display: none;margin-right: 5px;">Cancel</button>
+                                                    <button id="update_button"
+                                                        class="btn btn-primary btn-sm waves-effect waves-light"
+                                                        style="display: none;">Update</button>
+                                                </div>
+                                            </div>
+                                            <form id="editForm" class="row needs-validation p-1" novalidate>
+                                                <div class="row">
+                                                   <div class="col-md-3 mt-2">
+                                                       <div class=" updateFields employee_id">
+                                                           <p class="head-fp">Employee_id:
+                                                           </p>
+                                                           <div id="database_id" style="display: none"><%= employee.employee_id %></div>
+                                                           <p class="fp" id="id" style="display: none;" readonly>
+                                                               <%= employee.employee_id %>
+                                                           </p>
+                                                           <input class="form-control" type="text"
+                                                               value="<%= employee.id %>" text="<%= employee.id %>" name="Employee_id"
+                                                               disabled="">
+                                                           <div class="text-danger" id="idError"></div>
+                                                       </div>
+                                                   </div>
+							                  
+
+                                                    <div class="col-md-3 mt-2">
+                                                        <div class=" updateFields">
+                                                            <p class="head-fp">First Name:</p>
+                                                            <p class="sp" id="full_name" style="display: none;"
+                                                                data-value="<%= employee.first_name + ' ' + employee.last_name %>">
+                                                                <%= employee.first_name %>
+                                                            </p>
+                                                            <input class="form-control" type="text"
+                                                                value="<%= employee.first_name %>"
+                                                                name="Employee_fullname" disabled="">
+                                                            <div class="text-danger" id="nameError"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3 mt-2">
+                                                        <div class=" updateFields">
+                                                            <p class="head-fp">Last Name: </p>
+                                                            <input class="form-control" type="text"
+                                                                name="Employee_lastname"
+                                                                value="<%= employee.last_name %>" disabled="">
+                                                            <div class="text-danger" id="lastnameError"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3 mt-2">
+                                                        <div class="updateFields">
+                                                            <p class="head-fp">Employee Email:
+                                                            </p>
+
+                                                            <input class="form-control" name="email" type="text"
+                                                                value="<%= employee.email %>" name="email" disabled="">
+                                                            <div class="text-danger" id="emailError"></div>
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                    <div class="col-md-3 mt-2">
+                                                        <div class="updateFields">
+                                                            <p class="head-fp">Mobile Number:
+                                                            </p>
+
+                                                            <input class="form-control" id="phoneNumber" type="text"
+                                                                value="<%= employee.phone_number %>" name="phoneNumber"
+                                                                disabled="">
+                                                            <div class="text-danger" id="numberError"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3 mt-2">
+                                                        <div class="updateFields">
+                                                            <div id="rolee">
+                                                                <p class="head-fp">Role:
+                                                                </p>
+
+                                                                <input class="rolefield form-control" type="text"
+                                                                    value="<%= employee.role %>" disabled>
+
+                                                                <select name="role" style="display: none;"
+                                                                    id="editEmployeeRole" class="form-select" required>
+                                                                    <option value="">Select Role</option>
+                                                                    <option value="employee" <% if(employee.role !='hr'
+                                                                        ){ %>selected <% } %>>Employee </option>
+                                                                    <option value="hr" <% if(employee.role=='hr' ){ %>
+                                                                        selected <% } %> >HR </option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="text-danger" id="roleError"></div>
+                                                        </div>
+                                                    </div>
+                                                    
+
+                                                    <div class="col-md-3 mt-2">
+                                                        <div class="updateFields">
+                                                            <p class="head-fp">Designation:
+                                                            </p>
+
+                                                            <input class="form-control" type="text"
+                                                                value="<%= employee.designation %>" name="designation"
+                                                                disabled="">
+                                                            <div class="text-danger" id="designationError"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mt-2">
+                                                        <div class="updateFields">
+                                                            <p class="head-fp">Location:
+                                                            </p>
+
+                                                            <input class="form-control" type="text"
+                                                                value="<%= employee.location %>" name="location"
+                                                                disabled>
+                                                            <div class="text-danger" id="locationError"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="mt-2 updateFields">
+                                                            <p class="head-fp">Balanced Leaves:
+                                                            </p>
+
+                                                            <input class="form-control" type="text"
+                                                                value="<%= employee.balanced_leaves %>"
+                                                                id="editEmployeeBalanced" name="balanced" disabled>
+                                                            <div class="text-danger" id="balancedError"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="mt-2 updateFields">
+                                                            <p class="head-fp">Experience:
+                                                            </p>
+
+                                                            <input class="form-control" type="text"
+                                                                value="<%= employee.experience %>" id="edit_experience"
+                                                                name="experience" disabled>
+                                                            <div class="text-danger" id="experienceError"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="mt-2 updateFields">
+                                                            <p class="head-fp">Joining Date:
+                                                            </p>
+                                                            <% const date=new Date(employee.joining_date); const
+                                                                formattedDate=`${date.getDate().toString().padStart(2, '0'
+                                                                )}/${(date.getMonth() + 1).toString().padStart(2, '0'
+                                                                )}/${date.getFullYear()}`; %>
+
+                                                                <div class="" id="datepicker2">
+                                                                    <input type="text" class="form-control"
+                                                                        value="<%= formattedDate %>" id="joining_date"
+                                                                        name="joiningdate" autocomplete="off" disabled
+                                                                        readonly>
+                                                                    <div class="invalid-feedback" id="end_date">Enter
+                                                                        end date</div>
+                                                                    <div class="text-danger" id="end_date_error"></div>
+                                                                </div>
+
+                                                                <!-- <input class="form-control" type="text" value="<%= formattedDate %>" name="joiningdate"  disabled> -->
+                                                                <div class="text-danger" id="joiningError"></div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </form>
+
+
+
+                                        </div>
+                                    </div>
+                                    <%})%>
+
+                                        <div>
+                                            <div class="alert alert-danger alert-dismissible fade show"
+                                                style="display: none;" id="failed_message"><strong>Info: </strong>
+                                                <button type="button" class="close" data-dismiss="alert"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="false">&times;</span>
+                                                </button>
+
+                                            </div>
+                                            <div class="alert alert-success alert-dismissible fade show"
+                                                id="sucess_message" style="display: none;"><strong>Info: </strong>
+                                                <button type="button" class="close" data-dismiss="alert"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-7">
+                                                            <h4 class="page-title text-dark mt-3">Leave Details</h4>
+                                                        </div>
+                                                        <div class="col-md-5">
+
+                                                            <form class="needs-validation" id="leaveForm" novalidate>
+                                                                <div class="row">
+                                                                    <div class="mb-1 col-md-5" id="datepicker1">
+
+                                                                        <label for="validationCustom01"
+                                                                            class="form-label">Start Date</label>
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Select Date"
+                                                                            id="datepicker_start" name="start_date"
+                                                                            required autocomplete="off" readonly>
+                                                                        <div class="invalid-feedback" id="start_date">
+                                                                            Enter start date</div>
+                                                                        <div class="text-danger" id="start_date_error">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="mb-1 col-md-5" id="datepicker2">
+                                                                        <label for="validationCustom02"
+                                                                            class="form-label">End Date</label>
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Select Date"
+                                                                            id="datepicker_end" name="end_date" required
+                                                                            autocomplete="off" readonly>
+                                                                        <div class="invalid-feedback" id="end_date">
+                                                                            Enter end date</div>
+                                                                        <div class="text-danger" id="end_date_error">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div
+                                                                        class="mb-1 col-md-2 apply-btn1 align-items-center">
+                                                                        <button
+                                                                            class="btn btn-primary btn-sm waves-effect waves-light btn-mini-apply"
+                                                                            id="submit" type="submit">Apply</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mt-2">
+
+                                                        <div class="col-md-3">
+                                                            <div class="address-hr biography updateFields">
+                                                                <p class="head-fp">Leaves Count
+                                                                </p>
+                                                                <p class="sp total_leaves_count" id="updateShow-119">
+                                                                    <%= result1 %>
+                                                                </p>
+                                                                <p class="tp" style="display:none"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="address-hr biography updateFields">
+                                                                <p class="head-fp">Approved Count
+                                                                </p>
+                                                                <p class="sp total_approved_leaves" id="updateShow-119">
+                                                                    <%= result2 %>
+                                                                </p>
+                                                                <p class="tp" style="display:none"></p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-3">
+                                                            <div class="address-hr biography updateFields">
+                                                                <p class="head-fp">Declined Count
+                                                                </p>
+                                                                <p class="sp total_declined_leaves" id="updateShow-119">
+                                                                    <%= result4 %>
+                                                                </p>
+                                                                <p class="tp" style="display:none"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="address-hr biography updateFields">
+                                                                <p class="head-fp">Pending Count
+                                                                </p>
+                                                                <p class="sp total_pending_leaves" id="updateShow-119">
+                                                                    <%= result3 %>
+                                                                </p>
+                                                                <p class="tp" style="display:none"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="address-hr biography updateFields">
+                                                                <p class="head-fp">Emergency Leaves
+                                                                </p>
+                                                                <p class="sp total_emergency_leaves"
+                                                                    id="updateShow-119">
+                                                                    <%= result5 %>
+                                                                </p>
+                                                                <p class="tp" style="display:none"></p>
+                                                            </div>
+                                                        </div>
+                                                        
+
+
+
+
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="row" style="margin-top: -35px;">
+                                                    <div class="col-12">
+                                                        <div class="card">
+
+                                                            <div class="card-body">
+                                                                <div class="table-responsive lead-table"
+                                                                    style="padding: unset;">
+                                                                    <table id="basic-datatable"
+                                                                        class="table table-hover progress-table text-center dataTable no-footer dtr-inline collapsed table-centered table-nowrap mb-0"
+                                                                        role="grid" aria-describedby="dataTable_info"
+                                                                        style="width: 100%;background-color: white;">
+                                                                        <thead class="bg-light text-capitalize">
+                                                                            <tr role="row"
+                                                                                style="background-color: white;">
+                                                                                <!-- <th>Request_id</th> -->
+                                                                                <th>S.NO</th>
+                                                                                <th width="120">Full Name</th>
+
+                                                                                <!-- <th>Employee ID</th> -->
+
+                                                                                <th>Type</th>
+                                                                                <th>From</th>
+                                                                                <th>To</th>
+
+                                                                                <th>Applied On</th>
+                                                                                <th width="150">
+                                                                                    <select class="form-select  "
+                                                                                        id="validationCustomDropdown">
+
+                                                                                        <option value="">Status</option>
+                                                                                        <option value="pending">Pending
+                                                                                        </option>
+                                                                                        <option value="approved">
+                                                                                            Approved</option>
+                                                                                        <option value="rejected">
+                                                                                            Declined</option>
+                                                                                        <!-- <option value="Emergency/Medical">Emergency/Medical</option> -->
+
+                                                                                    </select>
+                                                                                </th>
+                                                                                <th>View Details</th>
+                                                                            </tr>
+                                                                        </thead>
+
+                                                                        <tbody id="laod">
+
+                                                                            <% i=0 %>
+                                                                                <% if(result !="0" ){%>
+                                                                                    <% result6.forEach(leave=>{ %>
+                                                                                        <% i=i+1 %>
+
+
+                                                                                            <tr>
+                                                                                                <!-- <td> <b>
+                                                                                        <%= leave.request_id %>
+                                                                                    </b></td> -->
+                                                                                                <td>
+                                                                                                    <%= i %>
+                                                                                                </td>
+
+                                                                                                <td><a target="_blank">
+                                                                                                        <%= leave.fullname
+                                                                                                            %>
+                                                                                                    </a></td>
+
+
+                                                                                                <!-- <td>
+                                                                                    <%= leave.employee_id %>
+                                                                                </td> -->
+                                                                                                <td>
+                                                                                                    <%= leave.leave_type
+                                                                                                        %>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <%= leave.start_date
+                                                                                                        %>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <%= leave.end_date
+                                                                                                        %>
+                                                                                                </td>
+
+                                                                                                <td>
+                                                                                                    <%= leave.created_at
+                                                                                                        %>
+                                                                                                </td>
+
+                                                                                                <td>
+                                                                                                    <% let
+                                                                                                        status=leave.status
+                                                                                                        %>
+
+                                                                                                        <% if(status=='approved'
+                                                                                                            ){%>
+
+                                                                                                            <span>Approved
+                                                                                                                <i
+                                                                                                                    class="fa fa-thumbs-o-up"></i></span>
+                                                                                                            <% } %>
+                                                                                                                <% if(status=='rejected'
+                                                                                                                    ){%>
+
+                                                                                                                    <span>Declined
+                                                                                                                        <i
+                                                                                                                            class="fa fa-thumbs-o-down"></i></span>
+                                                                                                                    <% }
+                                                                                                                        %>
+                                                                                                                        <% if(status=='pending'
+                                                                                                                            ){%>
+                                                                                                                            <span>Pending
+                                                                                                                                <i
+                                                                                                                                    class="fa fa-spinner"></i></span>
+                                                                                                                            <% }
+                                                                                                                                %>
+
+
+                                                                                                </td>
+
+
+                                                                                                <td>
+                                                                                                    <a href="/admin/employeeLeave-details?emp_id=<%= leave.employee_id %>&req_id=<%= leave.request_id %>"
+                                                                                                        class="btn btn-secondary btn-sm"
+                                                                                                        style="background-color: #0bb197;border: 1px solid #0bb197;">
+                                                                                                        View Details</a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <% })%>
+                                                                                                <% }else{ %>
+                                                                                                    <tr>
+                                                                                                        <td>"No pending
+                                                                                                            leaves"
+                                                                                                    </tr>
+                                                                                                    </tr>
+
+                                                                                                    <% } %>
+
+                                                                        </tbody>
+
+                                                                    </table>
+                                                                </div>
+
+                                                            </div> <!-- end card body-->
+                                                        </div> <!-- end card -->
+                                                    </div><!-- end col-->
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div>
+                                            <div class="alert alert-danger alert-dismissible fade show"
+                                                style="display: none;" id="failed_message"><strong>Info: </strong>
+                                                <button type="button" class="close" data-dismiss="alert"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="false">&times;</span>
+                                                </button>
+
+                                            </div>
+                                            <div class="alert alert-success alert-dismissible fade show"
+                                                id="sucess_message" style="display: none;"><strong>Info: </strong>
+                                                <button type="button" class="close" data-dismiss="alert"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-7">
+                                                            <h4 class="page-title mt-3 text-dark">Permission Details
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <form class="needs-validation" id="leaveForm" novalidate>
+                                                                <div class="row">
+                                                                    <div class="col-md-5 mb-1" id="datepicker1">
+                                                                        <label for="validationCustom01"
+                                                                            class="form-label">Start Date</label>
+                                                                        <input type="text"
+                                                                            class="form-control permission_start_date"
+                                                                            placeholder="Select Date"
+                                                                            id="permission_start_date" name="start_date"
+                                                                            required autocomplete="off" readonly>
+                                                                        <div class="invalid-feedback" id="start_date">
+                                                                            Enter start date</div>
+                                                                        <div class="text-danger" id="start_date_error">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-5 mb-1" id="datepicker2">
+                                                                        <label for="validationCustom02"
+                                                                            class="form-label">End Date</label>
+                                                                        <input type="text"
+                                                                            class="form-control permission_end_date"
+                                                                            placeholder="Select Date"
+                                                                            id="permission_end_date" name="end_date"
+                                                                            required autocomplete="off" readonly>
+                                                                        <div class="invalid-feedback" id="end_date">
+                                                                            Enter end date</div>
+                                                                        <div class="text-danger" id="end_date_error">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-2 mb-1 apply-btn1">
+                                                                        <button
+                                                                            class="btn btn-primary btn-sm waves-effect waves-light btn-mini-apply"
+                                                                            id="permission_submit"
+                                                                            type="submit">Apply</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mt-2">
+
+                                                        <div class="col-md-3">
+                                                            <div class="address-hr biography updateFields">
+                                                                <p class="head-fp">Permissions Count
+                                                                </p>
+                                                                <p class="sp total_permission_count"
+                                                                    id="updateShow-119">
+                                                                    <%= result7 %>
+                                                                </p>
+                                                                <p class="tp" style="display:none"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="address-hr biography updateFields">
+                                                                <p class="head-fp">Approved Count
+                                                                </p>
+                                                                <p class="sp approved_permission_count"
+                                                                    id="updateShow-119">
+                                                                    <%= result8 %>
+                                                                </p>
+                                                                <p class="tp" style="display:none"></p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-3">
+                                                            <div class="address-hr biography updateFields">
+                                                                <p class="head-fp">Declined Count
+                                                                </p>
+                                                                <p class="sp declined_permission_count"
+                                                                    id="updateShow-119">
+                                                                    <%= result10 %>
+                                                                </p>
+                                                                <p class="tp" style="display:none"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="address-hr biography updateFields">
+                                                                <p class="head-fp">Pending Count
+                                                                </p>
+                                                                <p class="sp pending_permission_count"
+                                                                    id="updateShow-119">
+                                                                    <%= result9 %>
+                                                                </p>
+                                                                <p class="tp" style="display:none"></p>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- <div class="col-md-12">
+                                                <div class="address-hr biography updateFields">
+                                                    <p class="head-fp">Unsechuduled Permission
+                                                    </p>
+                                                    <p class="sp" id="updateShow-119">235</p>
+                                                    <p class="tp" style="display:none"></p>
+                                                </div>
+                                             </div> -->
+
+
+
+                                                    </div>
+
+
+
+
+
+                                                </div>
+                                                <div class="row" style="margin-top: -35px;">
+                                                    <div class="col-12">
+                                                        <div class="card">
+
+                                                            <div class="card-body">
+                                                                <div class="table-responsive lead-table"
+                                                                    style="padding: unset;">
+                                                                    <table id="permission-basic-datatable"
+                                                                        class="table table-hover progress-table text-center dataTable no-footer dtr-inline collapsed table-centered table-nowrap mb-0"
+                                                                        role="grid" aria-describedby="dataTable_info"
+                                                                        style="width: 100%;background-color: white;">
+                                                                        <thead class="bg-light text-capitalize">
+                                                                            <tr role="row"
+                                                                                style="background-color: white;">
+                                                                                <!-- <th>Request_id</th> -->
+                                                                                <th>S.NO</th>
+                                                                                <th width="120">Full Name</th>
+
+                                                                                <!-- <th>Employee ID</th> -->
+
+                                                                                <th>Permission Date</th>
+                                                                                <th>Start Time</th>
+                                                                                <th>End Time</th>
+
+                                                                                <th>Applied On</th>
+                                                                                <th width="150">
+                                                                                    <select
+                                                                                        class="form-select permission_validationCustomDropdown">
+
+                                                                                        <option value="">Status</option>
+                                                                                        <option value="pending">Pending
+                                                                                        </option>
+                                                                                        <option value="approved">
+                                                                                            Approved</option>
+                                                                                        <option value="rejected">
+                                                                                            Declined</option>
+                                                                                        <!-- <option value="Emergency/Medical">Emergency/Medical</option> -->
+
+                                                                                    </select>
+                                                                                </th>
+                                                                                <th>View Details</th>
+                                                                            </tr>
+                                                                        </thead>
+
+                                                                        <tbody id="laod">
+
+                                                                            <% i=0 %>
+                                                                                <% if(result !="0" ){%>
+                                                                                    <% result11.forEach(leave=>{ %>
+                                                                                        <% i=i+1 %>
+
+
+                                                                                            <tr>
+                                                                                                <!-- <td> <b>
+                                                                                        <%= leave.request_id %>
+                                                                                    </b></td> -->
+                                                                                                <td>
+                                                                                                    <%= i %>
+                                                                                                </td>
+
+                                                                                                <td><a target="_blank">
+                                                                                                        <%= leave.fullname
+                                                                                                            %>
+                                                                                                    </a></td>
+
+
+                                                                                                <!-- <td>
+                                                                                    <%= leave.employee_id %>
+                                                                                </td> -->
+                                                                                                <td>
+                                                                                                    <%= leave.DATE %>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <%= leave.start_time
+                                                                                                        %>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <%= leave.end_time
+                                                                                                        %>
+                                                                                                </td>
+
+                                                                                                <td>
+                                                                                                    <%= leave.created_at
+                                                                                                        %>
+                                                                                                </td>
+
+                                                                                                <td>
+                                                                                                    <% let
+                                                                                                        status=leave.status
+                                                                                                        %>
+
+                                                                                                        <% if(status=='approved'
+                                                                                                            ){%>
+
+                                                                                                            <span
+                                                                                                                >Approved
+                                                                                                                <i
+                                                                                                                    class="fa fa-thumbs-o-up"></i></span>
+                                                                                                            <% } %>
+                                                                                                                <% if(status=='rejected'
+                                                                                                                    ){%>
+
+                                                                                                                    <span
+                                                                                                                        >Declined
+                                                                                                                        <i
+                                                                                                                            class="fa fa-thumbs-o-down"></i></span>
+                                                                                                                    <% }
+                                                                                                                        %>
+                                                                                                                        <% if(status=='pending'
+                                                                                                                            ){%>
+                                                                                                                            <span>Pending
+                                                                                                                                <i
+                                                                                                                                    class="fa fa-spinner"></i></span>
+                                                                                                                            <% }
+                                                                                                                                %>
+
+
+                                                                                                </td>
+
+
+                                                                                                <td>
+                                                                                                    <a href="/admin/employeeLeave-details?emp_id=<%= leave.employee_id %>&permission_id=<%= leave.permission_id %>"
+                                                                                                        class="btn btn-secondary btn-sm"
+                                                                                                        style="background-color: #0bb197;border: 1px solid #0bb197;">
+                                                                                                        View Details</a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <% })%>
+                                                                                                <% }else{ %>
+                                                                                                    <tr>
+                                                                                                        <td>"No pending
+                                                                                                            leaves"
+                                                                                                    </tr>
+                                                                                                    </tr>
+
+                                                                                                    <% } %>
+
+                                                                        </tbody>
+
+                                                                    </table>
+                                                                </div>
+
+                                                            </div> <!-- end card body-->
+                                                        </div> <!-- end card -->
+                                                    </div><!-- end col-->
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+
+                            </div>
+                            <!-- Striped table end -->
+
+                        </div>
+
+                        <!-- <% ids_array=[]; 
+                        email_array=[]; 
+                        result.forEach(data=> {%>
+                            
+                            <% ids_array.push(data.employee_id);
+                              
+                            email_array.push(data.email); 
+                            
+                            }); %> -->
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                <% ids_array=[]; email_array=[]; ids.forEach(data=> {%>
+
+                    <% ids_array.push(data.id); email_array.push(data.email); }); %>
+
+                        <%- include('../includes/employee-footer')%>
+                            <!-- end Footer -->
+
+            </div>
+    </div>
+    <!-- END wrapper -->
+
+    <!-- Theme Settings -->
+
+    <%- include('../includes/admin-theme-settings')%>
+
+        <!-- ... (previous HTML code) ... -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+        <!-- ... (remaining HTML code) ... -->
+
+
+
+
+
+
+        <!-- Vendor js -->
+        <script src="/assets/js/vendor.min.js"></script>
+
+        <!-- Daterangepicker js -->
+        <script src="/assets/vendor/daterangepicker/moment.min.js"></script>
+        <script src="/assets/vendor/daterangepicker/daterangepicker.js"></script>
+
+        <!-- Bootstrap Datepicker Plugin js -->
+        <script src="/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+
+        <!-- Vector Map js -->
+        <script src="/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+        <script src="/assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
+
+        <script src="/assets/js/pages/datatable.init.js"></script>
+
+
+        <script>
+            $(document).ready(function () {
+
+               
+                 var ids_array = JSON.parse('<%- JSON.stringify(ids_array) %>');
+                var email_array = JSON.parse('<%- JSON.stringify(email_array) %>')
+             
+
+                //joining date
+                $('#joining_date').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    orientation: 'bottom',
+                    format: 'dd/mm/yyyy',
+                    beforeShowDay: function (date) {
+                        var currentDate = new Date();
+                        currentDate.setHours(0, 0, 0, 0);
+                        date.setHours(0, 0, 0, 0);
+                    }
+                })
+
+
+
+
+                // cancel button
+
+                $('#cancel_button').on('click', function () {
+                    $('#edit').show();
+                    $('#cancel_button').hide();
+                    $('#update_button').hide();
+                    $(".updateFields input[type='text']").attr("disabled", "disabled");
+                    $('.rolefield').show();
+                    $('#editEmployeeRole').hide();
+                })
+
+
+                //added validations to the number 
+                $('#phoneNumber, #edit_experience,#editEmployeeBalanced').on('input', function () {
+                    $(this).val($(this).val().replace(/[^0-9.]/g, ''));
+                });
+
+                // Get the current date
+              
+                var currentDate = new Date();
+                var currentMonth = currentDate.getMonth();
+                var startMonth = (currentMonth === 11) ? currentMonth : ('0' + (currentMonth)).slice(-2);
+                var endMonth = ('0' + (currentMonth + 1)).slice(-2);
+                var startFormattedDate = '07/' + startMonth + '/' + currentDate.getFullYear();
+                var endFormattedDate = '07/' + endMonth + '/' + (currentMonth === 11 ? currentDate.getFullYear() + 1 : currentDate.getFullYear());
+                $('#datepicker_start,.permission_start_date ').val(startFormattedDate);
+                $('#datepicker_end ,.permission_end_date').val(endFormattedDate);
+                //click on edit button
+                $("#edit").on("click", function () {
+                    $(".updateFields input[type='text']").removeAttr("disabled");
+                    $('.rolefield').hide();
+                    $('#editEmployeeRole').show();
+                    $('#cancel_button').show();
+                    $('#update_button').show();
+                    $('#edit').hide();
+                });
+                // update button
+
+                $("#update_button").on("click", function (event) {
+                    event.preventDefault();
+                    $('#idError,#joiningError, #nameError, #lastnameError, #numberError, #emailError, #roleError, #designationError, #locationError, #balancedError, #experienceError').text("");
+                    $('#database_id').text()
+                    database_id=$('#database_id').text()
+                    var inputElement = document.querySelector('input[name="Employee_id"]');
+                    var textValue = inputElement.getAttribute('text');
+		            var form = document.getElementById("editForm");
+                    let value = true;
+                    // Access form fields using their name
+                    
+                    var employeeId = form.elements["Employee_id"].value;
+                    var firstName = form.elements["Employee_fullname"].value;
+                    var lastName = form.elements["Employee_lastname"].value;
+                    var mobileNumber = form.elements["phoneNumber"].value;
+                    var email = form.elements["email"].value;
+                    var role = form.elements["role"].value;
+                    var designation = form.elements["designation"].value;
+                    var location = form.elements["location"].value;
+                    var balancedLeaves = form.elements["balanced"].value;
+                    var experience = form.elements["experience"].value;
+                    var joiningDate = form.elements["joiningdate"].value;
+
+                    if (employeeId.trim() === '') {
+                        $('#idError').text("Please enter Employee ID");
+                        value = false;
+                    }
+
+
+                    if (value) {
+                        if (employeeId != textValue) {
+                            
+                        
+                         for (var i = 0; i < ids_array.length; i++) {
+                             if (ids_array[i] == employeeId) {
+                                $('#idError').text("ID is already present in the database").show();
+                                value = false
+                             }
+                             //  if (email_array[i] == email) {
+                                 //     $('#emailError').text("Email Is Already Present In Database").show();
+                                //          value = false
+                                 // }
+                        }
+                    }
+                    }
+
+                    if (firstName.trim() === '') {
+                        $('#nameError').text("Please enter First Name");
+                        value = false;
+                    }
+                    // Validation for Last Name            
+                    if (lastName.trim() === '') {
+                        $('#lastnameError').text("Please enter Last Name");
+                        value = false;
+                    }
+                    if (mobileNumber.trim() === '') {
+                        $('#numberError').text("Please enter Mobile Number");
+                        value = false;
+                    }
+                    if (value) {
+
+
+                        if (mobileNumber.trim().length !== 10) {
+                            $("#numberError").text("Phone Number must have exactly 10 digits.");
+                            value = false;
+                        }
+
+                    }
+                    // Validation for Email         
+                    if (email.trim() === '') {
+                        $('#emailError').text("Please enter a valid Email");
+                        value = false;
+                    }
+
+                    if (value) {
+                        if (!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).test(email.trim())) {
+
+                            $('#emailError').text('Invalid email format');
+                            value = false;
+                        }
+                    }
+
+
+                    if (role.trim() == '') {
+
+                        $('#roleError').text("Please enter Role");
+                        value = false;
+                    }
+                    // Validation for Designation            
+                    if (designation.trim() === '') {
+                        $('#designationError').text("Please enter Designation");
+                        value = false;
+                    }
+
+                    // Validation for Location
+
+                    if (location.trim() === '') {
+                        $('#locationError').text("Please enter Location");
+                        value = false;
+                    }
+
+                    // Validation for Balanced Leaves
+
+                    if (balancedLeaves.trim() === '') {
+                        $('#balancedError').text("Please enter Balanced Leaves");
+                        value = false;
+                    }
+                    if (experience.trim() === '') {
+                        $('#experienceError').text("Please enter Experience");
+                        value = false;
+                    }
+
+                    if (joiningDate.trim() === '') {
+                        $('#joiningError').text("Please enter joiningDate");
+                        value = false;
+                    }
+
+                    if (value) {
+
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                           // data: $("#editForm").serialize()+"&employeeId=" + $("input[name='Employee_id']").val(),
+  			                data: $("#editForm").serialize()+ "&database_id="+database_id,
+                            url: "/edit-employee",
+                            success: function (response) {
+                                if (response.status === "Successfully Updated") {
+
+                                    $("#sucessmessage").text("Updated Sucessfully.")
+                                    $('#sucessmessage').show().fadeOut(3000);
+                                    $('#edit').show();
+                                    $('#cancel_button').hide();
+                                    $('#update_button').hide();
+                                    $(".updateFields input[type='text']").attr("disabled", "disabled");
+
+                                    $('.rolefield').show();
+                                    $('#editEmployeeRole').hide();
+                                    rolee
+                                    $("#rolee").load(window.location.href + " #rolee");
+                                    $("html, body").animate({ scrollTop: 0 }, "slow");
+
+                                } else {
+                                    console.log("Not Update Successfully");
+                                }
+                            },
+                            error: function (error) {
+                                console.error("Error during the AJAX request", error);
+                            }
+                        });
+                    }
+                });
+
+
+
+                // To enable the date picker calendar, click on the field.
+                $('#datepicker_start , #datepicker_end').on('click', function () {
+                    $(this).datepicker('show');
+                });
+
+                const downloadReportBtn = document.getElementById('downloadReportBtn');
+
+                // Add a click event listener to the button
+                $('#Download').on('click', function (event) {
+                    // Prevent the default behavior of the button (i.e., navigating to the href)
+                    event.preventDefault();
+
+                    // Call the print function when the button is clicked
+                    window.print();
+                });
+
+                $('#clear').on('click', function (event) {
+
+
+                    var startDate = $('#datepicker_start').val('');
+                    var endDate = $('#datepicker_end').val('');
+                    let table = $('#basic-datatable').DataTable();
+
+                    table.clear().draw();
+                    $("#name").val("").trigger("change");
+                    $("#validationCustomDropdown").val("").trigger("change");
+
+                    event.preventDefault();
+
+                })
+                let nationalHolidays = [
+
+                ];
+                let saturdayHolidays = [
+
+
+                ];
+
+                let disabledDates = [...nationalHolidays, ...saturdayHolidays];
+                disabledDates = disabledDates.map(elem => elem.toLocaleDateString());
+
+                $('#datepicker_start').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    orientation: 'bottom',
+                    format: 'dd/mm/yyyy',
+                    beforeShowDay: function (date) {
+                        var currentDate = new Date();
+                        currentDate.setHours(0, 0, 0, 0);
+                        date.setHours(0, 0, 0, 0);
+
+
+                    }
+
+
+
+                })
+
+                // set end date
+                $("#datepicker_start").on("changeDate", function (e) {
+                    var selectedDate = e.format(0, "dd/mm/yyyy");
+                    $("#datepicker_end").datepicker("setStartDate", selectedDate);
+                    $("#datepicker_end").datepicker("setDate", selectedDate);
+                });
+
+
+                $('#datepicker_end').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    orientation: 'bottom',
+                    format: 'dd/mm/yyyy',
+                    beforeShowDay: function (date) {
+                        var currentDate = new Date();
+                        currentDate.setHours(0, 0, 0, 0);
+                        date.setHours(0, 0, 0, 0);
+
+
+                    }
+
+                });
+
+                $('.permission_start_date').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    orientation: 'bottom',
+                    format: 'dd/mm/yyyy',
+                    beforeShowDay: function (date) {
+                        var currentDate = new Date();
+                        currentDate.setHours(0, 0, 0, 0);
+                        date.setHours(0, 0, 0, 0);
+
+
+                    }
+
+
+
+                })
+
+
+                $('.permission_end_date').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    orientation: 'bottom',
+                    format: 'dd/mm/yyyy',
+                    beforeShowDay: function (date) {
+                        var currentDate = new Date();
+                        currentDate.setHours(0, 0, 0, 0);
+                        date.setHours(0, 0, 0, 0);
+
+
+                    }
+
+
+
+                })
+
+                // apply filter for leavedetails
+                $('#submit').on('click', function (event) {
+                    var form = $(this).closest('form')[0];
+                    var startDate = $('#datepicker_start').val();
+                    var endDate = $('#datepicker_end').val();
+
+                    var status = $('#validationCustomDropdown').val();
+                    var name = $('#full_name').data('value');
+
+
+
+                    $('#start_date,#end_date').text('');
+                    isValid = true
+
+                    if (startDate == '') {
+
+                        $('#start_date').text('Enter Start Date').show();
+
+                        isValid = false;
+                    }
+                    if (endDate == '') {
+
+                        $('#end_date').text('Enter end Date').show();
+
+                        isValid = false;
+                    }
+
+                    event.preventDefault();
+                    if (isValid) {
+
+                        if (!form.checkValidity()) {
+
+                            form.reportValidity();
+                            event.stopPropagation();
+                            return;
+                        } else {
+                            event.preventDefault();
+
+                            $.ajax({
+                                type: 'POST',
+                                dataType: "json",
+                                data: { startDate: startDate, endDate: endDate, status: status, name: name },
+
+                                url: '/admin/reports-filter',
+                                success: function (response) {
+
+
+                                    $(".total_leaves_count").text(response.data.length)
+                                    pending_leaves = [];
+                                    approved_leaves = [];
+                                    declined_leaves = [];
+                                    emergency_leaves = [];
+
+                                    if (response.status === 'success') {
+                                        let table = $('#basic-datatable').DataTable();
+                                        table.clear().draw();
+                                        if (response.data.length > 0) {
+
+                                            let sno = 1
+
+
+                                            response.data.forEach(leave => {
+                                                const startDate = new Date(leave.start_date);
+                                                const createdDate = new Date(leave.created_at);
+                                                const endDate = new Date(leave.end_date);
+                                                const formattedStartDate = `${('0' + startDate.getDate()).slice(-2)}/${('0' + (startDate.getMonth() + 1)).slice(-2)}/${startDate.getFullYear()}`;
+                                                const formattedEndDate = `${('0' + endDate.getDate()).slice(-2)}/${('0' + (endDate.getMonth() + 1)).slice(-2)}/${endDate.getFullYear()}`;
+                                                const formattedcreatedDate = `${('0' + createdDate.getDate()).slice(-2)}/${('0' + (createdDate.getMonth() + 1)).slice(-2)}/${createdDate.getFullYear()}`
+                                                if (leave.status == 'pending') {
+                                                    status = 'Pending'
+                                                    pending_leaves.push(status);
+                                                    if (leave.leave_type == 'Emergency/Medical') {
+                                                        emergency_leaves.push(status);
+                                                    }
+                                                }
+                                                if (leave.status == 'approved') {
+                                                    status = 'Approved'
+                                                    approved_leaves.push(status)
+                                                    if (leave.leave_type == 'Emergency/Medical') {
+                                                        emergency_leaves.push(status);
+                                                    }
+                                                }
+
+                                                if (leave.status == 'rejected') {
+                                                    status = 'Declined'
+                                                    declined_leaves.push(status);
+                                                    if (leave.leave_type == 'Emergency/Medical') {
+                                                        emergency_leaves.push(status);
+                                                    }
+                                                }
+
+                                                table.row.add([
+                                                    sno,
+                                                    leave.name,
+                                                    leave.leave_type,
+                                                    formattedStartDate,
+                                                    formattedEndDate,
+                                                    formattedcreatedDate,
+                                                    status,
+                                                    `<a href="/admin/employeeLeave-details?emp_id=${leave.employee_id}&req_id=${leave.request_id}"
+                                                                                                        class="btn btn-secondary btn-sm" style="background-color: #0bb197;border: 1px solid #0bb197;"> View Details</a>`
+                                                ]).draw(false);
+                                                sno++;
+                                            });
+
+                                        } else {
+
+                                        }
+                                        $(".total_approved_leaves").text(approved_leaves.length)
+                                        $(".total_declined_leaves").text(declined_leaves.length)
+                                        $(".total_pending_leaves").text(pending_leaves.length)
+                                        $(".total_emergency_leaves").text(emergency_leaves.length)
+                                    } else {
+                                        $('#load').html('<tr><td colspan="9">Error retrieving data</td></tr>');
+                                    }
+                                }
+                            });
+
+
+
+                        }
+
+                    }
+
+
+                });
+
+
+                $(".permission_validationCustomDropdown").on('change', function (event) {
+
+                    event.preventDefault();
+                    var startDate = $('.permission_start_date').val();
+                    var endDate = $('.permission_end_date').val();
+                    let selectedValue = $(this).val();
+                    if (selectedValue === 'pending' || selectedValue === 'approved' || selectedValue === 'rejected' || selectedValue === '') {
+                        let status = selectedValue;
+                        let leavehistory = 2;
+                        let id = $('#id').text();
+                        $.ajax({
+                            type: 'POST',
+                            dataType: "json",
+                            data: { status: status, leavehistory: leavehistory, emp_id: id, startDate: startDate, endDate: endDate },
+
+                            url: '/admin/filter-details',
+                            success: function (response) {
+
+                               
+
+                                if (response.status === 'success') {
+
+
+                                    let table = $('#permission-basic-datatable').DataTable();
+                                    table.clear().draw();
+
+
+                                    if (response.data.length > 0) {
+
+                                        let sno = 1
+
+                                        response.data.forEach(leave => {
+                                            const startDate = new Date(leave.start_date);
+                                            const createdDate = new Date(leave.created_at);
+                                            const endDate = new Date(leave.end_date);
+                                            const formattedStartDate = `${('0' + startDate.getDate()).slice(-2)}/${('0' + (startDate.getMonth() + 1)).slice(-2)}/${startDate.getFullYear()}`;
+                                            const formattedEndDate = `${('0' + endDate.getDate()).slice(-2)}/${('0' + (endDate.getMonth() + 1)).slice(-2)}/${endDate.getFullYear()}`;
+                                            const formattedcreatedDate = `${('0' + createdDate.getDate()).slice(-2)}/${('0' + (createdDate.getMonth() + 1)).slice(-2)}/${createdDate.getFullYear()}`
+
+                                            if (leave.status == 'pending') {
+                                                status = 'Pending'
+                                             
+
+
+                                            }
+                                            if (leave.status == 'approved') {
+                                                status = 'Approved'
+                                             
+
+                                            }
+
+                                            if (leave.status == 'rejected') {
+
+                                                status = 'Declined'
+                                                
+
+
+                                            }
+
+                                            table.row.add([
+                                                sno,
+                                                leave.fullname,
+                                                leave.DATE,
+                                                leave.start_time,
+                                                leave.end_time,
+                                                formattedcreatedDate,
+                                                status,
+                                                `<a href="/admin/employeeLeave-details?emp_id=${leave.employee_id}&permission_id=${leave.permission_id}"
+                                                                                                                class="btn btn-secondary btn-sm" style="background-color: #0bb197;border: 1px solid #0bb197;"> View Details</a>`
+                                            ]).draw(false);
+                                            sno++;
+                                        });
+                                       
+
+                                    } 
+
+                                   
+
+
+
+
+
+                                } else {
+
+                                    $('#load').html('<tr><td colspan="9">Error retrieving data</td></tr>');
+                                }
+                            }
+                        });
+
+
+                    }
+
+
+
+                })
+
+                $("#validationCustomDropdown").on('change', function (event) {
+
+                    event.preventDefault();
+                    var startDate = $('#datepicker_start').val();
+                    var endDate = $('#datepicker_end').val();
+
+                    let selectedValue = $(this).val();
+
+                    if (selectedValue === 'pending' || selectedValue === 'approved' || selectedValue === 'rejected' || selectedValue === '') {
+                        let status = selectedValue;
+                        let leavehistory = 1;
+                        let id = $('#id').text();
+
+                        $.ajax({
+                            type: 'POST',
+                            dataType: "json",
+                            data: { status: status, leavehistory: leavehistory, emp_id: id, startDate: startDate, endDate: endDate },
+
+                            url: '/admin/filter-details',
+                            success: function (response) {
+
+
+                                if (response.status === 'success') {
+
+
+                                    let table = $('#basic-datatable').DataTable();
+                                    table.clear().draw();
+
+
+                                    if (response.data.length > 0) {
+
+                                        let sno = 1
+
+                                        response.data.forEach(leave => {
+                                            const startDate = new Date(leave.start_date);
+                                            const createdDate = new Date(leave.created_at);
+
+                                            const endDate = new Date(leave.end_date);
+                                            // const formattedStartDate = `${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`;
+                                            // const formattedEndDate = `${endDate.getDate()}/${endDate.getMonth() + 1}/${endDate.getFullYear()}`;
+                                            const formattedStartDate = `${('0' + startDate.getDate()).slice(-2)}/${('0' + (startDate.getMonth() + 1)).slice(-2)}/${startDate.getFullYear()}`;
+                                            const formattedEndDate = `${('0' + endDate.getDate()).slice(-2)}/${('0' + (endDate.getMonth() + 1)).slice(-2)}/${endDate.getFullYear()}`;
+                                            const formattedcreatedDate = `${('0' + createdDate.getDate()).slice(-2)}/${('0' + (createdDate.getMonth() + 1)).slice(-2)}/${createdDate.getFullYear()}`
+
+                                            if (leave.status == 'pending') {
+                                                status = 'Pending'
+                                            }
+                                            if (leave.status == 'approved') {
+                                                status = 'Approved'
+                                            }
+
+                                            if (leave.status == 'rejected') {
+
+                                                status = 'Declined'
+
+                                            }
+
+                                            table.row.add([
+                                                sno,
+                                                leave.fullname,
+                                                leave.leave_type,
+                                                formattedStartDate,
+                                                formattedEndDate,
+                                                formattedcreatedDate,
+                                                status,
+                                                `<a href="/admin/employeeLeave-details?emp_id=${leave.employee_id}&req_id=${leave.request_id}"
+                                                                                            class="btn btn-secondary btn-sm" style="background-color: #0bb197;border: 1px solid #0bb197;"> View Details</a>`
+                                            ]).draw(false);
+                                            sno++;
+                                        });
+
+                                    } else {
+
+                                    }
+
+
+
+
+
+
+                                } else {
+
+                                    $('#load').html('<tr><td colspan="9">Error retrieving data</td></tr>');
+                                }
+                            }
+                        });
+
+
+                    }
+                }
+                )
+
+
+                $('#permission_submit').on('click', function (event) {
+                    var form = $(this).closest('form')[0];
+                    var startDate = $('.permission_start_date').val();
+                    var endDate = $('.permission_end_date').val();
+
+
+
+                    var status = $('.permission_validationCustomDropdown').val();
+                    var name = $('#full_name').data('value');
+
+
+
+                    $('#start_date,#end_date').text('');
+                    isValid = true
+
+
+
+                    event.preventDefault();
+                    if (isValid) {
+
+                        if (!form.checkValidity()) {
+
+                            form.reportValidity();
+                            event.stopPropagation();
+                            return;
+                        } else {
+                            event.preventDefault();
+
+                            $.ajax({
+                                type: 'POST',
+                                dataType: "json",
+                                data: { startDate: startDate, endDate: endDate, status: status, name: name },
+
+                                url: '/admin/permission-filter',
+                                success: function (response) {
+                                    $('.total_permission_count').text(response.data.length);
+                                permission_pending = [];
+                                pemission_approved = [];
+                                pemission_declined = [];
+
+                                    if (response.status === 'success') {
+
+
+                                        let table = $('#permission-basic-datatable').DataTable();
+                                        table.clear().draw();
+
+
+                                        if (response.data.length > 0) {
+
+                                            let sno = 1
+
+                                            response.data.forEach(leave => {
+                                                const startDate = new Date(leave.date);
+                                                const createdDate = new Date(leave.created_at);
+
+                                                const endDate = new Date(leave.end_date);
+                                                // const formattedStartDate = `${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`;
+                                                // const formattedEndDate = `${endDate.getDate()}/${endDate.getMonth() + 1}/${endDate.getFullYear()}`;
+                                                const formattedStartDate = `${('0' + startDate.getDate()).slice(-2)}/${('0' + (startDate.getMonth() + 1)).slice(-2)}/${startDate.getFullYear()}`;
+                                                const formattedEndDate = `${('0' + endDate.getDate()).slice(-2)}/${('0' + (endDate.getMonth() + 1)).slice(-2)}/${endDate.getFullYear()}`;
+                                                const formattedcreatedDate = `${('0' + createdDate.getDate()).slice(-2)}/${('0' + (createdDate.getMonth() + 1)).slice(-2)}/${createdDate.getFullYear()}`
+
+                                                if (leave.status == 'pending') {
+                                                    status = 'Pending'
+                                                    permission_pending.push(status);
+                                                }
+                                                if (leave.status == 'approved') {
+                                                    status = 'Approved'
+                                                    pemission_approved.push(status)
+                                                }
+
+                                                if (leave.status == 'rejected') {
+
+                                                    status = 'Declined'
+                                                    pemission_declined.push(status);
+                                                }
+
+                                                table.row.add([
+                                                    sno,
+                                                    leave.NAME,
+                                                    formattedStartDate,
+                                                    leave.start_time,
+                                                    leave.end_time,
+                                                    formattedcreatedDate,
+                                                    status,
+                                                    `<a href="/admin/employeeLeave-details?emp_id=${leave.employee_id}&permission_id=${leave.permission_id}"
+                                                                                            class="btn btn-secondary btn-sm" style="background-color: #0bb197;border: 1px solid #0bb197;"> View Details</a>`
+                                                ]).draw(false);
+                                                sno++;
+                                            });
+
+                                        } else {
+
+                                        }
+
+                                        $(".pending_permission_count").text(permission_pending.length);
+                                        $(".declined_permission_count").text(pemission_declined.length);
+                                        $(".approved_permission_count").text(pemission_approved.length);
+
+
+
+
+                                    } else {
+
+                                        $('#load').html('<tr><td colspan="9">Error retrieving data</td></tr>');
+                                    }
+                                }
+                            });
+
+
+
+                        }
+
+                    }
+
+
+                });
+
+            })
+
+
+
+        </script>
+
+        <!-- Datatables js -->
+        <script src="/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+
+
+        <!-- Datatable Demo Aapp js -->
+        <!-- <script src="/assets/js/pages/datatable.init.js"></script> -->
+
+        <!-- App js -->
+        <script src="/assets/js/app.min.js"></script>
+
+</body>
+
+</html>

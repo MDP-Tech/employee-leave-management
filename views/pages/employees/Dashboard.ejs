@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" data-layout="topnav" data-topbar-color="light" data-menu-color="light">
+
+<head>
+    <meta charset="utf-8" />
+    <title> Shiftwave -  Employee & Dashboard </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
+    <meta content="Techzaa" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+    <!-- Daterangepicker css -->
+    <link rel="stylesheet" href="/assets/vendor/daterangepicker/daterangepicker.css">
+
+    <!-- Vector Map css -->
+    <link rel="stylesheet" href="/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css">
+
+    <!-- Theme Config Js -->
+    <script src="/assets/js/config.js"></script>
+
+    <!-- App css -->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+       
+        
+       <%- include('../../includes/employee-header')%>
+       
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    
+                                </div>
+                                <h4 class="page-title">Dashboard</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col-xxl-6 col-sm-6">
+                            <div class="card widget-flat text-bg-info1"><a>
+                                <div class="card-body">
+                                    <div class="float-end">
+                                        <i class="ri-calendar-line widget-icon"></i>
+                                    </div>
+                                    <h6 class="text-uppercase mt-0" title="Customers" style="color: rgb(116, 116, 116);">Yearly Leaves</h6>
+                                    <h2 class="my-2"><%= yearly_leaves %></h2>
+                                    
+                                </div></a>
+                            </div>
+                        </div> <!-- end col-->
+
+                     
+                        
+                            <div class="col-xxl-6 col-sm-6">
+                                <div class="card widget-flat text-bg-info1"><a href="#">
+                                    <div class="card-body">
+                                        <div class="float-end">
+                                            <i class="ri-calendar-todo-line widget-icon"></i>
+                                        </div>
+                                        <h6 class="text-uppercase mt-0" title="Customers" style="color: rgb(116, 116, 116);">Carry Forward Leaves</h6>
+                                        <h2 class="my-2"><%= balanced_leaves %></h2>
+                                        <!-- <p class="mb-0" <%= carry_forward_leaves %> >
+                                            <span class="badge bg-white bg-opacity-10 me-1">2.97%</span>
+                                            <span class="text-nowrap">Since last month</span>
+                                        </p> -->
+                                    </div></a>
+                                </div>
+                            </div> <!-- end col-->
+                        
+                        <div class="col-xxl-4 col-sm-4">
+                            <div class="card widget-flat text-bg-primary1"><a href="/employees/leaves-status?value=approved">
+                                <div class="card-body"> 
+                                    <div class="float-end">
+                                        <i class="ri-shield-check-line widget-icon2"></i>
+                                    </div>
+                                    <h6 class="text-uppercase mt-0" title="Customers" style="color: rgb(116, 116, 116);">Approved leaves</h6>
+                                    <h2 class="my-2"><%= approved_count %></h2>
+                                    <!-- <p class="mb-0">
+                                        <span class="badge bg-white bg-opacity-25 me-1">-5.75%</span>
+                                        <span class="text-nowrap">Since last month</span>
+                                    </p> -->
+                                </div></a>
+                            </div>
+                        </div> <!-- end col-->
+                         
+                        <div class="col-xxl-4 col-sm-4">
+                            <div class="card widget-flat text-bg-yellow1"><a href="/employees/leaves-status?value=pending">
+                                <div class="card-body">
+                                    <div class="float-end">
+                                        <i class="ri-time-line widget-icon3"></i>
+                                    </div>
+                                    <h6 class="text-uppercase mt-0" title="Customers" style="color: rgb(116, 116, 116);">Pending Leaves</h6>
+                                    <h2 class="my-2"><%= pending_count %></h2>
+                                    
+                                </div></a>
+                            </div>
+                        </div> <!-- end col-->
+                     
+
+
+                        <div class="col-xxl-4 col-sm-4">
+                            <div class="card widget-flat text-bg-pink1"><a href="/employees/leaves-status?value=rejected">
+                                <div class="card-body">
+                                    <div class="float-end">
+                                        <i class="ri-close-circle-line widget-icon4"></i>
+                                    </div>
+                                    <h6 class="text-uppercase mt-0" title="Customers" style="color: rgb(116, 116, 116);">Declined Leaves</h6>
+                                    <!-- <h2 class="my-2"><%= declined_count %></h2> -->
+                                    <h2 class="my-2"><%= declined_count %></h2>
+                                    <!-- <p class="mb-0">
+                                        <span class="badge bg-white bg-opacity-10 me-1">8.21%</span>
+                                        <span class="text-nowrap">Since last month</span>
+                                    </p> -->
+                                </div></a>
+                            </div>
+                        </div> <!-- end col-->
+                        <div class="col-xxl-4 col-sm-4">
+                            <div class="card widget-flat text-bg-primary1"> <a href="/employees/permission-status?value=approved">
+                                <div class="card-body">
+                                    <div class="float-end">
+                                        <i class="ri-shield-check-line widget-icon2"></i>
+                                    </div>
+                                    <h6 class="text-uppercase mt-0" title="Customers" style="color: rgb(116, 116, 116);">Approved Permissions</h6>
+                                    <!-- <h2 class="my-2"><%= permission_a_count %></h2> -->
+                                     <h2 class="my-2"><%= permission_a_count %></h2>
+                                    <!-- <p class="mb-0">
+                                        <span class="badge bg-white bg-opacity-25 me-1">-5.75%</span>
+                                        <span class="text-nowrap">Since last month</span>
+                                    </p> -->
+                                </div></a>
+                            </div>
+                        </div> <!-- end col-->
+
+                        <div class="col-xxl-4 col-sm-4">
+                            <div class="card widget-flat text-bg-yellow1"><a href="/employees/permission-status?value=pending">
+                                <div class="card-body">
+                                    <div class="float-end">
+                                        <i class="ri-time-line widget-icon3"></i>
+                                    </div>
+                                    <h6 class="text-uppercase mt-0" title="Customers" style="color: rgb(116, 116, 116);">Pending Permissions</h6>
+                                    <!-- <h2 class="my-2"><%= permission_p_count %></h2> -->
+                                  <h2 class="my-2"><%= permission_p_count %></h2>
+                                    <!-- <p class="mb-0">
+                                        <span class="badge bg-white bg-opacity-10 me-1">18.25%</span>
+                                        <span class="text-nowrap">Since last month</span>
+                                    </p> -->
+                                </div></a>
+                            </div>
+                        </div> <!-- end col-->
+                     
+
+                        <div class="col-xxl-4 col-sm-4">
+                            <div class="card widget-flat text-bg-pink1 "><a href="/employees/permission-status?value=rejected">
+                                <div class="card-body">
+                                    <div class="float-end">
+                                        <i class="ri-close-circle-line widget-icon4"></i>
+                                    </div>
+                                    <h6 class="text-uppercase mt-0" title="Customers" style="color: rgb(116, 116, 116);">Declined Permissions</h6>
+                                    <!-- <h2 class="my-2"><%= permission_d_count %></h2> -->
+                                    <h2 class="my-2"><%= permission_d_count %></h2>
+                                    <!-- <p class="mb-0">
+                                        <span class="badge bg-white bg-opacity-10 me-1">8.21%</span>
+                                        <span class="text-nowrap">Since last month</span>
+                                    </p> -->
+                                </div></a>
+                            </div>
+                        </div> <!-- end col-->
+
+                      
+                      
+                            
+
+                        
+
+                  <div>
+                </div>
+                <!-- container -->
+
+            </div>
+            <!-- content -->
+
+            <!-- Footer Start -->
+            <%- include('../../includes/employee-footer')%>
+            <!-- end Footer -->
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+
+    <!-- Theme Settings -->
+    <%- include('../../includes/employee-theme')%>        
+    
+    <!-- Vendor js -->
+    <script src="/assets/js/vendor.min.js"></script>
+
+    <!-- Daterangepicker js -->
+    <script src="/assets/vendor/daterangepicker/moment.min.js"></script>
+    <script src="/assets/vendor/daterangepicker/daterangepicker.js"></script>
+    
+    <!-- Apex Charts js -->
+    <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Vector Map js -->
+    <script src="/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="/assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
+
+    <!-- Dashboard App js -->
+    <script src="/assets/js/pages/dashboard.js"></script>
+
+
+    <!-- App js -->
+    <script src="/assets/js/app.min.js"></script>
+
+</body>
+</html> 

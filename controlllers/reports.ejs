@@ -1,0 +1,322 @@
+<html>
+
+    <head>
+        <title>Reports | 5am Fresh</title>  
+        <%- include('../includes/header') %>
+    </head>
+    <body>
+        <%- include('../includes/menu') %>
+
+        <main>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="content-wrapper">
+                            <span class="span-message"></span>
+                           <div class="topbar">
+                                <div class="maintitle">Customer Reports</div>
+                                <select class="search" id="GetslotValue">
+                                    <option value="Select Delivery Day">Select Delivery day </option>
+                                    <% result.forEach(data=> { %>
+                                    <option value="<%= data.slot_id %>"><%= data.slot_day %></option>
+                                    <% }) %>                                        
+                                    <option value="all">All Data</option>
+                                </select>
+                                 <button class="btn" onclick="GetresportByslotday()"><i class="fas fa-print"></i><span>Print</span></button>
+                                 <a id="flush" class="btn"><i class="fas fa-ban"></i> <span>Flush</span></a>
+                          </div>
+                          <p>Here don't shows order ids. For order ids need to export the data.</p>
+                          <div id="selecteddayStatus">
+                            <div class="notice" id="statusdayMsg"></div>
+                        </div>
+                              <div class="filterveg" id="filterVegDiv">
+                                <div class="wrap active" style="cursor: pointer;" value="1" >Customer Details</div>
+                                <div class="wrap" style="cursor: pointer;" value="2" >Plans</div>
+                                <div class="wrap" style="cursor: pointer;" value="3" >Opt Out</div>
+                                <div class="wrap" style="cursor: pointer;" value="4" >Addons</div>
+                                <div class="wrap" style="cursor: pointer;" value="5" >OUT Veggies</div>
+                                <div class="wrap" style="cursor: pointer;" value="6" >Vegetables & Addons</div>
+                            </div>  
+                
+                        <div id="customer-details-table" class="table-container" style="display: block;">
+                        <table id="customer-table">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Customer Name</th>
+                                    <th>Payment Mode</th>
+                                    <th>Area</th>
+                                    <th>Payment Amount</th>
+                                    <th>Plan Type</th>
+                                    <th>Plan Name</th>
+                                    <th>Mobile</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customerrows">
+                                <% 
+                                i = 1 ;
+                                customerResult.forEach(customer => { 
+                                    if (customer.payment_mode === 'cod' && customer.payment_status === 'success') {
+                                        customer.payment_mode = 'cod (paid)';
+                                  } else if (customer.payment_mode === 'razorpay') {
+                                        customer.payment_mode = customer.payment_mode;
+                                  } 
+                                 %>
+                                <tr>
+                                <td><%= i++ %></td>
+                                <td><%= customer.name %></td>
+                                <td><%= customer.payment_mode %></td>
+                                <td><%= customer.area %></td>
+                                <td><%= customer.payment_amount %></td>
+                                <td><%= customer.subscription_type %></td>
+                                <td><%= customer.plan_name %></td> 
+                                <td><%= customer.mobile %></td>                 
+                            </tr>
+                            <% }) %>
+                            </tbody>
+                        </table>
+                 </div>     
+                 <div id="plans-table" class="table-container" style="display: none;">
+                    <table id="plans-table-content">
+                        <thead>
+                            <tr>
+                                <th>Plan Name</th>
+                                <th>Subscribers Count</th>
+                            </tr>
+                        </thead>
+                        <tbody id="planrows">
+                            <% planResult.forEach(plan => { %>
+                            <tr>
+                                <td><% if (plan.plan_name === "Total") { %>
+                                    <strong><%= plan.plan_name %></strong>
+                                        <% } else { %>
+                                            <%= plan.plan_name %>
+                                        <% } %></td>
+                                <td><%= plan.value_count %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div> 
+                <div id="opt-out-table" class="table-container" style="display: none;">
+                    <table id="opt-out-table-content">
+                        <thead>
+                            <tr>
+                                <th>Customer Name</th>
+                                <th>Area</th>
+                                <th>Opt Out</th>
+                                <th>Plan Name</th>
+                                <th>Mobile</th>
+                            </tr>
+                        </thead>
+                        <tbody id="optoutrows">
+                            <% optResult.forEach(opt => { %>
+                            <tr>
+                                <td><%= opt.name %></td>
+                                <td><%= opt.area %></td>
+                                <td><%= opt.vegetables %></td>
+                                <td><%= opt.plan_name %></td>
+                                <td><%= opt.mobile %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div> 
+                <div id="addons-table" class="table-container" style="display: none;">
+                    <table id="addons-table-content">
+                        <thead>
+                            <tr>
+                                <th>Customer Name</th>
+                                <th>Area</th>
+                                <th>Addons</th>
+                                <th>Plan Name</th>
+                                <th>Mobile</th>
+                            </tr>
+                        </thead>
+                        <tbody id="addrows">
+                            <% addResult.forEach(add => { %>
+                            <tr>
+                                <td><%= add.name %></td>
+                                <td><%= add.area %></td>
+                                <td><%= add.addons %></td>
+                                <td><%= add.plan_name %></td>
+                                <td><%= add.mobile %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="outveggies-table" class="table-container" style="display: none;">
+                    <table id="outveggies-table-content">
+                        <thead>
+                            <tr>
+                                <th>Vegetables</th>
+                                <th>Opt Out Count</th>
+                            </tr>
+                        </thead>
+                        <tbody id="outrows">
+                            <% outResult.forEach(out => { %>
+                            <tr>
+                                <td><%= out.vegetable_name %></td>
+                                <td><%= out.opt_out_count %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="vegaddons-table" class="table-container" style="display: none;">
+                    <table id="vegaddons-table-content">
+                        <thead id="formatheader">
+                            <tr>
+                                <th>Vegetables Name</th>                                
+                                <% if (formattedData.length > 0) {
+                                    const samplePlan = formattedData[0].planarray;
+                                    Object.keys(samplePlan).forEach(planName => { %>
+                                        <th><%= planName.replace('_weight', '') %></th>
+                                <% }); } %>
+                                <th>Total Vegetable Weight</th>
+                                <th>Addon Total Weight</th>
+                                <th>Combined Total Weight</th>
+                            </tr>
+                        </thead>
+                        <tbody id="formatrows">
+                            <% formattedData.forEach((data, rowIndex) => { %>
+                                <tr>
+                                    <td>
+                                        <%= data.vegetable_name %>
+                                        <% if (data.addon_name) { %>
+                                            <br>
+                                            <strong><%= data.addon_name %></strong>
+                                        <% } %>
+                                    </td>
+                                    <% Object.entries(data.planarray).forEach(([planName, weight]) => { %>
+
+                                        <% if (data.addon_name) { %>
+                                            <td colspan="<%= data.planarray.length %>"><%= Number.isInteger(weight) ? weight : (Number(weight) || 0).toFixed(1) %></td>
+                                         <% }else { %>
+                                        <td><%= Number.isInteger(weight) ? weight : (Number(weight) || 0).toFixed(1) %></td>
+                                        <% } %>
+                                    <% }); %>
+                                    <td><%= Number.isInteger(data.total_weight) ? data.total_weight : (Number(data.total_weight) || 0).toFixed(1) %></td>
+                                    <td><%= Number.isInteger(data.addon_total_weight) ? data.addon_total_weight : (Number(data.addon_total_weight) || 0).toFixed(1) %></td>
+                                    <% if(data.addon_name ==  "Lemon"){
+                                        unit = 'pcs';
+                                    }else {
+                                        unit = 'kg';
+                                    } %>
+                                    <td><%= Number.isInteger(data.combined_total_weight) ? data.combined_total_weight : (Number(data.combined_total_weight) || 0).toFixed(1) %> <%= unit %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                        
+                    </table>
+                    
+                </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        $(document).ready(function () {
+                $(document).on('click', '.filterveg .wrap', function () {
+                        var selectedCategory = $(this).attr('value'); 
+                        $('.filterveg .wrap').removeClass('active'); 
+                        $(this).addClass('active');
+                        $('.vegtablesmainwrap').hide(); 
+                        $('.vegtablesmainwrap[data-category="' + selectedCategory + '"]').show();
+                    });
+            })
+
+
+$(document).ready(function () {
+    $('.wrap').on('click', function () {
+        $('#customer-details-table, #plans-table, #opt-out-table, #addons-table, #outveggies-table, #vegaddons-table').hide();
+        var value = $(this).attr('value');
+        if (value === '2') {
+            $('#plans-table').show();
+        } else if (value === '1') {
+            $('#customer-details-table').show();
+        } else if (value === '3'){
+            $('#opt-out-table').show();
+        } else if (value === '4'){
+            $('#addons-table').show();
+        } else if(value === '5'){
+            $('#outveggies-table').show();
+        } else if(value === '6'){
+            $('#vegaddons-table').show();
+        }
+        $('.wrap').removeClass('active');
+        $(this).addClass('active');
+    });
+});
+
+
+    </script>
+        <%- include('../includes/footer') %>
+        <script>
+
+$('#flush').on('click', function (e) {
+            
+            let messageDisplayed = false;
+
+            $.ajax({
+  url: '/reports/deleteOrderIds',
+  type: 'GET',
+  dataType: 'json',
+  success: function (response) {
+      if (!messageDisplayed) {
+          let color;
+          switch (response.status) {
+              case "success":
+                  alert("Success: " + response.message);
+                  color = "green";
+                  $('.span-message').text(response.message);
+                  break;
+              case "error":
+                  alert("Error: " + response.message);
+                  color = "#FF6666"; // Light red for errors
+                  $('.span-message').text(response.message);
+                  break;
+              case "failed":
+                  alert("Failed: " + response.message);
+                  color = "#FF6666"; // Light red for failed actions
+                  $('.span-message').text(response.message);
+                  break;
+              case "message":
+                  alert("Message: " + response.message);
+                  color = "#FF6666"; // Light red for informational messages
+                  $('.span-message').text(response.message);
+                  break;
+              default:
+                  alert("Unknown status: " + response.message);
+                  color = "black";
+          }
+
+          $('.span-message')
+              .css('color', color)
+              .fadeIn()
+              .delay(3000)
+              .fadeOut(); // Fade in and fade out after 3 seconds
+      }
+  },
+  error: function (xhr, status, error) {
+      console.error("Error:", error);
+      $('.span-message')
+          .text("An error occurred while processing your request.")
+          .css('color', 'red'); // Red color for errors
+      alert("An unexpected error occurred.");
+
+      setTimeout(function () {
+          $('.span-message').fadeOut();
+      }, 3000);
+  }
+});
+
+
+          })
+        </script>
+
+    </body>
+	
+
+</html>

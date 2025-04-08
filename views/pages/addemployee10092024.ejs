@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" data-layout="topnav" data-topbar-color="light" data-menu-color="dark">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Apply Leave Page | Shiftwave</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
+    <meta content="Techzaa" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+    <!-- Select2 css -->
+    <link href="/assets/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Daterangepicker css -->
+    <link href="/assets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+    <!-- Bootstrap Touchspin css -->
+    <link href="/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Bootstrap Datepicker css -->
+    <link href="/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Bootstrap Timepicker css -->
+    <link href="/assets/vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Flatpickr Timepicker css -->
+    <link href="/assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Theme Config Js -->
+    <script src="/assets/js/config.js"></script>
+
+    <!-- App css -->
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        .error {
+            border: 1px solid red;
+        }
+
+        .daterangepicker {
+            z-index: 9999;
+            /* Increase the z-index to ensure it appears above other elements */
+            /* Or you can try adjusting the positioning */
+            /* position: relative; */
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <%- include('../includes/admin-header')%>
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <a href="javascript:window.history.go(-1);"><input type="button"
+                                                    value="Back"
+                                                    class="btn btn-primary btn-sm waves-effect waves-light"></a>
+
+                                        </ol>
+
+                                    </div>
+                                    <div class="">
+                                        <h4 class="page-title">Add New Employee</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="card">
+                            <div class="content">
+                                <!-- Start Content-->
+                                <div class="row">
+                                    <div class="col-12">
+
+
+                                        <div class="card-body">
+                                            <div class="alert alert-info text-bg-info border-0" id="success_message"
+                                                role="alert" style="display: none;">
+                                                <strong>Info - </strong> A simple info alert—check it out!
+                                            </div>
+                                            <div class="mb-3 position-relative">
+
+                                                <div class="row">
+                                                    <div class="alert alert-danger" role="alert" id="failed_message"
+                                                        style="display: none;"></div>
+
+                                                    <form class="row needs-validation p-1" id="leaveForm" novalidate>
+
+                                                        <div class="row">
+
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="Employee_id">Employee
+                                                                        Id</label>
+                                                                    <input autocomplete="off" type="text" maxlength="50"
+                                                                        class="form-control" name="employee_id"
+                                                                        placeholder="Employee Id" id="employee_id" required>
+
+                                                                        <div id="idError" class="text-danger"></div>   
+                                                                </div>
+                                                               
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="first_name">First
+                                                                        Name</label>
+                                                                    <input autocomplete="off" type="text" maxlength="50"
+                                                                        class="form-control" name="first_name" id="first_name"
+                                                                        placeholder="First Name" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="last_name">Last
+                                                                        Name</label>
+                                                                    <input autocomplete="off" type="text" class="form-control"
+                                                                        maxlength="50" name="last_name" id="last_name"
+                                                                        placeholder="Last Name" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                               
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="number">Mobile Number</label>
+                                                                    <input autocomplete="off" type="number" class="form-control" pattern="[0-9]*"  name="number" placeholder="Mobile Number" id="phn_number" required>
+
+                                                                    <div id="numberError" class="text-danger"></div>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                           
+                                                           
+                                                            
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="email">Email</label>
+                                                                    <input autocomplete="off" type="email" name="email" class="form-control"
+                                                                           pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                                                           maxlength="50" id="email" placeholder="Email" required>
+                                                                    <div id="emailError" class="text-danger"></div>
+                                                                </div>
+                                                                <div class="text-danger" id="mail_alert"></div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label"
+                                                                        for="Assign_lead_owner">Role</label>
+                                                                    <select name="assign_role" id="assign_role"
+                                                                        class="form-select" required>
+                                                                        <option value="">Select Role</option>
+                                                                        <option value="employee">Employee </option>
+                                                                        <option value="hr">HR </option>
+                                                                    </select>
+                                                                    <div id="roleError" class="text-danger"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label"
+                                                                        for="location">Location</label>
+                                                                    <input autocomplete="off" type="text" maxlength="50"
+                                                                        class="form-control" name="location" id="location"
+                                                                        placeholder="Location" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
+                                                                    <label for="job-role" class="form-label">
+                                                                        Position
+                                                                    </label>
+
+                                                                    <input autocomplete="off" type="text" list="job-role"
+                                                                        placeholder="enter here" name="designation" id="designation"
+                                                                        class="form-control" required />
+                                                                    <datalist id="job-role">
+
+                                                                        <% result.forEach(data=>{ %>
+                                                                            <option value="<%= data.designation%>">
+                                                                                <%= data.designation%>
+                                                                            </option>
+
+                                                                            <% }) %>
+                                                                               
+
+                                                                    </datalist>
+                                                                </div>
+                                                            </div>
+                                                            <%
+                                                            ids_array = [];
+                                                            email_array=[];
+                                                            ids.forEach(data => {
+                                                            %>
+                                                               
+    
+                                                            <%
+                                                                ids_array.push(data.id);
+                                                                email_array.push(data.email);
+                                                            });
+                                                            %>
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label"
+                                                                        for="password">Password</label>
+                                                                    <input autocomplete="off" type="text" maxlength="15"
+                                                                        class="form-control" name="password" id="password"
+                                                                        placeholder="Password" required>
+
+                                                                        <div class="text-danger" id="password_alert"></div> 
+                                                                </div>
+                                                                
+                                                            </div>
+
+                                                            
+                                                            <div class="col-md-3">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" for="experience">Experience</label>
+                                                                    <input autocomplete="off" type="number" step="any" min="0" maxlength="15" class="form-control" name="experience" id="experience" placeholder="Experience" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mb-1" id="datepicker2">
+                                                                <label for="validationCustom02" class="form-label">Joining Date</label>
+                                                                <input autocomplete="off" type="text" class="form-control joining_date" placeholder="Select Date" id="datepicker_end" name="joiningdate" required autocomplete="off" readonly>
+                                                                <div class="invalid-feedback" >Enter end date</div>
+                                                                <div class="text-danger" id="joining_date_error"></div>
+                                                            </div>
+                                                            
+                                                            
+                                                        </div>
+                                                        
+
+                                                </div>
+                                            </div>
+                                            <input autocomplete="off" type="hidden" id="lead_type_hidden" value="0">
+                                            <div class="text-center mt-2"><button id="submit"
+                                                    class="btn btn-primary btn-sm " style="width:100px"
+                                                    type="submit">Submit</button></div>
+
+                                            </form>
+
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+
+                                </div> <!-- end card body-->
+
+                            </div><!-- end col-->
+                        </div> <!-- end row-->
+                    </div> <!-- content -->
+                </div>
+
+
+
+            </div>
+    </div>
+    <%- include('../includes/employee-footer')%>
+        </div>
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Theme Settings -->
+        <%- include('../includes/admin-theme-settings')%>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+            <script
+                src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+
+                <script>
+                    $(document).ready(function () {
+
+                        $('#datepicker_end').datepicker({
+                            autoclose: true,
+                            todayHighlight: true,
+                            orientation: 'top',
+                            format: 'dd/mm/yyyy', 
+                            beforeShowDay: function (date) {
+                                var currentDate = new Date();
+                                currentDate.setHours(0, 0, 0, 0);
+                                date.setHours(0, 0, 0, 0);
+
+                            
+                            }
+                        
+                        });
+
+                // Loop through each input autocomplete="off" field
+                $('#employee_id, #first_name, #last_name, #phn_number, #location, #designation, #password, #experience, #email, #assign_role').each(function () {
+                    // Check if the 'required' attribute is NOT present
+                    if (!$(this).prop('required')) {
+                        // If 'required' is not present, add it
+                        $(this).attr("required", "required");
+                    }
+                
+                });
+
+
+    
+                        var ids_array = JSON.parse('<%- JSON.stringify(ids_array) %>');
+                        var email_array= JSON.parse('<%- JSON.stringify(email_array) %>')
+                       
+                         
+                        
+                         $("#submit").on('click', function (event) {
+    
+                            
+                            $('#idError').text("");
+                            $("#numberError").text("")
+                            $('#emailError').text("").show();
+                            $("#password_alert").text("");
+                            $('#joining_date_error').text("").show();
+                            
+                            employee_id= $("#employee_id").val();
+                            email=$('#email').val();
+                            phn_number=$('#phn_number').val();
+                             password =$("#password").val();
+                             joining_date= $(".joining_date").val();
+                          
+                           
+                          value=true
+    
+                           
+                          if (joining_date.trim() == '') {
+
+                            
+                            $('#joining_date_error').text("Enter Joining Date").show();
+                            value=false;
+                            }
+    
+                            
+                            const currentMonth = new Date().getMonth() ;
+                          const balanced_leaves=  12-currentMonth;
+                                var form = $('#leaveForm')[0];
+                             if (!form.checkValidity()) {
+                             
+                                form.reportValidity();
+                               
+                                event.stopPropagation();
+                                return;
+    
+    
+                            }
+
+
+                             if (phn_number.length != 10 ) {
+                                
+                                
+                                
+                                $('#numberError').text("Phone Number having must 10 Numbers").show();
+
+                                
+                                value=false
+                            } 
+                            
+                            if (password.length < 8) {
+                            $("#password_alert").text("Password must be at least 8 characters long").show();
+                            value=false
+                            
+                            } else if (!/\d/.test(password)) {
+                                $("#password_alert").text("Password must contain at least one digit").show();
+                                value=false 
+                            } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                                $("#password_alert").text("Password must contain at least one special character").show();
+                                value=false
+                            }
+
+                                for (var i = 0; i < ids_array.length; i++) {
+
+                                        if (ids_array[i] == employee_id) {
+                                            
+                                            $('#idError').text("Id Is Already Present In Database").show();
+                                            
+                                            value=false
+                                            
+                                        }
+                                        if (email_array[i]==email ) {
+
+                                            
+                                            $('#emailError').text("Email Is Already Present In Database").show();
+                                            
+                                            value=false
+                                        }
+
+                                        }
+                                
+                           
+                            event.preventDefault();
+                            if (value) {
+                                
+
+                                $.ajax({
+                                    type: 'POST',
+                                    dataType: "json",
+                                    data: $('#leaveForm').serialize()+"&balanced_leaves="+balanced_leaves+"",
+                                    url: '/admin/create-employee',
+                                    success: function (response) {
+                                       
+                
+                                        if (response.status == 'successfully Created') {
+                                            
+                                            $('#employee_id, #first_name, #last_name, #phn_number, #location, #designation, #password, #experience, #email, #assign_role').removeAttr("required").val('');
+
+                                            
+                                            $('#success_message').text('Successfully Created.').fadeIn().fadeOut(2000, function() {
+
+                                                
+                                                
+
+                                                window.location.href = '/admin/employees-list';
+                                                
+                                               
+                                            });
+                                            
+                                           
+                                        } else {
+                                            $('#failed_message').text(response.status).fadeIn().fadeOut(7000);
+                                        }
+                                    },
+                                    error: function () {
+                                        $('#failed_message').text("An error occurred during the AJAX request.").fadeIn().fadeOut(7000);
+                                    }
+                                });
+                          
+    
+                                
+                            }
+                            
+        })
+    
+    
+    
+    })
+    
+                </script>
+               
+            
+           
+
+            <!-- Vendor js -->
+            <script src="/assets/js/vendor.min.js"></script>
+
+            <!--  Select2 Plugin Js -->
+            <script src="/assets/vendor/select2/js/select2.min.js"></script>
+
+            <!-- Daterangepicker Plugin js -->
+            <script src="/assets/vendor/daterangepicker/moment.min.js"></script>
+            <script src="/assets/vendor/daterangepicker/daterangepicker.js"></script>
+
+            
+
+            <!-- Bootstrap Datepicker Plugin js -->
+            <script src="/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+            <!-- Bootstrap Timepicker Plugin js -->
+            <script src="/assets/vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+
+            <!-- Input Mask Plugin js -->
+            <script src="/assets/vendor/jquery-mask-plugin/jquery.mask.min.js"></script>
+
+            <!-- Bootstrap Touchspin Plugin js -->
+            <script src="/assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+
+            <!-- Bootstrap Maxlength Plugin js -->
+            <script src="/assets/vendor/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+
+            <!-- Typehead Plugin js -->
+            <script src="/assets/vendor/handlebars/handlebars.min.js"></script>
+            <script src="/assets/vendor/typeahead.js/typeahead.bundle.min.js"></script>
+
+            <!-- Flatpickr Timepicker Plugin js -->
+            <script src="/assets/vendor/flatpickr/flatpickr.min.js"></script>
+
+            <!-- Typehead Demo js -->
+            <script src="/assets/js/pages/typehead.init.js"></script>
+
+            <!-- Timepicker Demo js -->
+            <script src="/assets/js/pages/timepicker.init.js"></script>
+
+            <!-- App js -->
+            <script src="/assets/js/app.min.js"></script>
+
+
+
+</body>
+
+</html>
